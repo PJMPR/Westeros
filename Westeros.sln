@@ -3,13 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27130.2003
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Westeros", "Westeros\Westeros.csproj", "{1C7C5CD9-3CF9-4470-8EE2-569D4D0591B8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Westeros", "Westeros\Westeros.csproj", "{1C7C5CD9-3CF9-4470-8EE2-569D4D0591B8}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Lannister", "Lannister", "{57D9A443-5180-4E5C-A723-7FDDF1F70C44}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Westeros.Diet.Service", "Westeros.Diet.Service\Westeros.Diet.Service.csproj", "{C1E6A8B7-1F4A-4379-83BC-1F24F5E1E9B9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Westeros.Diet.Service", "Westeros.Diet.Service\Westeros.Diet.Service.csproj", "{C1E6A8B7-1F4A-4379-83BC-1F24F5E1E9B9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Westeros.Diet.Data", "Westeros.Diet.Data\Westeros.Diet.Data.csproj", "{C1CF42E8-554E-4B17-B2BE-67F7431AA983}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Westeros.Diet.Data", "Westeros.Diet.Data\Westeros.Diet.Data.csproj", "{C1CF42E8-554E-4B17-B2BE-67F7431AA983}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Westeros.Diet.Tests", "Westeros.Diet.Tests\Westeros.Diet.Tests.csproj", "{7CEBC910-D1CB-4B7A-8875-949062EFDB99}"
 EndProject
@@ -17,25 +17,33 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Stark", "Stark", "{1071CAD4
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Westeros.Ranking.Tests", "Westeros.Ranking.Tests\Westeros.Ranking.Tests.csproj", "{DF2F23ED-D626-49CB-A335-46F3E8E9EEC5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Westeros.Ranking.Service", "Westeros.Ranking.Service\Westeros.Ranking.Service.csproj", "{7E0A478F-9C37-4273-8A4F-AB5E06AE07BC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Westeros.Ranking.Service", "Westeros.Ranking.Service\Westeros.Ranking.Service.csproj", "{7E0A478F-9C37-4273-8A4F-AB5E06AE07BC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Westeros.Ranking.Data", "Westeros.Ranking.Data\Westeros.Ranking.Data.csproj", "{8BD506B0-A183-4BB5-A4C7-8A3BA9D1A33E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Westeros.Ranking.Data", "Westeros.Ranking.Data\Westeros.Ranking.Data.csproj", "{8BD506B0-A183-4BB5-A4C7-8A3BA9D1A33E}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Targeryan", "Targeryan", "{3FD9CF13-1AF3-4B87-AA80-73A7E181AA56}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Westeros.UserProfile.Data", "Westeros.UserProfile.Data\Westeros.UserProfile.Data.csproj", "{D0A052D2-3C32-4AE4-AC6D-D64C8F2336B9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Westeros.UserProfile.Data", "Westeros.UserProfile.Data\Westeros.UserProfile.Data.csproj", "{D0A052D2-3C32-4AE4-AC6D-D64C8F2336B9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Westeros.UserProfile.Service", "Westeros.UserProfile.Service\Westeros.UserProfile.Service.csproj", "{D55FB0DF-3BCE-4975-8177-0152D29286A9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Westeros.UserProfile.Service", "Westeros.UserProfile.Service\Westeros.UserProfile.Service.csproj", "{D55FB0DF-3BCE-4975-8177-0152D29286A9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Westeros.UserProfile.Tests", "Westeros.UserProfile.Tests\Westeros.UserProfile.Tests.csproj", "{8F53A4AB-7643-4201-83B3-4C04B3B6CC1E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Westeros.UserProfile.Tests", "Westeros.UserProfile.Tests\Westeros.UserProfile.Tests.csproj", "{8F53A4AB-7643-4201-83B3-4C04B3B6CC1E}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Bolton", "Bolton", "{5113E526-FA97-4B59-963E-81D57ADF0BD8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Westeros.Recipes.Tests", "Westeros.Recipes.Tests\Westeros.Recipes.Tests.csproj", "{3601FB4D-EBC5-43B2-B899-50DE964F1BE3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Westeros.Recipes.Tests", "Westeros.Recipes.Tests\Westeros.Recipes.Tests.csproj", "{3601FB4D-EBC5-43B2-B899-50DE964F1BE3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Westeros.Recipes.Data", "Westeros.Recipes.Data\Westeros.Recipes.Data.csproj", "{FFEE551E-AE30-45BC-BA9C-76FF4E26EA7A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Westeros.Recipes.Data", "Westeros.Recipes.Data\Westeros.Recipes.Data.csproj", "{FFEE551E-AE30-45BC-BA9C-76FF4E26EA7A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Westeros.Recipes.Service", "Westeros.Recipes.Service\Westeros.Recipes.Service.csproj", "{91EF6060-71E0-4166-B99D-7D02B654978F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Westeros.Recipes.Service", "Westeros.Recipes.Service\Westeros.Recipes.Service.csproj", "{91EF6060-71E0-4166-B99D-7D02B654978F}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Greyjoy", "Greyjoy", "{914F11BD-4E7F-43A8-9D8B-F69A4F24ABC0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Westeros.Events.Service", "Westeros.Events.Service\Westeros.Events.Service.csproj", "{C9CF6913-2B11-42B9-8440-4CDBDD89661F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Westeros.Events.Data", "Westeros.Events.Data\Westeros.Events.Data.csproj", "{2E5578AE-E0A5-4A54-90A1-690006DBB589}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Westeros.Events.Tests", "Westeros.Events.Tests\Westeros.Events.Tests.csproj", "{FA80C60C-FE72-439E-AC56-0ED3C6B2E0EC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -95,6 +103,18 @@ Global
 		{91EF6060-71E0-4166-B99D-7D02B654978F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{91EF6060-71E0-4166-B99D-7D02B654978F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{91EF6060-71E0-4166-B99D-7D02B654978F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C9CF6913-2B11-42B9-8440-4CDBDD89661F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C9CF6913-2B11-42B9-8440-4CDBDD89661F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C9CF6913-2B11-42B9-8440-4CDBDD89661F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C9CF6913-2B11-42B9-8440-4CDBDD89661F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2E5578AE-E0A5-4A54-90A1-690006DBB589}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2E5578AE-E0A5-4A54-90A1-690006DBB589}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2E5578AE-E0A5-4A54-90A1-690006DBB589}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2E5578AE-E0A5-4A54-90A1-690006DBB589}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FA80C60C-FE72-439E-AC56-0ED3C6B2E0EC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FA80C60C-FE72-439E-AC56-0ED3C6B2E0EC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FA80C60C-FE72-439E-AC56-0ED3C6B2E0EC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FA80C60C-FE72-439E-AC56-0ED3C6B2E0EC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -112,6 +132,9 @@ Global
 		{3601FB4D-EBC5-43B2-B899-50DE964F1BE3} = {5113E526-FA97-4B59-963E-81D57ADF0BD8}
 		{FFEE551E-AE30-45BC-BA9C-76FF4E26EA7A} = {5113E526-FA97-4B59-963E-81D57ADF0BD8}
 		{91EF6060-71E0-4166-B99D-7D02B654978F} = {5113E526-FA97-4B59-963E-81D57ADF0BD8}
+		{C9CF6913-2B11-42B9-8440-4CDBDD89661F} = {914F11BD-4E7F-43A8-9D8B-F69A4F24ABC0}
+		{2E5578AE-E0A5-4A54-90A1-690006DBB589} = {914F11BD-4E7F-43A8-9D8B-F69A4F24ABC0}
+		{FA80C60C-FE72-439E-AC56-0ED3C6B2E0EC} = {914F11BD-4E7F-43A8-9D8B-F69A4F24ABC0}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {F8666760-B389-4285-BAAF-F02AF5076C34}

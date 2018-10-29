@@ -4,6 +4,7 @@ using System.Collections.Generic;
 namespace Westeros.Diet.Data
 {
     class Ingredient : IIngredient
+
     {
         public int Id { get; }
         public string Name { get; }

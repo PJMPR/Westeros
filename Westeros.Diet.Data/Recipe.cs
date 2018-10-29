@@ -1,33 +1,34 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Westeros.Diet.Data
 {
-    class Ingredient : IIngredient
+    class Recipe : IIngredient
     {
         public int Id { get; }
         public string Name { get; }
         public int Calories { get; }
         public double Fats { get; }
         public double Carbs { get; }
-        public double Proteins { get;  }
+        public double Proteins { get; }
         public string Image { get; }
         public List<string> Tags { get; set; }
+        public List<Ingredient> Ingredients { get; }
 
-        public Ingredient(int id, string name, int calories, double fats, double carbs, double proteins, string image)
+        public Recipe(int id, string name, string image, List<Ingredient> ingredients)
         {
             Id = id;
             Name = name;
-            Calories = calories;
-            Fats = fats;
-            Carbs = carbs;
-            Proteins = proteins;
+            Calories = ingredients.Sum(x => x.Calories);
+            Fats = ingredients.Sum(x => x.Fats);
+            Carbs = ingredients.Sum(x => x.Carbs);
+            Proteins = ingredients.Sum(x => x.Proteins);
             Image = image;
             Tags = SetTags();
-
+            Ingredients = ingredients;
         }
 
-        //TODO: Zbieranie tagów 
         private List<string> SetTags()
         {
             throw new NotImplementedException();

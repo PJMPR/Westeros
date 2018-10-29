@@ -22,7 +22,7 @@ namespace Westeros.Recipes.Data
 
         public static int caloriesCalc(List<Ingridient>ingList)
         {
-            double sumCalories;
+            int sumCalories;
 
             foreach(Ingridient ing in ingList)
             {

@@ -1,12 +1,13 @@
 using System;
 
+
 namespace Westeros.Recipes.Data
 {
     public class Recipe
     {
         public int Id { get; }
         public string Name { get; set; }
-        List<int> Ingridients = new List<int>();
+        List<Ingridient> Ingridients = new List<Ingridient>();
         public double SumCalories { get; set; }
         public enum CuisineType { Polish, Italian, Spanish, French, Scandinavian, Hungarian, Arabic, African, Thai, Japanese, Chinese, Russian, American, Other };
         public CuisineType Cuisine { get; set; }
@@ -17,6 +18,19 @@ namespace Westeros.Recipes.Data
         public DifficultyType Difficulty {get; set;}
         List<string> Tags = new List<string>();
         
+
+
+        public static int caloriesCalc(List<Ingridient>ingList)
+        {
+            double sumCalories;
+
+            foreach(Ingridient ing in ingList)
+            {
+                sumCalories += ing.Calories;
+            }
+
+            return sumCalories;
+        }
 
     }
 

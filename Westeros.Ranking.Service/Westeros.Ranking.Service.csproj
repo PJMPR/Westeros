@@ -5,4 +5,8 @@
     <TargetFramework>netcoreapp2.0</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Westeros.Ranking.Data\Westeros.Ranking.Data.csproj" />
+  </ItemGroup>
+
 </Project>

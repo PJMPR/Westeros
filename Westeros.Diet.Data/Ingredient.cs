@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace Westeros.Diet.Data
 {
-    class Ingredient : IIngredient
+    public class Ingredient : IIngredient
     {
         public int Id { get; }
         public string Name { get; }

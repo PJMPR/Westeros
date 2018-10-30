@@ -2,7 +2,7 @@
 
 namespace Westeros.Diet.Data
 {
-    interface IIngredient
+    public interface IIngredient
     {
         int Calories { get; }
         double Carbs { get; }

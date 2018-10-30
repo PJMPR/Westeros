@@ -39,11 +39,17 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Westeros.Recipes.Service", 
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Greyjoy", "Greyjoy", "{914F11BD-4E7F-43A8-9D8B-F69A4F24ABC0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Westeros.Events.Service", "Westeros.Events.Service\Westeros.Events.Service.csproj", "{C9CF6913-2B11-42B9-8440-4CDBDD89661F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Westeros.Events.Service", "Westeros.Events.Service\Westeros.Events.Service.csproj", "{C9CF6913-2B11-42B9-8440-4CDBDD89661F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Westeros.Events.Data", "Westeros.Events.Data\Westeros.Events.Data.csproj", "{2E5578AE-E0A5-4A54-90A1-690006DBB589}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Westeros.Events.Data", "Westeros.Events.Data\Westeros.Events.Data.csproj", "{2E5578AE-E0A5-4A54-90A1-690006DBB589}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Westeros.Events.Tests", "Westeros.Events.Tests\Westeros.Events.Tests.csproj", "{FA80C60C-FE72-439E-AC56-0ED3C6B2E0EC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Westeros.Events.Tests", "Westeros.Events.Tests\Westeros.Events.Tests.csproj", "{FA80C60C-FE72-439E-AC56-0ED3C6B2E0EC}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Demo", "Demo", "{D6E949C4-45D3-4FF3-BBFF-403F983A1B51}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Westeros.Demo.Data", "Westeros.Demo.Data\Westeros.Demo.Data.csproj", "{1A5252A1-3451-4A29-A170-3EB5CDEF6520}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Westeros.Demo.Service", "Westeros.Demo.Service\Westeros.Demo.Service.csproj", "{D7B98491-D7ED-4A9D-9FE2-B01D8BCE752A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -115,6 +121,14 @@ Global
 		{FA80C60C-FE72-439E-AC56-0ED3C6B2E0EC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FA80C60C-FE72-439E-AC56-0ED3C6B2E0EC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FA80C60C-FE72-439E-AC56-0ED3C6B2E0EC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1A5252A1-3451-4A29-A170-3EB5CDEF6520}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1A5252A1-3451-4A29-A170-3EB5CDEF6520}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1A5252A1-3451-4A29-A170-3EB5CDEF6520}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1A5252A1-3451-4A29-A170-3EB5CDEF6520}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D7B98491-D7ED-4A9D-9FE2-B01D8BCE752A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D7B98491-D7ED-4A9D-9FE2-B01D8BCE752A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D7B98491-D7ED-4A9D-9FE2-B01D8BCE752A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D7B98491-D7ED-4A9D-9FE2-B01D8BCE752A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -135,6 +149,8 @@ Global
 		{C9CF6913-2B11-42B9-8440-4CDBDD89661F} = {914F11BD-4E7F-43A8-9D8B-F69A4F24ABC0}
 		{2E5578AE-E0A5-4A54-90A1-690006DBB589} = {914F11BD-4E7F-43A8-9D8B-F69A4F24ABC0}
 		{FA80C60C-FE72-439E-AC56-0ED3C6B2E0EC} = {914F11BD-4E7F-43A8-9D8B-F69A4F24ABC0}
+		{1A5252A1-3451-4A29-A170-3EB5CDEF6520} = {D6E949C4-45D3-4FF3-BBFF-403F983A1B51}
+		{D7B98491-D7ED-4A9D-9FE2-B01D8BCE752A} = {D6E949C4-45D3-4FF3-BBFF-403F983A1B51}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {F8666760-B389-4285-BAAF-F02AF5076C34}

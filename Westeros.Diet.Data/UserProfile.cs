@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace Westeros.Diet.Data
 {
-    enum Gender { Male, Female, Other}
+    public enum Gender { Male, Female, Other}
 
     public class UserProfile
     {

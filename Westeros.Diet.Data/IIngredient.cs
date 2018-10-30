@@ -11,6 +11,6 @@ namespace Westeros.Diet.Data
         string Image { get; }
         string Name { get; }
         double Proteins { get; }
-        List<string> Tags { get; set; }
+        List<string> GetAllTags();
     }
 }

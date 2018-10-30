@@ -6,20 +6,22 @@ namespace Westeros.Ranking.Data
 {
     public class Komentarz
     {
-        private DateTime data;
-        private string tekst;
-        private string nick;
+        public DateTime Data { get; set; }
+        public string Tekst {get; set; }
+        public string Nick { get; set; }
+
 
         public Komentarz(string nick, string tekst, DateTime data)
         {
-            this.data = data;
-            this.nick = nick;
-            this.tekst = tekst;
+            Data = data;
+            Nick = nick;
+            Tekst = tekst;
         }
 
         public override string ToString()
         {
-            return data.ToString() + tekst + nick;
+            return Data + Tekst + Nick;
         }
+
     }
 }

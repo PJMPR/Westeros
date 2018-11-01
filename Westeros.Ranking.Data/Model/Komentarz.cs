@@ -1,11 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Westeros.Ranking.Data
 {
     public class Komentarz
     {
+        public int id { get; set; }
         public DateTime Data { get; set; }
         public string Tekst {get; set; }
         public string Nick { get; set; }

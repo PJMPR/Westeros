@@ -12,7 +12,6 @@ namespace Westeros.Ranking.Data
 
         public Komentarz(string nick, string tekst, DateTime data)
         {
-            id = 1;
             Data = data;
             Nick = nick;
             Tekst = tekst;

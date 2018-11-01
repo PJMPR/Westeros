@@ -16,6 +16,7 @@ namespace Westeros.Ranking.Service
             ctx.Komentarz.Add(k);
             ctx.SaveChanges();
             Console.Read();
+
         }
     }
 }

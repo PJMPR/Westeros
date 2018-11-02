@@ -1,4 +1,9 @@
 ﻿using System;
+using Westeros.Diet.Data.Model;
+using Westeros.Diet.Data.Repositories;
+using System.Collections.Generic;
+using System.Linq;
+using Microsoft.EntityFrameworkCore;
 
 namespace Westeros.Diet.Service
 {
@@ -7,6 +12,7 @@ namespace Westeros.Diet.Service
         static void Main(string[] args)
         {
             Console.WriteLine("Hello World!");
+            Console.ReadKey();
         }
     }
 }

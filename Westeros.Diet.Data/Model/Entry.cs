@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Westeros.Diet.Data
+namespace Westeros.Diet.Data.Model
 {
     public class Entry
     {

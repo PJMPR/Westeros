@@ -8,17 +8,21 @@ namespace Westeros.Events.Data
         public string From { get; set; }
         public string Content { get; set; }
         public string Topic { get; set; }
-        public DateTime Date { get; set; }
+     
+        public String Date { get; set; }
+
+ 
 
 
-
-        public Message(string to,string from,string content)
+        public Message(string to,string from, string topic,string content)
         {
             To = to;
             From = from;
+            Topic = topic;
             Content = content;
-            Date = Date.Date.ToUniversalTime();
+            Date = DateTime.Now.ToString("yyyy-MM-dd hh:mm:ss");
         }
+       
      
     }
 }

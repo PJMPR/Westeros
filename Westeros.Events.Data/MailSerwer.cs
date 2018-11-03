@@ -31,13 +31,11 @@ namespace Westeros.Events.Data
         private List<Message> EmailServer = new List<Message>();
         private Boolean RunningFlag = false;
 
-		public void SendMessage(Message message)
+        public void SendMessage(Message message)
         {
             EmailServer.Add(message);
             if (!RunningFlag)
                 CheckMessage();
-
-
         }
 
         private void CheckMessage()
@@ -46,25 +44,29 @@ namespace Westeros.Events.Data
             {
                 if (!RunningFlag)
                     RunningFlag = true;
-                if (UserProfiles.ProfileList.get.Exists(
-                    e => e.NickName.get == EmailServer.ElementAt(0)))
-                    RedirectMessage();
-                
-
-
+                Message ActMessage = EmailServer.ElementAt(0);
+                EmailServer.RemoveAt(0);
+                if (UserProfiles.Instance.ProfileList.Exists(
+                    e => e.NickName.Equals(ActMessage.To, StringComparison.OrdinalIgnoreCase)))
+                    RedirectMessage(ActMessage);
+                else
+                    NoReciver(ActMessage);
             }
             RunningFlag = false;
-           // check if there is a reciver if yes send to him and LOG
+            // check if there is a reciver if yes send to him and LOG
         }
 
-
-
-        private void RedirectMessage()
+        private void RedirectMessage(Message message)
         {
+            Console.WriteLine("asd");
+
+            MailDb.Instance.AddMessage(message);
             //SEND to reciver and LOG
         }
         private void NoReciver(Message message)
         {
+            MailDb.Instance.AddErrorMessage(message);
+
             //SEND an info that no reciver
         }
 

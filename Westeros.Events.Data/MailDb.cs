@@ -5,7 +5,7 @@ namespace Westeros.Events.Data
 {
 
     public class MailDb
-	{
+    {
         private static MailDb instance = null;
         private static readonly object padlock = new object();
 
@@ -30,16 +30,14 @@ namespace Westeros.Events.Data
 
         public List<Message> LOG { get; set; } = new List<Message>();
 
-        public Boolean AddMessage(Message message)
+        public void AddMessage(Message message)
         {
-
-            return false;
+            LOG.Add(message);
         }
-        public Boolean AddErrorMessage(Message message)
+        public void AddErrorMessage(Message message)
         {
-
-
-            return false;
+            message.Topic = "Error" + message.Topic;
+            LOG.Add(message);
         }
 
     }

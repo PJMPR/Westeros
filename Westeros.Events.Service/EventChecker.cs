@@ -7,7 +7,7 @@ public class EventChecker
 	public EventChecker()
 	{
 	}
-    public UpdateEvents()
+    public void UpdateEvents()
     {
         //Check new Recipes, Send promotion emails
     }

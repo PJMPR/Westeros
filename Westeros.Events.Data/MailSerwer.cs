@@ -46,8 +46,7 @@ namespace Westeros.Events.Data
                     RunningFlag = true;
                 Message ActMessage = EmailServer.ElementAt(0);
                 EmailServer.RemoveAt(0);
-                if (UserProfiles.Instance.ProfileList.Exists(
-                    e => e.NickName.Equals(ActMessage.To, StringComparison.OrdinalIgnoreCase)))
+                if(CheckReceiver(ActMessage.To))
                     RedirectMessage(ActMessage);
                 else
                     NoReciver(ActMessage);
@@ -68,6 +67,16 @@ namespace Westeros.Events.Data
             MailDb.Instance.AddErrorMessage(message);
 
             //SEND an info that no reciver
+        }
+
+        private Boolean CheckReceiver(String s)
+        {
+            if (UserProfiles.Instance.ProfileList.Exists(
+                    e => e.NickName.Equals(s, StringComparison.OrdinalIgnoreCase)))
+               return true;
+            else
+               return false;
+
         }
 
 

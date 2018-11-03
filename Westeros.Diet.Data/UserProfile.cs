@@ -9,7 +9,7 @@ namespace Westeros.Diet.Data
     public class UserProfile
     {
         public int Id { get; set; }
-        public Gender Sex { get; set; }
+        public Gender Gender { get; set; }
         public int Age { get; set; }
         public double Weight { get; set; }
         public double Height { get; set; }
@@ -25,10 +25,10 @@ namespace Westeros.Diet.Data
             _dairy.Add(entry);
         }
 
-        public UserProfile(int id, Gender sex, int age, double weight, double height)
+        public UserProfile(int id, Gender gender, int age, double weight, double height)
         {
             Id = id;
-            Sex = sex;
+            Gender = gender;
             Age = age;
             Weight = weight;
             Height = height;

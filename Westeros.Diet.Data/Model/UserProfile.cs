@@ -1,8 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Westeros.Diet.Data.Repositories;
 
-namespace Westeros.Diet.Data
+namespace Westeros.Diet.Data.Model
 {
     public enum Gender { Male, Female, Other}
 

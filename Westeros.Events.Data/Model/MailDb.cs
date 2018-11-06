@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Westeros.Events.Data
+namespace Westeros.Events.Data.Model
 {
 
     public class MailDb

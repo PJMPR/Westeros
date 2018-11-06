@@ -1,7 +1,9 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-namespace Westeros.Events.Data
+using Westeros.Events.Data.Model;
+
+namespace Westeros.Events.Service
 {
     public class MailSerwer
     {

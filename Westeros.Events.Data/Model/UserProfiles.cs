@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Threading;
 
-namespace Westeros.Events.Data
+namespace Westeros.Events.Data.Model
 {
     public class UserProfiles
     {
@@ -30,21 +30,31 @@ namespace Westeros.Events.Data
         }
         public List<Profile> ProfileList { get; set; } = new List<Profile>();
 
-        public void AddProfile(String NickName, String Name)
+        public void AddProfile(Profile profile)
         {
-            ProfileList.Add(new Profile(NickName, Name));
+            ProfileList.Add(profile);
         }
         public void GenerateProfiles(int n)
         {
             for (int i = 0; i < n; i++)
             {
-                string NickName = "Demo" + i + 1;
-                AddProfile(NickName, NickName);
+                string NName = "Demo" + i + 1;
+                AddProfile(new Profile {
+                    NickName = NName,
+                     Name = NName
+                });
             }
-            AddProfile("DEmo1", "Albert");
+            AddProfile(new Profile
+            {
+                NickName = "DEmo1",
+                Name = "Albert"
+            });
+    
+        }
+            
 
         }
-    }
+    
 
 
     public class Profile
@@ -52,12 +62,10 @@ namespace Westeros.Events.Data
         public static int ProfileId;
 
         public String NickName { get; set; }
-        private String Name { get; set; }
+        public String Name { get; set; }
         private int Id { get; set; }
-        public Profile(String NickName, String Name)
+        public Profile()
         {
-            this.NickName = NickName;
-            this.Name = Name;
             this.Id = Interlocked.Increment(ref ProfileId);
         }
     }

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Westeros.Events.Data
+namespace Westeros.Events.Data.Model
 {
     public class Message
     {

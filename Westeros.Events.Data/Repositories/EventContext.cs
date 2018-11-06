@@ -16,12 +16,12 @@ namespace Westeros.Events.Data.Repositories
             }
             protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
             {
-                optionsBuilder.UseSqlServer(@"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=EventsDatabase;Integrated Security=True;");
+                optionsBuilder.UseSqlServer(@"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=EventsDB;Integrated Security=True;");
             }
 
             public DbSet<Profile> Profiles { get; set; }
-            public DbSet<Message> MessagesDB { get; set; }
-            public DbSet<Message> LogDb { get; set; }
+            public DbSet<Message> MailDB { get; set; }
+            public DbSet<LogRecord> LogDb { get; set; }
     }
 }
 

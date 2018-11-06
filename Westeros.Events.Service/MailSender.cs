@@ -1,8 +1,11 @@
 ﻿using System;
+using Westeros.Events.Data.Model;
+using Westeros.Events.Service;
 
-public class MailSender
+public static class MailSender
 {
-	public MailSender()
-	{
-	}
+    public static void SendMail(Message message)
+    {
+        MailSerwer.Instance.SendMessage(message);
+    }
 }

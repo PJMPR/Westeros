@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Westeros.Events.Data.Model;
+using Westeros.Events.Data.Repositories;
 
 namespace Westeros.Events.Service
 {
@@ -30,25 +31,25 @@ namespace Westeros.Events.Service
         }
 
 
-        private List<Message> EmailServer = new List<Message>();
+        private List<Message> EmailServerList = new List<Message>();
         private Boolean RunningFlag = false;
 
         public void SendMessage(Message message)
         {
-            EmailServer.Add(message);
+            EmailServerList.Add(message);
             if (!RunningFlag)
                 CheckMessage();
         }
 
         private void CheckMessage()
         {
-            while (EmailServer.Count > 0)
+            while (EmailServerList.Count > 0)
             {
                 if (!RunningFlag)
                     RunningFlag = true;
-                Message ActMessage = EmailServer.ElementAt(0);
-                EmailServer.RemoveAt(0);
-                if(CheckReceiver(ActMessage.To))
+                Message ActMessage = EmailServerList.ElementAt(0);
+                EmailServerList.RemoveAt(0);
+                if(!CheckReceiver(ActMessage.To).NickName.Equals(""))
                     RedirectMessage(ActMessage);
                 else
                     NoReciver(ActMessage);
@@ -60,24 +61,50 @@ namespace Westeros.Events.Service
         private void RedirectMessage(Message message)
         {
             Console.WriteLine("asd");
+            using (var context = new EventContext())
+            {
+                context.MailDB.Add(message);
+                context.LogDb.Add(new LogRecord
+                {
+                    message = message,
+                    Status = "Succeed"
+                });
 
-            MailDb.Instance.AddMessage(message);
+                context.SaveChanges();
+            }
+            //MailDb.AddMessage(message);
             //SEND to reciver and LOG
         }
         private void NoReciver(Message message)
         {
-            MailDb.Instance.AddErrorMessage(message);
+            using (var context = new EventContext())
+            {
+                context.MailDB.Add(message);
+                context.LogDb.Add(new LogRecord
+                {
+                    message = message,
+                    Status = "Failed"
+                });
+
+                context.SaveChanges();
+            }
+            //  MailDb.Instance.AddErrorMessage(message);
 
             //SEND an info that no reciver
         }
 
-        private Boolean CheckReceiver(String s)
+        private Profile CheckReceiver(String s)
         {
-            if (UserProfiles.Instance.ProfileList.Exists(
-                    e => e.NickName.Equals(s, StringComparison.OrdinalIgnoreCase)))
-               return true;
-            else
-               return false;
+            using (var context = new EventContext())
+            {
+                var ReceiverProfile = context.Profiles
+                    .Single(b => b.NickName == s);
+                return ReceiverProfile;
+               
+            }
+           
+
+            
 
         }
 

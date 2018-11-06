@@ -8,8 +8,8 @@ using Westeros.Ranking.Data.Repositories;
 
 namespace Westeros.Ranking.Data.Migrations
 {
-    [DbContext(typeof(KomentarzeDbContext))]
-    partial class KomentarzeDbContextModelSnapshot : ModelSnapshot
+    [DbContext(typeof(StarkDbContext))]
+    partial class StarkDbContextModelSnapshot : ModelSnapshot
     {
         protected override void BuildModel(ModelBuilder modelBuilder)
         {
@@ -18,6 +18,21 @@ namespace Westeros.Ranking.Data.Migrations
                 .HasAnnotation("ProductVersion", "2.1.4-rtm-31024")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+            modelBuilder.Entity("Westeros.Ranking.Data.Dieta", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("DietaId");
+
+                    b.Property<int>("IloscOdwiedzin");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("DietyOdwiedziny");
+                });
 
             modelBuilder.Entity("Westeros.Ranking.Data.Komentarz", b =>
                 {
@@ -34,6 +49,21 @@ namespace Westeros.Ranking.Data.Migrations
                     b.HasKey("id");
 
                     b.ToTable("Komentarz");
+                });
+
+            modelBuilder.Entity("Westeros.Ranking.Data.Przepis", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("IloscOdwiedzin");
+
+                    b.Property<int>("PrzepisId");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("PrzepisyOdwiedziny");
                 });
 #pragma warning restore 612, 618
         }

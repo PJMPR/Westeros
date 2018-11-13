@@ -19,6 +19,19 @@ namespace Westeros.Diet.Data.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+            modelBuilder.Entity("Westeros.Diet.Data.Model.Device", b =>
+                {
+                    b.Property<int>("ID")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Name");
+
+                    b.HasKey("ID");
+
+                    b.ToTable("Device");
+                });
+
             modelBuilder.Entity("Westeros.Diet.Data.Model.Entry", b =>
                 {
                     b.Property<int>("Id")
@@ -61,11 +74,15 @@ namespace Westeros.Diet.Data.Migrations
 
                     b.Property<int>("EntryId");
 
+                    b.Property<int?>("IngredientId");
+
                     b.Property<int>("RecipeId");
 
                     b.HasKey("Id");
 
                     b.HasIndex("EntryId");
+
+                    b.HasIndex("IngredientId");
 
                     b.HasIndex("RecipeId");
 
@@ -151,6 +168,25 @@ namespace Westeros.Diet.Data.Migrations
                     b.ToTable("Recipe");
                 });
 
+            modelBuilder.Entity("Westeros.Diet.Data.Model.RecipeDevice", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("DeviceId");
+
+                    b.Property<int>("RecipeId");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("DeviceId");
+
+                    b.HasIndex("RecipeId");
+
+                    b.ToTable("RecipeDevice");
+                });
+
             modelBuilder.Entity("Westeros.Diet.Data.Model.EntryIngredient", b =>
                 {
                     b.HasOne("Westeros.Diet.Data.Model.Entry", "Entry")
@@ -159,7 +195,7 @@ namespace Westeros.Diet.Data.Migrations
                         .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("Westeros.Diet.Data.Model.Ingredient", "Ingredient")
-                        .WithMany("EntryIngredients")
+                        .WithMany()
                         .HasForeignKey("IngredientId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
@@ -170,6 +206,10 @@ namespace Westeros.Diet.Data.Migrations
                         .WithMany("EntryRecipes")
                         .HasForeignKey("EntryId")
                         .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("Westeros.Diet.Data.Model.Ingredient")
+                        .WithMany("EntryRecipes")
+                        .HasForeignKey("IngredientId");
 
                     b.HasOne("Westeros.Diet.Data.Model.Recipe", "Recipe")
                         .WithMany("EntryRecipes")
@@ -186,6 +226,19 @@ namespace Westeros.Diet.Data.Migrations
 
                     b.HasOne("Westeros.Diet.Data.Model.Recipe", "Recipe")
                         .WithMany("IngredientRecipes")
+                        .HasForeignKey("RecipeId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("Westeros.Diet.Data.Model.RecipeDevice", b =>
+                {
+                    b.HasOne("Westeros.Diet.Data.Model.Device", "Device")
+                        .WithMany()
+                        .HasForeignKey("DeviceId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("Westeros.Diet.Data.Model.Recipe", "Recipe")
+                        .WithMany("RecipeDevices")
                         .HasForeignKey("RecipeId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });

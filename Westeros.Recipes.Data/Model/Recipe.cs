@@ -26,16 +26,11 @@ namespace Westeros.Recipes.Data
         public string Description { get; set; } // Opis przepisu
         public int PrepTime { get; set; } // Czas przygotowania w minutach
         public DifficultyType Difficulty { get; set; } // Poziom trudnoœci [1-5]
-        public CuisineType Cuisine { get; set; } // Typ kuchni w³oska, azjatycka itp
-        public ICollection<Device> Devices { get; set;} // Przyrz¹dy które potrzebujemy: piekarnik, blender itp.
-        public string Description { get; set; } // Opis przepisu
-        public int PrepTime { get; set; } // Czas przygotowania w minutach
-        public DifficultyType Difficulty {get; set; } // Poziom trudnoœci [1-5]
-
         public string PriceBar { get; set; } // Czy danie jest tanie/drogie
         public string PhotoPath { get; set; } // Œcie¿ka do zdjêcia przepisu
         [NotMapped]
         private List<string> _tags;
+        [NotMapped]
         public List<string> Tag
         {
             get { return _tags ?? (_tags = GenerateTags()); }
@@ -124,29 +119,14 @@ namespace Westeros.Recipes.Data
       
         }
 
-        public List<string> GenerateTags() {
-            
-            List<string> tagi = new List<string>();
 
-            tagi.Add(Name);
-            tagi.Add(Cuisine.ToString());
+        public List<string> GenerateTags()
+        {
+            List<string> tagi = new List<string>();
 
             foreach (Ingridient ing in Ingridients)
             {
                 tagi.Add(ing.Name);
-            if (Price < 10) return "Bardzo tani";
-            else if (Price >= 10 && Price < 15) return "Tani";
-            else if (Price >= 15 && Price < 25) return "Œreni";
-            else if (Price >= 25 && Price < 40) return "Drogi";
-            else return "Bardzo drogi";
-      
-        }
-
-        public void GenerateTags() {
-
-            foreach (Ingridient ing in Ingridients)
-            {
-                tags.Add(ing.Name);
             }
 
             foreach (var dev in Devices)
@@ -157,14 +137,9 @@ namespace Westeros.Recipes.Data
             tagi.Add(CalculatePriceBar(Ingridients));
 
             tagi.Add(Difficulty.ToString());
-
             return tagi;
-                tags.Add(dev.Name);
-            }
 
-            tags.Add(Cuisine.ToString());
-            tags.Add(Difficulty.ToString());
-            tags.Add(PriceBar);
         }
     }
 }
+

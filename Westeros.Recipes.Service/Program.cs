@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Linq;
 using Westeros.Recipes.Data;
 using Westeros.Recipes.Data.Model;
@@ -71,8 +71,22 @@ namespace Westeros.Recipes.Service
 
                 //c.Devices.ToList().ForEach(x => Console.WriteLine(x.Name));
 
+              Console.WriteLine("Hello World!");
             }
+          
+            using (var c = new RecipesDbContext())
+            {
+                //c.Devices.Add(new Device()
+                //{
+                //    Name = "xD"
+                //}
+                //);
 
+                //c.savechanges();
+
+                c.Devices.ToList().ForEach(x => Console.WriteLine(x.Name));
+
+            }
         }
     }
 }

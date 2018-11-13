@@ -6,6 +6,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Westeros.Demo.Data\Westeros.Demo.Data.csproj" />
     <ProjectReference Include="..\Westeros.Ranking.Data\Westeros.Ranking.Data.csproj" />
   </ItemGroup>
 

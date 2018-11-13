@@ -6,7 +6,6 @@ namespace Westeros.Recipes.Data
 {
 
     public class Ingridient {
-
         [Key]
         public int Id { get; set; } // Id składnika
         public string Name { get; set; } // Nazwa składnika
@@ -18,7 +17,7 @@ namespace Westeros.Recipes.Data
         public double Calories { get; set; } // Kalorie
         public string PhotoPath { get; set; } // Ścieżka do zdjęcia składnika
         public double AvgPrice { get; set; } // Średnia cena
-       
+
         public static Ingridient GetIngridient(int id)
         {
             throw new NotImplementedException();

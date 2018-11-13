@@ -1,6 +1,7 @@
 ﻿using System;
 using Westeros.Ranking;
 using Westeros.Ranking.Data;
+using Westeros.Ranking.Data.Repositories;
 
 namespace Westeros.Ranking.Service
 {
@@ -8,11 +9,16 @@ namespace Westeros.Ranking.Service
     {
         static void Main(string[] args)
         {
-            Komentarz k=new Komentarz("OreDa", "to jest komentarz", new DateTime(2000, 12, 12));
+            Komentarz k = new Komentarz() {Data = new DateTime(2001, 10, 1), Nick = "OreDa", Tekst = "testowy Koment"};
+            Komentarz k2 = new Komentarz() {Data = new DateTime(2001, 12, 21), Nick = "OreJaNai", Tekst = "asdasdasd"};
 
-            //Console.WriteLine("Hello World!");
+            Dieta d=new Dieta();
+
             Console.WriteLine(k.ToString());
-            Console.Read();
+            StarkDbContext ctx = new StarkDbContext();
+            ctx.Komentarz.Add(k);
+            ctx.Komentarz.Add(k2);
+            ctx.SaveChanges();
         }
     }
 }

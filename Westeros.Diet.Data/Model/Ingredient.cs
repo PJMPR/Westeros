@@ -29,25 +29,7 @@ namespace Westeros.Diet.Data.Model
         public string Image { get; private set; }
         public double AveragePrice { get; private set; }
         public ICollection<IngredientRecipe> IngredientRecipes { get; set; }
-        public ICollection<EntryIngredient> EntryIngredients { get; set; }
-
-        public Ingredient( string name, CategoryType category, int calories, double fats, double carbohydrates, double proteins, string image, double averagePrice)
-        {
-            Name = name;
-            Category = category;
-            Calories = calories;
-            Fats = fats;
-            Carbohydrates = carbohydrates;
-            Proteins = proteins;
-            Image = image;
-            AveragePrice = averagePrice;
-        }
-
-        public Ingredient(int id, string name, CategoryType category, int calories, double fats, double carbohydrates, double proteins, string image, double averagePrice) 
-            : this(name, category, calories, fats, carbohydrates, proteins, image, averagePrice)
-        {
-            Id = id;
-        }
+        public ICollection<EntryRecipe> EntryRecipes { get; set; }
 
         public static Ingredient GetIngredient(int id)
         {

@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore.Metadata;
+﻿using System;
+using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Westeros.Diet.Data.Migrations
@@ -7,6 +8,20 @@ namespace Westeros.Diet.Data.Migrations
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.CreateTable(
+                name: "Entries",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    Date = table.Column<DateTime>(nullable: false),
+                    Weight = table.Column<double>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Entries", x => x.Id);
+                });
+
             migrationBuilder.CreateTable(
                 name: "Ingredient",
                 columns: table => new
@@ -51,6 +66,58 @@ namespace Westeros.Diet.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "EntryIngredients",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    IngredientId = table.Column<int>(nullable: false),
+                    EntryId = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_EntryIngredients", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_EntryIngredients_Entries_EntryId",
+                        column: x => x.EntryId,
+                        principalTable: "Entries",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_EntryIngredients_Ingredient_IngredientId",
+                        column: x => x.IngredientId,
+                        principalTable: "Ingredient",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "EntryRecipes",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    EntryId = table.Column<int>(nullable: false),
+                    RecipeId = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_EntryRecipes", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_EntryRecipes_Entries_EntryId",
+                        column: x => x.EntryId,
+                        principalTable: "Entries",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_EntryRecipes_Recipe_RecipeId",
+                        column: x => x.RecipeId,
+                        principalTable: "Recipe",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "IngredientRecipes",
                 columns: table => new
                 {
@@ -77,6 +144,26 @@ namespace Westeros.Diet.Data.Migrations
                 });
 
             migrationBuilder.CreateIndex(
+                name: "IX_EntryIngredients_EntryId",
+                table: "EntryIngredients",
+                column: "EntryId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_EntryIngredients_IngredientId",
+                table: "EntryIngredients",
+                column: "IngredientId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_EntryRecipes_EntryId",
+                table: "EntryRecipes",
+                column: "EntryId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_EntryRecipes_RecipeId",
+                table: "EntryRecipes",
+                column: "RecipeId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_IngredientRecipes_IngredientId",
                 table: "IngredientRecipes",
                 column: "IngredientId");
@@ -90,7 +177,16 @@ namespace Westeros.Diet.Data.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
+                name: "EntryIngredients");
+
+            migrationBuilder.DropTable(
+                name: "EntryRecipes");
+
+            migrationBuilder.DropTable(
                 name: "IngredientRecipes");
+
+            migrationBuilder.DropTable(
+                name: "Entries");
 
             migrationBuilder.DropTable(
                 name: "Ingredient");

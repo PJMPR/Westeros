@@ -1,48 +1,45 @@
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+using Westeros.Recipes.Data.Model;
 
 namespace Westeros.Recipes.Data
 {
+
+    public enum DifficultyType { Amateur, Easy, Medium, Hard, Masterchef };
+    public enum CuisineType { Polish, Italian, Spanish, French, Scandinavian, Hungarian, Arabic, African, Thai, Japanese, Chinese, Russian, American, Other };
+
     public class Recipe
     {
-        public int Id { get; } // Id przepisu
+        public int Id { get; set; } // Id przepisu
         public string Name { get; set; } // Nazwa przepisu
-        private readonly List<Ingridient> ingridients; // Lista (kolekcja) sk³adników
+        public ICollection<Ingridient> Ingridients { get; set; } = new List<Ingridient>();// Lista (kolekcja) sk³adników
 
         public double Calories { get; private set; } // Suma kalorii wszystkich sk³adników
         public double Proteins { get; private set; } // Suma bia³ek
         public double Carbohydrates { get; private set; } // Suma wêglowodanów
         public double Fats { get; private set; } // Suma wszystkich t³uszczy
 
-        public enum CuisineType { Polish, Italian, Spanish, French, Scandinavian, Hungarian, Arabic, African, Thai, Japanese, Chinese, Russian, American, Other };
+        
         public CuisineType Cuisine { get; set; } // Typ kuchni w³oska, azjatycka itp
-        private List<string> devices = new List<string>(); // Przyrz¹dy które potrzebujemy: piekarnik, blender itp.
+        public ICollection<Device> Devices { get; set; } = new List<Device>(); // Przyrz¹dy które potrzebujemy: piekarnik, blender itp.
         public string Description { get; set; } // Opis przepisu
         public int PrepTime { get; set; } // Czas przygotowania w minutach
-        public enum DifficultyType { Amateur, Easy, Medium, Hard, Masterchef }; 
-        public DifficultyType Difficulty {get; set; } // Poziom trudnoœci [1-5]
+        public DifficultyType Difficulty { get; set; } // Poziom trudnoœci [1-5]
 
         public string PriceBar { get; set; } // Czy danie jest tanie/drogie
         public string PhotoPath { get; set; } // Œcie¿ka do zdjêcia przepisu
-        private List<string> tags = new List<string>(); // Lista tagów
-
-        public Recipe(int id, string name, CuisineType cuisine, List<string> devices, string description, int prepTime, DifficultyType difficulty, string photoPath, string priceBar,List<Ingridient> ingridients=null)
+        [NotMapped]
+        private List<string> _tags;
+        public List<string> Tag
         {
+            get { return _tags ?? (_tags = GenerateTags()); }
+        }
 
-            Id = id;
-            Name = name;
-            this.ingridients = ingridients ?? new List<Ingridient>();
-            Cuisine = cuisine;
-            this.devices = devices;
-            Description = description;
-            PrepTime = prepTime;
-            Difficulty = difficulty;
-            PhotoPath = photoPath;
-            PriceBar = priceBar;
-
-            CalculateMakros(this.ingridients);
-            GenerateTags();
-
+        public Recipe NewInstance()
+        {
+            return new Recipe();
         }
 
         public static double CaloriesCalc(List<Ingridient>ingList)
@@ -105,7 +102,7 @@ namespace Westeros.Recipes.Data
             Carbohydrates = CarbsCalc(ingList);
         }
 
-        public string CalculatePriceBar(List<Ingridient> ingList) {
+        public string CalculatePriceBar(ICollection<Ingridient> ingList) {
 
             double Price = 0;
 
@@ -114,29 +111,36 @@ namespace Westeros.Recipes.Data
                 Price += ing.AvgPrice;
             }
 
-            if (Price < 10) return "Bardzo tani";
-            else if (Price >= 10 && Price < 15) return "Tani";
-            else if (Price >= 15 && Price < 25) return "Œreni";
-            else if (Price >= 25 && Price < 40) return "Drogi";
-            else return "Bardzo drogi";
+            if (Price < 10) return "Bardzo tanie";
+            else if (Price >= 10 && Price < 15) return "Tanie";
+            else if (Price >= 15 && Price < 25) return "Œrenio drogie";
+            else if (Price >= 25 && Price < 40) return "Drogie";
+            else return "Bardzo drogie";
       
         }
 
-        public void GenerateTags() {
+        public List<string> GenerateTags() {
+            
+            List<string> tagi = new List<string>();
 
-            foreach (Ingridient ing in ingridients)
+            tagi.Add(Name);
+            tagi.Add(Cuisine.ToString());
+
+            foreach (Ingridient ing in Ingridients)
             {
-                tags.Add(ing.Name);
+                tagi.Add(ing.Name);
             }
 
-            foreach (string dev in devices)
+            foreach (var dev in Devices)
             {
-                tags.Add(dev);
+                tagi.Add(dev.Name);
             }
 
-            tags.Add(Cuisine.ToString());
-            tags.Add(Difficulty.ToString());
-            tags.Add(PriceBar);
+            tagi.Add(CalculatePriceBar(Ingridients));
+
+            tagi.Add(Difficulty.ToString());
+
+            return tagi;
         }
         
     }

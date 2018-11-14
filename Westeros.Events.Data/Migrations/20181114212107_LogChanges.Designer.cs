@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Westeros.Events.Data.Repositories;
 
 namespace Westeros.Events.Data.Migrations
 {
     [DbContext(typeof(EventContext))]
-    partial class EventContextModelSnapshot : ModelSnapshot
+    [Migration("20181114212107_LogChanges")]
+    partial class LogChanges
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -25,13 +27,13 @@ namespace Westeros.Events.Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int?>("MessageId");
-
                     b.Property<string>("Status");
+
+                    b.Property<int?>("messageId");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("MessageId");
+                    b.HasIndex("messageId");
 
                     b.ToTable("LogDb");
                 });
@@ -74,9 +76,9 @@ namespace Westeros.Events.Data.Migrations
 
             modelBuilder.Entity("Westeros.Events.Data.Model.LogRecord", b =>
                 {
-                    b.HasOne("Westeros.Events.Data.Model.Message", "Message")
+                    b.HasOne("Westeros.Events.Data.Model.Message", "message")
                         .WithMany()
-                        .HasForeignKey("MessageId");
+                        .HasForeignKey("messageId");
                 });
 #pragma warning restore 612, 618
         }

@@ -49,10 +49,14 @@ namespace Westeros.Events.Service
                     RunningFlag = true;
                 Message ActMessage = EmailServerList.ElementAt(0);
                 EmailServerList.RemoveAt(0);
-                if(!CheckReceiver(ActMessage.To).NickName.Equals(""))
+                if (CheckReceiver(ActMessage.To)!=null){
                     RedirectMessage(ActMessage);
-                else
+                }
+                else{
+
                     NoReciver(ActMessage);
+                }
+                    
             }
             RunningFlag = false;
             // check if there is a reciver if yes send to him and LOG
@@ -66,7 +70,7 @@ namespace Westeros.Events.Service
                 context.MailDB.Add(message);
                 context.LogDb.Add(new LogRecord
                 {
-                    message = message,
+                    Message = message,
                     Status = "Succeed"
                 });
 
@@ -79,10 +83,16 @@ namespace Westeros.Events.Service
         {
             using (var context = new EventContext())
             {
-                context.MailDB.Add(message);
+                Message returnedMessage= new Message();
+                returnedMessage.To = message.From;
+                returnedMessage.From = "Service@Westeros";
+                returnedMessage.Content =  "The reciver was not found";
+
+                context.MailDB.Add(returnedMessage);
+               context.MailDB.Add(message);      //FOR INBOX OUTBOX
                 context.LogDb.Add(new LogRecord
                 {
-                    message = message,
+                    Message = message,
                     Status = "Failed"
                 });
 
@@ -98,8 +108,12 @@ namespace Westeros.Events.Service
             using (var context = new EventContext())
             {
                 var ReceiverProfile = context.Profiles
-                    .Single(b => b.NickName == s);
-                return ReceiverProfile;
+                    .FirstOrDefault(b => b.NickName.Equals(s));
+
+                if (ReceiverProfile != null)
+                    return ReceiverProfile;
+                else
+                    return null;
                
             }
            

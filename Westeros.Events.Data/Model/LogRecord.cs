@@ -7,7 +7,7 @@ namespace Westeros.Events.Data.Model
     public class LogRecord 
     {
         public int Id { get; private set; }
-        public Message message;
+        public Message Message { get; set; }
         public String Status { get; set; }
     }
 }

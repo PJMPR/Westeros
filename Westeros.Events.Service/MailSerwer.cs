@@ -11,6 +11,9 @@ namespace Westeros.Events.Service
         private static MailSerwer instance = null;
         private static readonly object padlock = new object();
 
+
+ 
+
         MailSerwer()
         {
         }

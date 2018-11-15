@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Westeros.Events.Data.Repositories;
 
 namespace Westeros.Events.Data.Migrations
 {
     [DbContext(typeof(EventContext))]
-    partial class EventContextModelSnapshot : ModelSnapshot
+    [Migration("20181115211504_MVCadded")]
+    partial class MVCadded
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -46,11 +48,9 @@ namespace Westeros.Events.Data.Migrations
 
                     b.Property<string>("Date");
 
-                    b.Property<string>("From")
-                        .IsRequired();
+                    b.Property<string>("From");
 
-                    b.Property<string>("To")
-                        .IsRequired();
+                    b.Property<string>("To");
 
                     b.Property<string>("Topic");
 

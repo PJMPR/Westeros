@@ -1,0 +1,1 @@
+﻿DELETE FROM dbo.MailDB WHERE Id>0

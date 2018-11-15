@@ -10,16 +10,25 @@ namespace Westeros.Events.Data.Repositories
   
         public class EventContext : DbContext
         {
-            public EventContext() : base()
+            public EventContext(DbContextOptions<EventContext> options) : base(options)
             {
 
             }
-            protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-            {
-                optionsBuilder.UseSqlServer(@"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=EventsDB;Integrated Security=True;");
-            }
+        public EventContext() : base()
+        {
 
-            public DbSet<Profile> Profiles { get; set; }
+        }
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            optionsBuilder.UseSqlServer(@"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=EventsDB;Integrated Security=True;");
+        }
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Profile>().HasAlternateKey(u => u.NickName);
+            //or: modelBuilder.Entity<User>().HasAlternateKey(u => new { u.Passport, u.Name})
+        }
+
+        public DbSet<Profile> Profiles { get; set; }
             public DbSet<Message> MailDB { get; set; }
             public DbSet<LogRecord> LogDb { get; set; }
     }

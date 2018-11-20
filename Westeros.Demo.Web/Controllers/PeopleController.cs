@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Westeros.Demo.Data.Model;
 using Westeros.Demo.Data.Repositories;
@@ -11,11 +7,11 @@ namespace Westeros.Demo.Web.Controllers
 {
     public class PeopleController : Controller
     {
-        DemoDbContext _ctx;
+        IGenericRepository<Person> _repository;
 
-        public PeopleController(DemoDbContext ctx)
+        public PeopleController(IGenericRepository<Person> ctx)
         {
-            _ctx = ctx;
+            _repository = ctx;
         }
 
         // GET: People
@@ -29,7 +25,7 @@ namespace Westeros.Demo.Web.Controllers
         {
             if (personId != null)
                 id = personId.Value;
-            var person = _ctx.People.FirstOrDefault(x => x.Id == id);
+            var person = _repository.GetByID(id);
             return View(person);
         }
 
@@ -48,8 +44,8 @@ namespace Westeros.Demo.Web.Controllers
             {
                 if (ModelState.IsValid)
                 {
-                    _ctx.People.Add(person);
-                    _ctx.SaveChanges();
+                    _repository.Insert(person);
+                    _repository.SaveChanges();
                 }
                 else return View(person);
 

@@ -7,6 +7,8 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.DependencyInjection.Extensions;
+using Westeros.Demo.Data.Model;
 using Westeros.Demo.Data.Repositories;
 
 namespace Westeros.Demo.Web
@@ -23,9 +25,10 @@ namespace Westeros.Demo.Web
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services
+                .AddTransient<IGenericRepository<Person>, GenericRepository<Person>>();
             services.AddMvc();
-
-            var connection = @"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=DemoDatabase;Integrated Security=True;";
+            var connection = Configuration.GetConnectionString("Demo");
             services.AddDbContext<DemoDbContext>(options => options.UseSqlServer(connection));
         }
 

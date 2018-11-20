@@ -14,10 +14,10 @@ namespace Westeros.Events.Data.Repositories
             {
 
             }
-        public EventContext() : base()
-        {
+            public EventContext() : base()
+            {
 
-        }
+            }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.UseSqlServer(@"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=EventsDB;Integrated Security=True;");

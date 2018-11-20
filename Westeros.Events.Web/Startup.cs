@@ -25,8 +25,8 @@ namespace Westeros.Events.Web
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc();
-
-            var connection = @"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=EventsDB;Integrated Security=True;";
+            var connection=Configuration.GetConnectionString("demo");
+           // @"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=EventsDB;Integrated Security=True;";
             services.AddDbContext<EventContext>(options => options.UseSqlServer(connection));
         }
 

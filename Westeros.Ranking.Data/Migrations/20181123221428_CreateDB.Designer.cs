@@ -9,22 +9,20 @@ using Westeros.Ranking.Data.Repositories;
 namespace Westeros.Ranking.Data.Migrations
 {
     [DbContext(typeof(StarkDbContext))]
-    [Migration("20181106141834_CreateStarkDB")]
-    partial class CreateStarkDB
+    [Migration("20181123221428_CreateDB")]
+    partial class CreateDB
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("ProductVersion", "2.1.4-rtm-31024")
-                .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-            modelBuilder.Entity("Westeros.Ranking.Data.Dieta", b =>
+            modelBuilder.Entity("Westeros.Ranking.Data.Model.Dieta", b =>
                 {
                     b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .ValueGeneratedOnAdd();
 
                     b.Property<int>("DietaId");
 
@@ -35,11 +33,10 @@ namespace Westeros.Ranking.Data.Migrations
                     b.ToTable("DietyOdwiedziny");
                 });
 
-            modelBuilder.Entity("Westeros.Ranking.Data.Komentarz", b =>
+            modelBuilder.Entity("Westeros.Ranking.Data.Model.Komentarz", b =>
                 {
                     b.Property<int>("id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .ValueGeneratedOnAdd();
 
                     b.Property<DateTime>("Data");
 
@@ -52,11 +49,10 @@ namespace Westeros.Ranking.Data.Migrations
                     b.ToTable("Komentarz");
                 });
 
-            modelBuilder.Entity("Westeros.Ranking.Data.Przepis", b =>
+            modelBuilder.Entity("Westeros.Ranking.Data.Model.Przepis", b =>
                 {
                     b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .ValueGeneratedOnAdd();
 
                     b.Property<int>("IloscOdwiedzin");
 

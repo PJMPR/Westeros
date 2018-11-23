@@ -28,7 +28,7 @@ namespace Westeros.Ranking.Web
         {
             services.AddRepositories();
             services.AddMvc();
-            var connection = Configuration.GetConnectionString("Demo");
+            var connection = Configuration.GetConnectionString("StarkDB");
             services.AddDbContext<StarkDbContext>(options => options.UseSqlServer(connection));
         }
 

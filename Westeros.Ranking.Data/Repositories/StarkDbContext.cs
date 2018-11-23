@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Westeros.Ranking.Data.Model;
 
 namespace Westeros.Ranking.Data.Repositories
 {

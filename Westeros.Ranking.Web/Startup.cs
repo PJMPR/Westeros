@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -6,6 +6,11 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+
+//dep Injection
+using Microsoft.EntityFrameworkCore;
+using Westeros.Ranking.Data.Repositories;
+using Westeros.Ranking.Web.Registry;
 
 namespace Westeros.Ranking.Web
 {
@@ -21,7 +26,10 @@ namespace Westeros.Ranking.Web
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddRepositories();
             services.AddMvc();
+            var connection = Configuration.GetConnectionString("Demo");
+            services.AddDbContext<StarkDbContext>(options => options.UseSqlServer(connection));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -34,12 +42,17 @@ namespace Westeros.Ranking.Web
             }
             else
             {
-                app.UseExceptionHandler("/Error");
+                app.UseExceptionHandler("/Home/Error");
             }
 
             app.UseStaticFiles();
 
-            app.UseMvc();
+            app.UseMvc(routes =>
+            {
+                routes.MapRoute(
+                    name: "default",
+                    template: "{controller=Home}/{action=Index}/{id?}");
+            });
         }
     }
 }

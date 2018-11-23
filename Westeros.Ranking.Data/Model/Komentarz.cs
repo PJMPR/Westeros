@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Westeros.Ranking.Data
+namespace Westeros.Ranking.Data.Model
 {
     public class Komentarz
     {

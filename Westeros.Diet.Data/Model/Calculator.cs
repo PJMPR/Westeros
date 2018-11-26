@@ -5,19 +5,19 @@ namespace Westeros.Diet.Data.Model
     public class Calculator
     {
 
-        private UserProfile userProfile;
+        public UserProfile userProfile;
 
-        private enum PhysicalActivity   {ExtremelyInactive, Inactive, ModeratelyActive, Active, VigorouslyActive, ExtremelyActive};
+        public enum PhysicalActivity   {ExtremelyInactive, Inactive, ModeratelyActive, Active, VigorouslyActive, ExtremelyActive};
 
-        private enum Goal  {LoseWeight, KeepWeight, GetMuscles};
+        public enum Goal  {LoseWeight, KeepWeight, GetMuscles};
 
-        private double BmiCalculate(UserProfile userProfile) {
+        public double BmiCalculate(UserProfile userProfile) {
            return ((userProfile.Weight) / ((userProfile.Height) * (userProfile.Height)));
         }
 
         //podstawowe zapotrzebowanie kaloryczne
 
-      private double BmrCalculate() {
+      public double BmrCalculate() {
  
             double bmr;
 
@@ -36,7 +36,7 @@ namespace Westeros.Diet.Data.Model
             }
         }
 
-        private double TotalCaloricDemand(PhysicalActivity physicalActivity, Goal goal)
+        public double TotalCaloricDemand(PhysicalActivity physicalActivity, Goal goal)
         {
            double totalBmr = BmrCalculate();
             

@@ -1,1 +1,1 @@
-﻿select * from dbo.Komentarz
+﻿select * from Komentarz;

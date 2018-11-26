@@ -48,67 +48,44 @@ namespace Westeros.Diet.Data.Model
         public DifficultyType Difficulty { get; private set; }
         public string PriceBar { get; private set; }
         public string Image { get; private set; }
+        //public ICollection<IngredientRecipe> IngredientRecipes { get; set; }
         public ICollection<IngredientRecipe> IngredientRecipes { get; set; }
-
+        public ICollection<EntryRecipe> EntryRecipes { get; set; }
+        public ICollection<RecipeDevice> RecipeDevices { get; set; } 
 
         [NotMapped]
-        public ICollection<string> devices { get; private set; }
+        private List<string> _tags;
         [NotMapped]
-        public List<string> tags { get; private set; }
-
-
-        public Recipe(int id, string name, int calories, double proteins, double carbohydrates, double fats, CuisineType cuisine, string description, int prepTime, DifficultyType difficulty, string priceBar, string image/*, ICollection<string> devices, ICollection<Ingredient> Ingredients, ICollection<string> tags*/)
+        public List<string> Tag
         {
-            Id = id;
-            Name = name;
-            Calories = calories;
-            Proteins = proteins;
-            Carbohydrates = carbohydrates;
-            Fats = fats;
-            Cuisine = cuisine;
-            Description = description;
-            PrepTime = prepTime;
-            Difficulty = difficulty;
-            PriceBar = priceBar;
-            Image = image;
-            //this.devices = devices;
-            //this.Ingredients = Ingredients;
-            GenerateTags();
+            get { return _tags /*?? (_tags = GenerateTags())*/; }
         }
 
-        private void GenerateTags()
-        {
-            GetAllIngredients().ForEach(x => tags.Add(x.Name));
-            devices.ToList().ForEach(tags.Add);
-            tags.Add(Cuisine.ToString());
-            tags.Add(Difficulty.ToString());
-            tags.Add(PriceBar);
-        }
 
         public List<string> GetAllTags()
         {
-            return tags.ToList();    
+            return _tags.ToList();    
         }
 
-        public List<Ingredient> GetAllIngredients()
-        {
-            return IngredientRecipes.Select(x => x.Ingredient).ToList();
-        }
+        //public List<Ingredient> GetAllIngredients()
+        //{
+        //    return IngredientRecipes.Select(x => x.Ingredient).ToList();
+        //}
 
-        public static Recipe GetRecipe(int id)
-        {
-            using (var context = new DietDbContext())
-            {
-                var rex = context.Recipe.Single(r => r.Id == id);
-                var ir = context.IngredientRecipes
-                    .Where(x => x.RecipeId == id)
-                    .Include(p => p.Recipe)
-                    .Include(x => x.Ingredient).ToList();
+        //public static Recipe GetRecipe(int id)
+        //{
+        //    using (var context = new DietDbContext())
+        //    {
+        //        var rex = context.Recipe.Single(r => r.Id == id);
+        //        var ir = context.IngredientRecipes
+        //            .Where(x => x.RecipeId == id)
+        //            .Include(p => p.Recipe)
+        //            .Include(x => x.Ingredient).ToList();
 
-                rex.IngredientRecipes = ir;
-                return rex;
-            }
-        }
+        //        rex.IngredientRecipes = ir;
+        //        return rex;
+        //    }
+        //}
 
         public static List<Recipe> GetAllRecipes()
         {
@@ -116,6 +93,42 @@ namespace Westeros.Diet.Data.Model
             {
                 return context.Recipe.ToList();
             }
+        }
+
+        //public List<string> GenerateTags()
+        //{
+        //    var tags = new List<string>();
+
+        //    foreach (Ingredient ing in IngredientRecipes)
+        //    {
+        //        tags.Add(ing.Name);
+        //    }
+
+        //    foreach (var dev in RecipeDevices)
+        //    {
+        //        tags.Add(dev.Name);
+        //    }
+
+        //    tags.Add(CalculatePriceBar(Ingredients));
+        //    tags.Add(Difficulty.ToString());
+
+        //    return tags;
+        //}
+
+        private string CalculatePriceBar(ICollection<Ingredient> ingredients)
+        {
+            double Price = 0;
+
+            foreach (Ingredient ing in ingredients)
+            {
+                Price += ing.AveragePrice;
+            }
+
+            if (Price < 10) return "Bardzo tanie";
+            else if (Price >= 10 && Price < 15) return "Tanie";
+            else if (Price >= 15 && Price < 25) return "Œrenio drogie";
+            else if (Price >= 25 && Price < 40) return "Drogie";
+            else return "Bardzo drogie";
         }
 
         public override string ToString()

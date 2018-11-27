@@ -21,26 +21,28 @@ namespace Westeros.Diet.Data.Model
  
             double bmr;
 
-            if (userProfile.Gender == Female) {
+            if (userProfile.Gender == Gender.Female) {
                 bmr = ((9.99 * userProfile.Weight)+
                             (6.25 * userProfile.Height*100)-
                             (4.92 * userProfile.Age) - 161);
                 return bmr;
             }
-            if (userProfile.Gender == Male)
+            if (userProfile.Gender == Gender.Male)
             {
                 bmr = ((9.99 * userProfile.Weight) +
                             (6.25 * userProfile.Height * 100) -
                             (4.92 * userProfile.Age) + 5);
                 return bmr;
             }
-        }
+
+          return 0.0f;
+      }
 
         public double TotalCaloricDemand(PhysicalActivity physicalActivity, Goal goal)
         {
            double totalBmr = BmrCalculate();
             
-            switch (PhysicalActivity) {
+            switch (physicalActivity) {
 
                 case PhysicalActivity.ExtremelyInactive:
                     return totalBmr;
@@ -62,7 +64,7 @@ namespace Westeros.Diet.Data.Model
             }
 
 
-            switch (Goal)
+            switch (goal)
             {
                 case Goal.LoseWeight: return totalBmr - 300;
 

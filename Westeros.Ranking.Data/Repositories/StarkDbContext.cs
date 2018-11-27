@@ -10,6 +10,10 @@ namespace Westeros.Ranking.Data.Repositories
         {
         }
 
+        public StarkDbContext()
+        {
+        }
+
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.UseSqlServer(

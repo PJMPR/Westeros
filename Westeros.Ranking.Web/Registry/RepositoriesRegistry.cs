@@ -7,10 +7,11 @@ namespace Westeros.Ranking.Web.Registry
 {
     public static class RepositoriesRegistry
     {
-
         public static IServiceCollection AddRepositories(this IServiceCollection services)
         {
-            return services.AddTransient<IGenericRepository<Dieta>, GenericRepository<Dieta>>().AddTransient<IGenericRepository<Komentarz>, GenericRepository<Komentarz>>();
+            return services.AddTransient<IGenericRepository<Dieta>, GenericRepository<Dieta>>()
+                .AddTransient<IGenericRepository<Komentarz>, GenericRepository<Komentarz>>()
+                .AddTransient<IGenericRepository<Przepis>, GenericRepository<Przepis>>();
         }
     }
 }

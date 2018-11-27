@@ -10,4 +10,8 @@
     <ProjectReference Include="..\Westeros.Ranking.Data\Westeros.Ranking.Data.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Properties\" />
+  </ItemGroup>
+
 </Project>

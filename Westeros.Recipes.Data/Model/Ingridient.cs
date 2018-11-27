@@ -18,18 +18,6 @@ namespace Westeros.Recipes.Data
         public string PhotoPath { get; set; } // Ścieżka do zdjęcia składnika
         public double AvgPrice { get; set; } // Średnia cena
 
-        public Ingridient(string name, CategoryType category, double proteins, double fats, double carbohydrates, double calories, string photoPath, double avgPrice)
-        {
-            Name = name;
-            Category = category;
-            Proteins = proteins;
-            Fats = fats;
-            Carbohydrates = carbohydrates;
-            Calories = calories;
-            PhotoPath = photoPath;
-            AvgPrice = avgPrice;
-        }
-
         public static Ingridient GetIngridient(int id)
         {
             throw new NotImplementedException();

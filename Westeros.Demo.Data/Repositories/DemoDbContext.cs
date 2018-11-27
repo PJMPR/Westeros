@@ -8,6 +8,10 @@ namespace Westeros.Demo.Data.Repositories
 {
     public class DemoDbContext : DbContext
     {
+        public DemoDbContext():base()
+        {
+
+        }
         public DemoDbContext(DbContextOptions<DemoDbContext> options) :base(options)
         {
 

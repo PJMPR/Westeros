@@ -4,8 +4,8 @@ namespace Westeros.Diet.Data.Model
 {
     public class Calculator
     {
-       
-        public UserProfile userProfile;
+
+        private UserProfile userProfile;
 
         public enum PhysicalActivity   {ExtremelyInactive, Inactive, ModeratelyActive, Active, VigorouslyActive, ExtremelyActive};
 
@@ -17,7 +17,7 @@ namespace Westeros.Diet.Data.Model
 
         //podstawowe zapotrzebowanie kaloryczne
 
-        public double BmrCalculate() {
+      private double BmrCalculate() {
  
             double bmr;
 

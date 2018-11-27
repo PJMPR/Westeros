@@ -4,6 +4,11 @@ namespace Westeros.UserProfile.Data.Repositories
 {
     public class UserDbContext : DbContext
     {
+        public UserDbContext(DbContextOptions<UserDbContext> o) : base()
+        {
+
+        }
+
         public UserDbContext() : base()
         {
 

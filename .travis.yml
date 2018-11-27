@@ -1,5 +1,5 @@
 language: csharp
-mono:none
+mono: none
 solution: Westeros.sln
 dotnet: 2.1.2
 script:

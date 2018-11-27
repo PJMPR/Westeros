@@ -47,7 +47,7 @@ namespace Westeros.Demo.Web.Controllers.Api
                 LastName = value.LastName,
                 Name = value.Name
             });
-            _people.SaveChanges();
+            _people.SaveChanges()
             return StatusCode(201);
         }
         

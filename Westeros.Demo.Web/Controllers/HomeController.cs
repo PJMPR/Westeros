@@ -4,14 +4,22 @@ using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Westeros.Demo.Data.Services;
 using Westeros.Demo.Web.Models;
 
 namespace Westeros.Demo.Web.Controllers
 {
     public class HomeController : Controller
     {
+        private readonly ICalculator _calculator;
+        public HomeController(ICalculator calculator)
+        {
+            _calculator = calculator;
+        }
+
         public IActionResult Index()
         {
+            _calculator.execute();
             return View();
         }
 

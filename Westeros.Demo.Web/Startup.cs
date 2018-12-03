@@ -29,6 +29,7 @@ namespace Westeros.Demo.Web
             services.AddAutoMapper();
             services.AddRepositories();
             services.AddMvc();
+            services.AddDemo();
             var connection = Configuration.GetConnectionString("Demo");
             services.AddDbContext<DemoDbContext>(options => options.UseSqlServer(connection));
         }

@@ -6,3 +6,4 @@ script:
   - dotnet clean
   - dotnet restore
   - dotnet build
+  - dotnet test Westeros.Demo.Tests

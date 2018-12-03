@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Westeros.Demo.ApiClient;
 using Westeros.Demo.Data.Services;
 using Westeros.Demo.Web.Models;
 
@@ -12,13 +13,16 @@ namespace Westeros.Demo.Web.Controllers
     public class HomeController : Controller
     {
         private readonly ICalculator _calculator;
-        public HomeController(ICalculator calculator)
+        IDemoApiClient _api;
+        public HomeController(ICalculator calculator, IDemoApiClient api)
         {
             _calculator = calculator;
+            _api = api;
         }
 
         public IActionResult Index()
         {
+            var result = _api.All();
             _calculator.execute();
             return View();
         }

@@ -10,6 +10,7 @@ namespace Westeros.Demo.Data.Model
         [Required]
         public string Name { get; set; }
         public string LastName { get; set; }
+        public int Age { get; set; }
 
         public virtual ICollection<Address> Address { get; set; } = new List<Address>();
     }

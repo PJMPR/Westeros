@@ -30,6 +30,7 @@ namespace Westeros.Demo.Web
             services.AddRepositories();
             services.AddMvc();
             services.AddDemo();
+            services.AddDemoClient(Configuration);
             var connection = Configuration.GetConnectionString("Demo");
             services.AddDbContext<DemoDbContext>(options => options.UseSqlServer(connection));
         }

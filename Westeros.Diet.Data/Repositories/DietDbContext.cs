@@ -21,8 +21,9 @@ namespace Westeros.Diet.Data.Repositories
         public DbSet<IngredientRecipe> IngredientRecipes { get; set; }
         public DbSet<EntryIngredient> EntryIngredients { get; set; }
         public DbSet<EntryRecipe> EntryRecipes { get; set; }
-        protected override void
-            OnModelCreating(ModelBuilder modelBuilder)
+        public DbSet<UserProfile> UserProfiles { get; set; }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             //modelBuilder.Entity<IngredientRecipe>()
             //    .HasKey(x => x.Id);

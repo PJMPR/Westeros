@@ -1,13 +1,16 @@
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+using Westeros.Recipes.Data.Model;
 
 namespace Westeros.Recipes.Data
 {
     public class Recipe
     {
-        public int Id { get; } // Id przepisu
+        public int Id { get; set; } // Id przepisu
         public string Name { get; set; } // Nazwa przepisu
-        private readonly List<Ingridient> ingridients; // Lista (kolekcja) sk³adników
+        public ICollection<Ingridient> Ingridients { get; set; } // Lista (kolekcja) sk³adników
 
         public double Calories { get; private set; } // Suma kalorii wszystkich sk³adników
         public double Proteins { get; private set; } // Suma bia³ek
@@ -16,7 +19,8 @@ namespace Westeros.Recipes.Data
 
         public enum CuisineType { Polish, Italian, Spanish, French, Scandinavian, Hungarian, Arabic, African, Thai, Japanese, Chinese, Russian, American, Other };
         public CuisineType Cuisine { get; set; } // Typ kuchni w³oska, azjatycka itp
-        private List<string> devices = new List<string>(); // Przyrz¹dy które potrzebujemy: piekarnik, blender itp.
+
+        public ICollection<Device> Devices { get; set;} // Przyrz¹dy które potrzebujemy: piekarnik, blender itp.
         public string Description { get; set; } // Opis przepisu
         public int PrepTime { get; set; } // Czas przygotowania w minutach
         public enum DifficultyType { Amateur, Easy, Medium, Hard, Masterchef }; 
@@ -24,23 +28,22 @@ namespace Westeros.Recipes.Data
 
         public string PriceBar { get; set; } // Czy danie jest tanie/drogie
         public string PhotoPath { get; set; } // Œcie¿ka do zdjêcia przepisu
+        [NotMapped]
         private List<string> tags = new List<string>(); // Lista tagów
 
-        public Recipe(int id, string name, CuisineType cuisine, List<string> devices, string description, int prepTime, DifficultyType difficulty, string photoPath, string priceBar,List<Ingridient> ingridients=null)
+        public Recipe(string name, CuisineType cuisine, string description, int prepTime, DifficultyType difficulty, string photoPath, string priceBar)
         {
-
-            Id = id;
             Name = name;
-            this.ingridients = ingridients ?? new List<Ingridient>();
+//            this.ingridients = ingridients;
             Cuisine = cuisine;
-            this.devices = devices;
+      //      this.devices = devices;
             Description = description;
             PrepTime = prepTime;
             Difficulty = difficulty;
             PhotoPath = photoPath;
             PriceBar = priceBar;
 
-            CalculateMakros(this.ingridients);
+           //CalculateMakros(this.ingridients);
             GenerateTags();
 
         }
@@ -124,14 +127,14 @@ namespace Westeros.Recipes.Data
 
         public void GenerateTags() {
 
-            foreach (Ingridient ing in ingridients)
+            foreach (Ingridient ing in Ingridients)
             {
                 tags.Add(ing.Name);
             }
 
-            foreach (string dev in devices)
+            foreach (var dev in Devices)
             {
-                tags.Add(dev);
+                tags.Add(dev.Name);
             }
 
             tags.Add(Cuisine.ToString());

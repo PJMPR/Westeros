@@ -47,9 +47,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Westeros.Demo.Data", "Weste
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Westeros.Demo.Service", "Westeros.Demo.Service\Westeros.Demo.Service.csproj", "{D7B98491-D7ED-4A9D-9FE2-B01D8BCE752A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Westeros.Ranking.Tests", "Westeros.Ranking.Tests\Westeros.Ranking.Tests.csproj", "{AA325FBE-5341-4CD1-8284-BE989A6597E9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Westeros.Ranking.Tests", "Westeros.Ranking.Tests\Westeros.Ranking.Tests.csproj", "{AA325FBE-5341-4CD1-8284-BE989A6597E9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Westeros.Diet.Tests", "Westeros.Diet.Tests\Westeros.Diet.Tests.csproj", "{55C9E6F5-0504-4C5B-9C1C-8BAE1A7B89BE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Westeros.Diet.Tests", "Westeros.Diet.Tests\Westeros.Diet.Tests.csproj", "{55C9E6F5-0504-4C5B-9C1C-8BAE1A7B89BE}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Westeros.Events.ApiClient", "Westeros.Events.ApiClient\Westeros.Events.ApiClient.csproj", "{016E84DA-2B79-4838-B885-8D520281B679}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Westeros.Events.Web", "Westeros.Events.Web\Westeros.Events.Web.csproj", "{3BA4D05F-F2D1-46C5-9578-BB26798EE56F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -129,6 +133,14 @@ Global
 		{55C9E6F5-0504-4C5B-9C1C-8BAE1A7B89BE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{55C9E6F5-0504-4C5B-9C1C-8BAE1A7B89BE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{55C9E6F5-0504-4C5B-9C1C-8BAE1A7B89BE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{016E84DA-2B79-4838-B885-8D520281B679}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{016E84DA-2B79-4838-B885-8D520281B679}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{016E84DA-2B79-4838-B885-8D520281B679}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{016E84DA-2B79-4838-B885-8D520281B679}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3BA4D05F-F2D1-46C5-9578-BB26798EE56F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3BA4D05F-F2D1-46C5-9578-BB26798EE56F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3BA4D05F-F2D1-46C5-9578-BB26798EE56F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3BA4D05F-F2D1-46C5-9578-BB26798EE56F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -151,6 +163,8 @@ Global
 		{D7B98491-D7ED-4A9D-9FE2-B01D8BCE752A} = {D6E949C4-45D3-4FF3-BBFF-403F983A1B51}
 		{AA325FBE-5341-4CD1-8284-BE989A6597E9} = {1071CAD4-0274-46DC-8392-B8D5A219E2D5}
 		{55C9E6F5-0504-4C5B-9C1C-8BAE1A7B89BE} = {57D9A443-5180-4E5C-A723-7FDDF1F70C44}
+		{016E84DA-2B79-4838-B885-8D520281B679} = {914F11BD-4E7F-43A8-9D8B-F69A4F24ABC0}
+		{3BA4D05F-F2D1-46C5-9578-BB26798EE56F} = {914F11BD-4E7F-43A8-9D8B-F69A4F24ABC0}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {F8666760-B389-4285-BAAF-F02AF5076C34}

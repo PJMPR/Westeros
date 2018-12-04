@@ -8,5 +8,7 @@ namespace Westeros.Ranking.Data.Model
         public DateTime Data { get; set; }
         public string Tekst {get; set; }
         public string Nick { get; set; }
+        public int resourceId { get; set; }
+        public string resourceName { get; set; }
     }
 }

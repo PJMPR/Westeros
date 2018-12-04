@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Westeros.Ranking.Data.Migrations
 {
-    public partial class CreateDB : Migration
+    public partial class StarkDataBase : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -30,7 +30,9 @@ namespace Westeros.Ranking.Data.Migrations
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     Data = table.Column<DateTime>(nullable: false),
                     Tekst = table.Column<string>(nullable: true),
-                    Nick = table.Column<string>(nullable: true)
+                    Nick = table.Column<string>(nullable: true),
+                    resourceId = table.Column<int>(nullable: false),
+                    resourceName = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {

@@ -6,10 +6,23 @@ using Westeros.Ranking.Data.Repositories;
 
 namespace Westeros.Ranking.Service
 {
-    class Program
+    /*  Kalkulator ma miec:
+     *      -Najbardziej Komentowane rosnaco --> malejaco
+     *      -Najczesciej odwiedzone
+     *      -Cos z dieta (najmniej kalorii)
+     *  
+     *  
+     * 
+     * 
+     * 
+     * */
+    public class Calculator
     {
-        static void Main(string[] args)
-        {
-        }
+            private readonly StarkDbContext _context;
+
+            
+
+
+
     }
 }

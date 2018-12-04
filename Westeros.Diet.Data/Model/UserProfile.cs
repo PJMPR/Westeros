@@ -1,15 +1,24 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.NetworkInformation;
 using Westeros.Diet.Data.Repositories;
 
 namespace Westeros.Diet.Data.Model
 {
-    public enum Gender { Male, Female, Other}
+    public enum Gender
+    {
+        Male,
+        Female
+    }
 
     public class UserProfile
     {
         public int Id { get; set; }
+        public string Name { get; set; }
+        public string Surname { get; set; }
+        public string Login { get; set; }
+        public string Email { get; set; }   
         public Gender Gender { get; set; }
         public int Age { get; set; }
         public double Weight { get; set; }
@@ -24,17 +33,6 @@ namespace Westeros.Diet.Data.Model
         public void AddEntry(Entry entry)
         {
             _dairy.Add(entry);
-        }
-
-        public UserProfile(int id, Gender gender, int age, double weight, double height)
-        {
-            Id = id;
-            Gender = gender;
-            Age = age;
-            Weight = weight;
-            Height = height;
-            _dairy = new List<Entry>();
-
         }
     }
 }

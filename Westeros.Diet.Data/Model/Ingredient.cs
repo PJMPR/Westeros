@@ -17,7 +17,7 @@ namespace Westeros.Diet.Data.Model
         Other
     };
 
-    public class Ingredient //: IIngredient
+    public class Ingredient
     {
         public int Id { get; private set; }
         public string Name { get; private set; }
@@ -30,34 +30,6 @@ namespace Westeros.Diet.Data.Model
         public double AveragePrice { get; private set; }
         public ICollection<IngredientRecipe> IngredientRecipes { get; set; }
         public ICollection<EntryRecipe> EntryRecipes { get; set; }
-
-        public static Ingredient GetIngredient(int id)
-        {
-            using (var context = new DietDbContext())
-            {
-                return context.Ingredient.Single(i => i.Id == id);
-            }
-        }
-
-        public static List<Ingredient> GetAllIngredients()
-        {
-            using (var context = new DietDbContext())
-            {
-                return context.Ingredient.ToList();
-            }
-        }
-
-        public static List<Ingredient> GetIngredientsForRecipe(int recipeId)
-        {
-            using (var context = new DietDbContext())
-            {
-                var ingredients = from ir in context.IngredientRecipes
-                                  where ir.RecipeId == recipeId
-                                  select ir.Ingredient;
-
-                return ingredients.ToList();
-            }
-        }
 
         public override string ToString()
         {

@@ -1,0 +1,9 @@
+language: csharp
+mono: none
+solution: Westeros.sln
+dotnet: 2.1.2
+script:
+  - dotnet clean
+  - dotnet restore
+  - dotnet build
+  - dotnet test Westeros.Demo.Tests

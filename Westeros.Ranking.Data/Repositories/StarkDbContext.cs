@@ -5,7 +5,12 @@ namespace Westeros.Ranking.Data.Repositories
 {
     public class StarkDbContext : DbContext
     {
+
         public StarkDbContext(DbContextOptions<StarkDbContext>o) : base()
+        {
+        }
+
+        public StarkDbContext()
         {
         }
 

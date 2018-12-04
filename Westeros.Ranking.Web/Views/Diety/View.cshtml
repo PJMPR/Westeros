@@ -1,0 +1,33 @@
+﻿@model IEnumerable<Westeros.Ranking.Data.Model.Dieta>
+
+@{
+    ViewData["Title"] = "View";
+}
+
+<h2>View</h2>
+<table class="table">
+    <thead>
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.DietaId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.IloscOdwiedzin)
+        </th>
+        <th></th>
+    </tr>
+    </thead>
+    <tbody>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.DietaId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IloscOdwiedzin)
+            </td>
+        </tr>
+    }
+    </tbody>
+</table>

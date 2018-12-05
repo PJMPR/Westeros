@@ -57,9 +57,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Westeros.Diet.Web", "Wester
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Westeros.Ranking.Web", "Westeros.Ranking.Web\Westeros.Ranking.Web.csproj", "{2070BB7F-EF4D-40BE-AFDE-626DE129F9C6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "views", "views\views.csproj", "{25AE424B-159B-4A45-815E-462334AB3BC9}"
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Westeros.Demo.ApiClient", "Westeros.Demo.ApiClient\Westeros.Demo.ApiClient.csproj", "{6116C4B6-AF25-4EE9-8D9A-D5EE025A74B0}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Westeros.UserProfile.Web", "Westeros.UserProfile.Web\Westeros.UserProfile.Web.csproj", "{A2CADDB4-448A-4620-BCAF-6B097764EAA2}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Westeros.Demo.Tests", "Westeros.Demo.Tests\Westeros.Demo.Tests.csproj", "{2A9C7577-ACC7-4495-A190-F48068BB88DB}"

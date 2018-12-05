@@ -49,6 +49,7 @@ namespace Westeros.Recipes.Service
                     AvgPrice = 14
                 };
 
+                c.SaveChanges();
 
                 Przepis.Ingridients.Add(Ingridient1);
                 Przepis.Ingridients.Add(Ingridient2);
@@ -87,6 +88,7 @@ namespace Westeros.Recipes.Service
                 c.Devices.ToList().ForEach(x => Console.WriteLine(x.Name));
 
             }
+            Console.ReadKey();
         }
     }
 }

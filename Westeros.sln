@@ -56,6 +56,9 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Westeros.Diet.Web", "Westeros.Diet.Web\Westeros.Diet.Web.csproj", "{5D5BBDDB-F326-46EB-A8F9-D5FF5ABC9E52}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Westeros.Ranking.Web", "Westeros.Ranking.Web\Westeros.Ranking.Web.csproj", "{2070BB7F-EF4D-40BE-AFDE-626DE129F9C6}"
+	ProjectSection(ProjectDependencies) = postProject
+		{5116CF13-11E5-4E12-A3E4-32DF95183246} = {5116CF13-11E5-4E12-A3E4-32DF95183246}
+	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Westeros.Demo.ApiClient", "Westeros.Demo.ApiClient\Westeros.Demo.ApiClient.csproj", "{6116C4B6-AF25-4EE9-8D9A-D5EE025A74B0}"
 EndProject
@@ -63,7 +66,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Westeros.UserProfile.Web", 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Westeros.Demo.Tests", "Westeros.Demo.Tests\Westeros.Demo.Tests.csproj", "{2A9C7577-ACC7-4495-A190-F48068BB88DB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Westeros.Ranking.ApiClient", "Westeros.Ranking.ApiClient\Westeros.Ranking.ApiClient.csproj", "{5116CF13-11E5-4E12-A3E4-32DF95183246}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Westeros.Ranking.ApiClient", "Westeros.Ranking.ApiClient\Westeros.Ranking.ApiClient.csproj", "{5116CF13-11E5-4E12-A3E4-32DF95183246}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

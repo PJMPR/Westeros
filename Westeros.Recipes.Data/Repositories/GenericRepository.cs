@@ -8,10 +8,10 @@ namespace Westeros.Demo.Data.Repositories
 {
     public class GenericRepository<TEntity> : IGenericRepository<TEntity> where TEntity : class
     {
-        internal DemoDbContext context;
+        internal RecipesDbContext context;
         internal DbSet<TEntity> dbSet;
 
-        public GenericRepository(DemoDbContext context)
+        public GenericRepository(RecipesDbContext context)
         {
             this.context = context;
             this.dbSet = context.Set<TEntity>();

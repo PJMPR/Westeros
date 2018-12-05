@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Text;
 
 namespace Westeros.Demo.Data.Model
 {
@@ -12,6 +10,7 @@ namespace Westeros.Demo.Data.Model
         [Required]
         public string Name { get; set; }
         public string LastName { get; set; }
+        public int Age { get; set; }
 
         public virtual ICollection<Address> Address { get; set; } = new List<Address>();
     }

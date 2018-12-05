@@ -7,11 +7,11 @@ namespace Westeros.Diet.Data.Model
 
         private UserProfile userProfile;
 
-        private enum PhysicalActivity   {ExtremelyInactive, Inactive, ModeratelyActive, Active, VigorouslyActive, ExtremelyActive};
+        public enum PhysicalActivity   {ExtremelyInactive, Inactive, ModeratelyActive, Active, VigorouslyActive, ExtremelyActive};
 
-        private enum Goal  {LoseWeight, KeepWeight, GetMuscles};
+        public enum Goal  {LoseWeight, KeepWeight, GetMuscles};
 
-        private double BmiCalculate(UserProfile userProfile) {
+        public double BmiCalculate(UserProfile userProfile) {
            return ((userProfile.Weight) / ((userProfile.Height) * (userProfile.Height)));
         }
 
@@ -19,28 +19,29 @@ namespace Westeros.Diet.Data.Model
 
       private double BmrCalculate() {
  
-            double bmr;
+            double bmr =0;
 
-            if (userProfile.Gender == Female) {
+            if (userProfile.Gender == Gender.Female) {
                 bmr = ((9.99 * userProfile.Weight)+
                             (6.25 * userProfile.Height*100)-
                             (4.92 * userProfile.Age) - 161);
                 return bmr;
             }
-            if (userProfile.Gender == Male)
+            if (userProfile.Gender == Gender.Male)
             {
                 bmr = ((9.99 * userProfile.Weight) +
                             (6.25 * userProfile.Height * 100) -
                             (4.92 * userProfile.Age) + 5);
                 return bmr;
             }
+            return bmr;
         }
 
-        private double TotalCaloricDemand(PhysicalActivity physicalActivity, Goal goal)
+        public double TotalCaloricDemand(PhysicalActivity physicalActivity, Goal goal)
         {
            double totalBmr = BmrCalculate();
             
-            switch (PhysicalActivity) {
+            switch (physicalActivity) {
 
                 case PhysicalActivity.ExtremelyInactive:
                     return totalBmr;
@@ -62,7 +63,7 @@ namespace Westeros.Diet.Data.Model
             }
 
 
-            switch (Goal)
+            switch (goal)
             {
                 case Goal.LoseWeight: return totalBmr - 300;
 

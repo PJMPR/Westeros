@@ -9,20 +9,22 @@ using Westeros.Ranking.Data.Repositories;
 namespace Westeros.Ranking.Data.Migrations
 {
     [DbContext(typeof(StarkDbContext))]
-    [Migration("20181123221428_CreateDB")]
-    partial class CreateDB
+    [Migration("20181204132452_StarkDataBase")]
+    partial class StarkDataBase
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("ProductVersion", "2.1.4-rtm-31024")
+                .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
             modelBuilder.Entity("Westeros.Ranking.Data.Model.Dieta", b =>
                 {
                     b.Property<int>("Id")
-                        .ValueGeneratedOnAdd();
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<int>("DietaId");
 
@@ -36,13 +38,18 @@ namespace Westeros.Ranking.Data.Migrations
             modelBuilder.Entity("Westeros.Ranking.Data.Model.Komentarz", b =>
                 {
                     b.Property<int>("id")
-                        .ValueGeneratedOnAdd();
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<DateTime>("Data");
 
                     b.Property<string>("Nick");
 
                     b.Property<string>("Tekst");
+
+                    b.Property<int>("resourceId");
+
+                    b.Property<string>("resourceName");
 
                     b.HasKey("id");
 
@@ -52,7 +59,8 @@ namespace Westeros.Ranking.Data.Migrations
             modelBuilder.Entity("Westeros.Ranking.Data.Model.Przepis", b =>
                 {
                     b.Property<int>("Id")
-                        .ValueGeneratedOnAdd();
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<int>("IloscOdwiedzin");
 

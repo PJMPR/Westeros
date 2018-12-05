@@ -34,7 +34,7 @@ namespace Westeros.Diet.Data.Model
         Masterchef
     };
 
-    public class Recipe //: IIngredient
+    public class Recipe
     {
         public int Id { get; private set; }
         public string Name { get; private set; }
@@ -48,7 +48,6 @@ namespace Westeros.Diet.Data.Model
         public DifficultyType Difficulty { get; private set; }
         public string PriceBar { get; private set; }
         public string Image { get; private set; }
-        //public ICollection<IngredientRecipe> IngredientRecipes { get; set; }
         public ICollection<IngredientRecipe> IngredientRecipes { get; set; }
         public ICollection<EntryRecipe> EntryRecipes { get; set; }
         public ICollection<RecipeDevice> RecipeDevices { get; set; } 
@@ -58,7 +57,7 @@ namespace Westeros.Diet.Data.Model
         [NotMapped]
         public List<string> Tag
         {
-            get { return _tags /*?? (_tags = GenerateTags())*/; }
+            get { return _tags ?? (_tags = GenerateTags()); }
         }
 
 
@@ -67,55 +66,30 @@ namespace Westeros.Diet.Data.Model
             return _tags.ToList();    
         }
 
-        //public List<Ingredient> GetAllIngredients()
-        //{
-        //    return IngredientRecipes.Select(x => x.Ingredient).ToList();
-        //}
-
-        //public static Recipe GetRecipe(int id)
-        //{
-        //    using (var context = new DietDbContext())
-        //    {
-        //        var rex = context.Recipe.Single(r => r.Id == id);
-        //        var ir = context.IngredientRecipes
-        //            .Where(x => x.RecipeId == id)
-        //            .Include(p => p.Recipe)
-        //            .Include(x => x.Ingredient).ToList();
-
-        //        rex.IngredientRecipes = ir;
-        //        return rex;
-        //    }
-        //}
-
-        public static List<Recipe> GetAllRecipes()
+        private List<string> GenerateTags()
         {
-            using (var context = new DietDbContext())
+            var tags = new List<string>();
+
+
+            foreach (var ing in IngredientRecipes)
             {
-                return context.Recipe.ToList();
+                tags.Add(ing.Ingredient.Name);
             }
+
+            foreach (var dev in RecipeDevices)
+            {
+                tags.Add(dev.Device.Name);
+            }
+
+
+            var ingredients = IngredientRecipes.Select(i => i.Ingredient);
+            tags.Add(CalculatePriceBar(ingredients));
+            tags.Add(Difficulty.ToString());
+
+            return tags;
         }
 
-        //public List<string> GenerateTags()
-        //{
-        //    var tags = new List<string>();
-
-        //    foreach (Ingredient ing in IngredientRecipes)
-        //    {
-        //        tags.Add(ing.Name);
-        //    }
-
-        //    foreach (var dev in RecipeDevices)
-        //    {
-        //        tags.Add(dev.Name);
-        //    }
-
-        //    tags.Add(CalculatePriceBar(Ingredients));
-        //    tags.Add(Difficulty.ToString());
-
-        //    return tags;
-        //}
-
-        private string CalculatePriceBar(ICollection<Ingredient> ingredients)
+        private string CalculatePriceBar(IEnumerable<Ingredient> ingredients)
         {
             double Price = 0;
 

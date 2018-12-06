@@ -13,7 +13,7 @@ namespace Westeros.Recipes.Data
     {
         public int Id { get; set; } // Id przepisu
         public string Name { get; set; } // Nazwa przepisu
-        public ICollection<Ingridient> Ingridients { get; set; } // Lista (kolekcja) sk³adników
+        public ICollection<Ingridient> Ingridients { get; set; } = new HashSet<Ingridient>(); // Lista (kolekcja) sk³adników
 
         public double Calories { get; private set; } // Suma kalorii wszystkich sk³adników
         public double Proteins { get; private set; } // Suma bia³ek
@@ -22,7 +22,7 @@ namespace Westeros.Recipes.Data
 
         
         public CuisineType Cuisine { get; set; } // Typ kuchni w³oska, azjatycka itp
-        public ICollection<Device> Devices { get; set; } = new List<Device>(); // Przyrz¹dy które potrzebujemy: piekarnik, blender itp.
+        public ICollection<Device> Devices { get; set; } = new HashSet<Device>(); // Przyrz¹dy które potrzebujemy: piekarnik, blender itp.
         public string Description { get; set; } // Opis przepisu
         public int PrepTime { get; set; } // Czas przygotowania w minutach
         public DifficultyType Difficulty { get; set; } // Poziom trudnoœci [1-5]

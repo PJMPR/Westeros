@@ -2,8 +2,12 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
+using Microsoft.EntityFrameworkCore.Storage;
+using Microsoft.EntityFrameworkCore.Storage.Internal;
+using System;
+using Westeros.UserProfile.Data;
 using Westeros.UserProfile.Data.Repositories;
-//using Westeros.UserProfile.Data.Model.
 
 namespace Westeros.UserProfile.Data.Migrations
 {
@@ -14,25 +18,29 @@ namespace Westeros.UserProfile.Data.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "2.1.4-rtm-31024")
-                .HasAnnotation("Relational:MaxIdentifierLength", 128)
+                .HasAnnotation("ProductVersion", "2.0.3-rtm-10026")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
             modelBuilder.Entity("Westeros.UserProfile.Data.User", b =>
                 {
                     b.Property<int>("id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .ValueGeneratedOnAdd();
 
-                    // NOWE
-                    b.Property<string>("name");
-                    b.Property<string>("surname");
-                    b.Property<string>("login");
-                    b.Property<string>("email");
                     b.Property<int>("age");
-                    b.Property<int>("weight");
+
+                    b.Property<string>("email");
+
                     b.Property<Gender>("gender");
-                    //
+
+                    b.Property<double>("height");
+
+                    b.Property<string>("login");
+
+                    b.Property<string>("name");
+
+                    b.Property<string>("surname");
+
+                    b.Property<double>("weight");
 
                     b.HasKey("id");
 

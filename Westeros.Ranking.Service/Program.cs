@@ -10,6 +10,7 @@ namespace Westeros.Ranking.Service
     {
         static void Main()
         {
+            /*
             StarkApiClient client = new StarkApiClient("http://localhost:3142/");
             KomentarzDto k = new KomentarzDto
             {
@@ -27,6 +28,7 @@ namespace Westeros.Ranking.Service
                 Console.WriteLine(komentarzDto.ToString());
             }
             Console.Read();
+            */
         }
     }
 }

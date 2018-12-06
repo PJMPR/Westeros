@@ -16,7 +16,6 @@
   <DotNetCliToolReference Include="Microsoft.EntityFrameworkCore.Tools.DotNet" Version="2.0.0" />
 </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Westeros.Ranking.ApiClient\Westeros.Ranking.ApiClient.csproj" />
     <ProjectReference Include="..\Westeros.Ranking.Data\Westeros.Ranking.Data.csproj" />
   </ItemGroup>
 

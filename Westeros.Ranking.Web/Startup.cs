@@ -6,10 +6,7 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-
-//dep Injection
 using Microsoft.EntityFrameworkCore;
-using Westeros.Ranking.ApiClient;
 using Westeros.Ranking.Data.Repositories;
 using Westeros.Ranking.Web.Registry;
 
@@ -27,7 +24,7 @@ namespace Westeros.Ranking.Web
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddStarkApiClient(Configuration);
+            //services.AddStarkApiClient(Configuration);
             services.AddRepositories();
             services.AddMvc();
             var connection = Configuration.GetConnectionString("StarkDB");

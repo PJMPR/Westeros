@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Westeros.Ranking.ApiClient.Contracts
 {
-    class KomentarzDto
+    public class KomentarzDto
     {
         public int id { get; set; }
         public DateTime Data { get; set; }
@@ -12,5 +12,10 @@ namespace Westeros.Ranking.ApiClient.Contracts
         public string Nick { get; set; }
         public int resourceId { get; set; }
         public string resourceName { get; set; }
+
+        public override string ToString()
+        {
+            return $"{nameof(id)}: {id}, {nameof(Data)}: {Data}, {nameof(Tekst)}: {Tekst}, {nameof(Nick)}: {Nick}, {nameof(resourceId)}: {resourceId}, {nameof(resourceName)}: {resourceName}";
+        }
     }
 }

@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Westeros.Ranking.ApiClient.Contracts
 {
-    class DietaDto
+    public class DietaDto
     {
         public int Id { get; set; }
         public int DietaId { get; set; }

@@ -13,13 +13,13 @@ namespace Westeros.Ranking.ApiClient
 
 
         void AddNewPrzepis(PrzepisDto przepis);
-        IEnumerable<PrzepisDto> AllPrzepise();
+        IEnumerable<PrzepisDto> AllPrzepisy();
         void DeletePrzepis(int id);
         PrzepisDto GetPrzepis(int id);
         void UpdatePrzepis(PrzepisDto przepis);
 
         void AddNewDieta(DietaDto dieta);
-        IEnumerable<DietaDto> AllDietae();
+        IEnumerable<DietaDto> AllDiety();
         void DeleteDieta(int id);
         DietaDto GetDieta(int id);
         void UpdateDieta(DietaDto dieta);

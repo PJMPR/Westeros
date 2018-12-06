@@ -1,91 +1,108 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Net.Http;
-using System.Text;
 using Westeros.Ranking.ApiClient.Contracts;
 
 namespace Westeros.Ranking.ApiClient
 {
-    class StarkApiClient : IStarkApiClient
+    public class StarkApiClient : IStarkApiClient
     {
+        private readonly HttpClient _httpClient;
+
         public StarkApiClient(string baseAddress)
         {
-            _httpClient = new HttpClient();
-            _httpClient.BaseAddress = new Uri(baseAddress);
+            _httpClient = new HttpClient {BaseAddress = new Uri(baseAddress)};
         }
-        public void AddNewKomentarz(KomentarzDto komentarz)
+
+        public async void AddNewKomentarz(KomentarzDto komentarz)
         {
-            throw new NotImplementedException();
+            await _httpClient.PostAsJsonAsync("api/KomentarzeApi", komentarz);
         }
 
         public IEnumerable<KomentarzDto> AllKomentarze()
         {
-            throw new NotImplementedException();
+            return _httpClient
+                .GetAsync("api/KomentarzeApi")
+                .Result
+                .Content
+                .ReadAsAsync<IEnumerable<KomentarzDto>>()
+                .Result;
         }
 
-        public void DeleteKomentarz(int id)
+        public async void DeleteKomentarz(int id)
         {
-            throw new NotImplementedException();
+            await _httpClient.DeleteAsync($"api/KomentarzeApi/{id}");
         }
 
         public KomentarzDto GetKomentarz(int id)
         {
-            throw new NotImplementedException();
+            return _httpClient.GetAsync($"api/KomentarzeApi/{id}").Result.Content.ReadAsAsync<KomentarzDto>().Result;
         }
 
-        public void UpdateKomentarz(KomentarzDto komentarz)
+        public async void UpdateKomentarz(KomentarzDto komentarz)
         {
-            throw new NotImplementedException();
+            await _httpClient.PutAsJsonAsync("api/KomentarzeApi", komentarz);
         }
 
-        public void AddNewPrzepis(PrzepisDto przepis)
+        public async void AddNewPrzepis(PrzepisDto Przepis)
         {
-            throw new NotImplementedException();
+            await _httpClient.PostAsJsonAsync("api/PrzepisyApi", Przepis);
         }
 
-        public IEnumerable<PrzepisDto> AllPrzepise()
+        public IEnumerable<PrzepisDto> AllPrzepisy()
         {
-            throw new NotImplementedException();
+            return _httpClient
+                .GetAsync("api/PrzepisyApi")
+                .Result
+                .Content
+                .ReadAsAsync<IEnumerable<PrzepisDto>>()
+                .Result;
         }
 
-        public void DeletePrzepis(int id)
+        public async void DeletePrzepis(int id)
         {
-            throw new NotImplementedException();
+            await _httpClient.DeleteAsync($"api/PrzepisyApi/{id}");
         }
 
         public PrzepisDto GetPrzepis(int id)
         {
-            throw new NotImplementedException();
+            return _httpClient.GetAsync($"api/PrzepisyApi/{id}").Result.Content.ReadAsAsync<PrzepisDto>().Result;
         }
 
-        public void UpdatePrzepis(PrzepisDto przepis)
+        public async void UpdatePrzepis(PrzepisDto Przepis)
         {
-            throw new NotImplementedException();
+            await _httpClient.PutAsJsonAsync("api/PrzepisyApi", Przepis);
         }
 
-        public void AddNewDieta(DietaDto dieta)
+
+        public async void AddNewDieta(DietaDto Diety)
         {
-            throw new NotImplementedException();
+            await _httpClient.PostAsJsonAsync("api/DietyeApi", Diety);
         }
 
-        public IEnumerable<DietaDto> AllDietae()
+        public IEnumerable<DietaDto> AllDiety()
         {
-            throw new NotImplementedException();
+            return _httpClient
+                .GetAsync("api/DietyeApi")
+                .Result
+                .Content
+                .ReadAsAsync<IEnumerable<DietaDto>>()
+                .Result;
         }
 
-        public void DeleteDieta(int id)
+        public async void DeleteDieta(int id)
         {
-            throw new NotImplementedException();
+            await _httpClient.DeleteAsync($"api/DietyeApi/{id}");
         }
 
         public DietaDto GetDieta(int id)
         {
-            throw new NotImplementedException();
+            return _httpClient.GetAsync($"api/DietyeApi/{id}").Result.Content.ReadAsAsync<DietaDto>().Result;
         }
 
-        public void UpdateDieta(DietaDto dieta)
+        public async void UpdateDieta(DietaDto Diety)
         {
-            throw new NotImplementedException();
+            await _httpClient.PutAsJsonAsync("api/DietyeApi", Diety);
         }
     }
 }

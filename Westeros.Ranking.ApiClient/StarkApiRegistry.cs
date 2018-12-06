@@ -5,10 +5,10 @@ namespace Westeros.Ranking.ApiClient
 {
     public static class StarkApiRegistry
     {
-        public static IServiceCollection AddDemoClient(this IServiceCollection services, IConfiguration config)
+        public static IServiceCollection AddStarkApiClient(this IServiceCollection services, IConfiguration config)
         {
 
-            return services.AddTransient<IStarkApiClient>(s => new starka(config.GetSection("DemoApi").Value));
+            return services.AddTransient<IStarkApiClient>(s => new StarkApiClient(config.GetSection("DemoApi").Value));
         }
     }
 }

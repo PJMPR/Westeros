@@ -41,7 +41,8 @@ namespace Westeros.Events.Data
                 msg.To = profile.NickName;
                 msg.From = "Admin@recipes.com";
                 msg.Topic = "New Recipes from"+recipe.Tag;
-                msg.Content = "New Recipes from"+recipe.Tag;
+                
+                msg.Content = "<a href=\"http://localhost:51764/Recipe/Details/"+recipe.Id+"\">Recipe link</a>";
 
                 context.MailDB.Add(msg);
                 context.LogDb.Add(new LogRecord

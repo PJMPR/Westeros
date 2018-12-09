@@ -42,6 +42,7 @@
             if (@item.ReadFlag)
             {
                 <tr>
+
                     <td>
                         @Html.DisplayFor(modelItem => item.Id)
                     </td>
@@ -52,7 +53,10 @@
                         @Html.DisplayFor(modelItem => item.From)
                     </td>
                     <td>
-                        @Html.DisplayFor(modelItem => item.Content)
+                       
+                        @Html.Raw(item.Content)
+                      
+                        
                     </td>
                     <td>
                         @Html.DisplayFor(modelItem => item.Topic)
@@ -83,7 +87,7 @@
                         @Html.DisplayFor(modelItem => item.From)
                     </td>
                     <td>
-                        @Html.DisplayFor(modelItem => item.Content)
+                        @Html.Raw(item.Content)
                     </td>
                     <td>
                         @Html.DisplayFor(modelItem => item.Topic)

@@ -1,1 +1,3 @@
-﻿DELETE FROM dbo.MailDB WHERE Id>0
+﻿UPDATE dbo.RecipeDb
+SET isnew = 'true'
+WHERE id > 0;

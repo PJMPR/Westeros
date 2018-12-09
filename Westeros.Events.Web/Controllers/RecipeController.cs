@@ -25,9 +25,15 @@ namespace Westeros.Events.Web.Controllers
         }
 
         // GET: Recipe/Details/5
-        public ActionResult Details(int id)
+        public ActionResult Details(int id, [FromRoute] int? recipeId)
         {
-            return View();
+            if (recipeId != null)
+                id = recipeId.Value;
+
+            var recipe = _ctx.RecipeDb.FirstOrDefault(x => x.Id == id);
+            
+     
+            return View(recipe);
         }
 
         // GET: Recipe/Create

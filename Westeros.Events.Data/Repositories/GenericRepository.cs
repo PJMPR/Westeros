@@ -81,5 +81,10 @@ namespace Westeros.Events.Data.Repositories
         {
             context.SaveChanges();
         }
+
+        public void Dispose()
+        {
+            GC.SuppressFinalize(this);
+        }
     }
 }

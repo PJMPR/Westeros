@@ -1,6 +1,6 @@
 ﻿using System;
 using Westeros.Events.Data.Model;
-using Westeros.Events.Service;
+using Westeros.Events.Data;
 
 public static class MailSender
 {

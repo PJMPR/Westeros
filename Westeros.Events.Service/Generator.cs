@@ -4,7 +4,7 @@ using System.Text;
 using Westeros.Events.Data.Model;
 using Westeros.Events.Data.Repositories;
 
-namespace Westeros.Events.Service
+namespace Westeros.Events.Data
 {
     class Generator
     {

@@ -1,51 +1,27 @@
-﻿using System;
-using Westeros.Events.Data;
-using Westeros.Events.Data.Model;
+﻿
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
+using System.Threading.Tasks;
+using Westeros.Events.Data.Events;
+using Westeros.Events.Data.Registry;
+using Westeros.Events.Data.Repositories;
 
-namespace Westeros.Events.Service
+namespace Westeros.Events.Data
 {
     class Program
     {
-        static void Main(string[] args)
+        public static async Task Main (string[] args)
         {
-       
-            MailSender.SendMail(new Message
-            {
-                To = "Demo8",
-                From = "Demo1",
-                Content = "asdada",
-                Topic = "demo"
-            });
-            MailSender.SendMail(new Message
-            {
-                To = "Demo2",
-                From = "Demo1",
-                Content = "asdada",
-                Topic = "demo"
-            });
-            MailSender.SendMail(new Message
-            {
-                To = "Demo1",
-                From = "Demo4",
-                Content = "asdada",
-                Topic = "demo"
-            });
-            MailSender.SendMail(new Message
-            {
-                To = "Demo3",
-                From = "Demo2",
-                Content = "asdada",
-                Topic = "demo"
-            });
-            MailSender.SendMail(new Message
-            {
-                To = "Demo1",
-                From = "Demo3",
-                Content = "asdada",
-                Topic = "demo"
-            });
-            System.Console.ReadKey();
-
+            var connection = "Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=EventsDB;Integrated Security=True;";
+            await new HostBuilder()
+               .ConfigureServices((hostContext, services) =>
+               {
+                   services.AddRepositories();
+                   services.AddDbContext<EventContext>(options => options.UseSqlServer(connection));
+               })
+               .UseHostedService<EventChecker>()
+               .RunConsoleAsync();
         }
     }
 }

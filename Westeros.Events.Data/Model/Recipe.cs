@@ -4,10 +4,10 @@ using System.Text;
 
 namespace Westeros.Events.Data.Model
 {
-    public class LogRecord 
+    public class Recipe
     {
         public int Id { get; private set; }
-        public IMessage Message { get; set; }
-        public String Status { get; set; }
+        public Boolean IsNew { get; set; } = true;
+        public string Tag { get; set; }
     }
 }

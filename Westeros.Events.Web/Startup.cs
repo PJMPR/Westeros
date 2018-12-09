@@ -7,8 +7,10 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.DependencyInjection.Extensions;
+
+using Westeros.Events.Data.Registry;
 using Westeros.Events.Data.Repositories;
-using Westeros.Events.Data.Model;
 
 namespace Westeros.Events.Web
 {
@@ -24,10 +26,13 @@ namespace Westeros.Events.Web
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            
+            services.AddRepositories();  
             services.AddMvc();
+            //services.AddContext(Configuration);
             var connection=Configuration.GetConnectionString("demo");
-           // @"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=EventsDB;Integrated Security=True;";
-            services.AddDbContext<EventContext>(options => options.UseSqlServer(connection));
+            // @"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=EventsDB;Integrated Security=True;";
+             services.AddDbContext<EventContext>(options => options.UseSqlServer(connection));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

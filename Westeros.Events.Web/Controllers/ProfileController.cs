@@ -21,7 +21,9 @@ namespace Westeros.Events.Web.Controllers
         // -------------------------------------------GET: User-----------------------------------------------------
         public ActionResult Index()
         {
-            return View();
+
+            var data = _ctx.Profiles.OrderBy(x => x.Id);
+            return View(data);
         }
 
         // -------------------------------------------GET: User/Details/5

@@ -4,7 +4,7 @@ using System.Linq;
 using Westeros.Events.Data.Model;
 using Westeros.Events.Data.Repositories;
 
-namespace Westeros.Events.Service
+namespace Westeros.Events.Data
 {
     public class MailSerwer
     {
@@ -38,7 +38,8 @@ namespace Westeros.Events.Service
         private Boolean RunningFlag = false;
 
         public void SendMessage(Message message)
-        {
+        {   
+            message.Date = DateTime.Now;
             EmailServerList.Add(message);
             if (!RunningFlag)
                 CheckMessage();

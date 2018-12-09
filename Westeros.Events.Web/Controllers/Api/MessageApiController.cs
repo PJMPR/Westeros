@@ -6,49 +6,50 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Westeros.Events.Data.Model;
 using Westeros.Events.Data.Repositories;
-
 namespace Westeros.Events.Web.Controllers.Api
 {
     [Produces("application/json")]
-    [Route("api/Message")]
-    public class MessageApiController : Controller
+    [Route("api/Messages")]
+    public class PeopleApiController : Controller
     {
-        IGenericRepository<Message> _message;
-        public MessageApiController(IGenericRepository<Message> message)
+       IGenericRepository<Message> _message;
+       // IMapper _mapper;
+
+        public PeopleApiController(IGenericRepository<Message> message)
         {
             _message = message;
             //_mapper = mapper;
         }
-        // GET: api/MessageApi
-        [HttpGet]
-        public IEnumerable<string> Get()
-        {
-            return new string[] { "value1", "value2" };
-        }
 
-        // GET: api/MessageApi/5
+        [HttpGet]
+        public ActionResult Get()
+        {
+            return Json(_message.Get());
+        }
+        
         [HttpGet("{id}", Name = "Get")]
-        public string Get(int id)
+        public ActionResult Get(int id)
         {
-            return "value";
+            var result = _message.GetByID(id);
+            if (result == null)
+                return StatusCode(404);
+            return Json(result);
         }
         
-        // POST: api/MessageApi
         [HttpPost]
-        public void Post([FromBody]string value)
+        public ActionResult Post([FromBody]Message value)
         {
-        }
+             MailSender.SendMail(value);
+     
+            return StatusCode(201);
+        }       
         
-        // PUT: api/MessageApi/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody]string value)
-        {
-        }
-        
-        // DELETE: api/ApiWithActions/5
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public ActionResult Delete(int id)
         {
+            _message.Delete(id);
+            _message.SaveChanges();
+            return StatusCode(200);
         }
     }
 }

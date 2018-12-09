@@ -15,6 +15,7 @@ namespace Westeros.Events.Data.Model
         [Required]
         public String NickName { get; set; }
         public String Name { get; set; }
+        public String Tag { get; set; }
       
         public Profile()
         {

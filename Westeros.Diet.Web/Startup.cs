@@ -4,8 +4,6 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.EntityFrameworkCore;
 using Westeros.Diet.Data.Repositories;
-using Microsoft.EntityFrameworkCore;
-using Westeros.Diet.Data.Repositories;
 using Westeros.Diet.Web.Registry;
 
 namespace Westeros.Diet.Web

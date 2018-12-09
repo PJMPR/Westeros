@@ -10,9 +10,15 @@ namespace Westeros.Diet.Data.Repositories
 
         }
 
+        public DietDbContext(DbContextOptions<DietDbContext> options) : base(options)
+        {
+
+        }
+
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.UseSqlServer(@"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=DietDatabase;Integrated Security=True;");
+            base.OnConfiguring(optionsBuilder);
         }
 
         public DbSet<Ingredient> Ingredient { get; set; }

@@ -1,11 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Builder;
+﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.EntityFrameworkCore;
+using Westeros.Diet.Data.Repositories;
+using Microsoft.EntityFrameworkCore;
+using Westeros.Diet.Data.Repositories;
+using Westeros.Diet.Web.Registry;
 
 namespace Westeros.Diet.Web
 {
@@ -21,7 +22,10 @@ namespace Westeros.Diet.Web
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddRepositories();
             services.AddMvc();
+            var connection = Configuration.GetConnectionString("DietDB");
+            services.AddDbContext<DietDbContext>(options => options.UseSqlServer(connection));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

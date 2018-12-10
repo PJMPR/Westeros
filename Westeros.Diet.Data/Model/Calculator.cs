@@ -1,80 +1,92 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace Westeros.Diet.Data.Model
 {
-    public class Calculator
-    {
+    public enum PhysicalActivity { ExtremelyInactive, Inactive, ModeratelyActive, Active, VigorouslyActive, ExtremelyActive };
 
-        private UserProfile userProfile;
+    public enum Goal { LoseWeight, KeepWeight, GetMuscles };
 
-        public enum PhysicalActivity   {ExtremelyInactive, Inactive, ModeratelyActive, Active, VigorouslyActive, ExtremelyActive};
+    public static class Calculator
+    {       
 
-        public enum Goal  {LoseWeight, KeepWeight, GetMuscles};
-
-        public double BmiCalculate(UserProfile userProfile) {
+        public static double BmiCalculate(UserProfile userProfile) {
            return ((userProfile.Weight) / ((userProfile.Height) * (userProfile.Height)));
         }
 
-        //podstawowe zapotrzebowanie kaloryczne
-
-      private double BmrCalculate() {
+      public static double BmrCalculate(UserProfile userProfile) {
  
             double bmr =0;
 
             if (userProfile.Gender == Gender.Female) {
-                bmr = ((9.99 * userProfile.Weight)+
-                            (6.25 * userProfile.Height*100)-
-                            (4.92 * userProfile.Age) - 161);
+                bmr = ((9.99 * userProfile.Weight)  +
+                        (6.25 * userProfile.Height*100) -
+                         (4.92 * userProfile.Age) - 161);
                 return bmr;
             }
             if (userProfile.Gender == Gender.Male)
             {
-                bmr = ((9.99 * userProfile.Weight) +
-                            (6.25 * userProfile.Height * 100) -
-                            (4.92 * userProfile.Age) + 5);
+                bmr = ((9.99 * userProfile.Weight)  +
+                        (6.25 * userProfile.Height * 100) -
+                         (4.92 * userProfile.Age) + 5);
                 return bmr;
             }
             return bmr;
         }
 
-        public double TotalCaloricDemand(PhysicalActivity physicalActivity, Goal goal)
+        public static double TotalCaloricDemand(UserProfile userProfile, PhysicalActivity physicalActivity, Goal goal)
         {
-           double totalBmr = BmrCalculate();
-            
-            switch (physicalActivity) {
+            double totalBmr = BmrCalculate(userProfile);
 
+            switch (physicalActivity)
+            {
                 case PhysicalActivity.ExtremelyInactive:
-                    return totalBmr;
+                    break;
 
                 case PhysicalActivity.Inactive:
-                    return totalBmr = totalBmr * 1.2;
+                    totalBmr = totalBmr * 1.2;
+                    break;
 
                 case PhysicalActivity.ModeratelyActive:
-                    return totalBmr = totalBmr * 1.4;
+                    totalBmr = totalBmr * 1.4;
+                    break;
 
                 case PhysicalActivity.Active:
-                    return totalBmr = totalBmr * 1.6;
+                    totalBmr = totalBmr * 1.6;
+                    break;
 
                 case PhysicalActivity.VigorouslyActive:
-                    return totalBmr = totalBmr * 1.8;
+                    totalBmr = totalBmr * 1.8;
+                    break;
 
                 case PhysicalActivity.ExtremelyActive:
-                    return totalBmr = totalBmr * 2.0;
+                    totalBmr = totalBmr * 2.0;
+                    break;
             }
 
 
             switch (goal)
             {
-                case Goal.LoseWeight: return totalBmr - 300;
+                case Goal.LoseWeight:
+                    totalBmr = totalBmr - 300;
+                    break;
 
-                case Goal.KeepWeight: return totalBmr;
+                case Goal.KeepWeight:
+                    break;
 
-                case Goal.GetMuscles: return totalBmr + 300;
-                    
+                case Goal.GetMuscles:
+                    totalBmr = totalBmr + 300;
+                    break;
             }
-
             return totalBmr;
+        }
 
+        public static decimal TotalConsumption(Entry entry, UserProfile userProfile, PhysicalActivity physicalActivity, Goal goal)
+        {
+            return 1;
         }
     }
    }

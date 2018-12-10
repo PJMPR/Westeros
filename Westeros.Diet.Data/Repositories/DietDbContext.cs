@@ -30,13 +30,15 @@ namespace Westeros.Diet.Data.Repositories
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<RecipeIngredients>().HasKey(p => new {p.IngredientId, p.RecipeId});
+
             modelBuilder.Entity<Device>().HasData(
-                new {Id = 1, Name = "Mikrofalówka"},
-                new {Id = 2, Name = "Talerz"},
-                new {Id = 3, Name = "Widelec"},
-                new {Id = 4, Name = "Garnek"},
-                new {Id = 5, Name = "Patelnia"},
-                new {Id = 6, Name = "Wok"});
+                new { Id = 1, Name = "Mikrofalówka"},
+                new { Id = 2, Name = "Talerz"},
+                new { Id = 3, Name = "Widelec"},
+                new { Id = 4, Name = "Garnek"},
+                new { Id = 5, Name = "Patelnia"},
+                new { Id = 6, Name = "Wok"});
 
             modelBuilder.Entity<Ingredient>().HasData(
                 new { Id = 1, Name = "Wołowina", Category = CategoryType.Meat, Calories = 250, Fats = 15.0, Carbohydrates = 0.0, Proteins = 26.0, AveragePrice = 3.5},

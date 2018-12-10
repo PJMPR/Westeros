@@ -12,13 +12,13 @@ namespace Westeros.Diet.Data.Migrations
                 name: "Devices",
                 columns: table => new
                 {
-                    ID = table.Column<int>(nullable: false)
+                    Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     Name = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Devices", x => x.ID);
+                    table.PrimaryKey("PK_Devices", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -151,32 +151,6 @@ namespace Westeros.Diet.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "IngredientRecipes",
-                columns: table => new
-                {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    IngredientId = table.Column<int>(nullable: false),
-                    RecipeId = table.Column<int>(nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_IngredientRecipes", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_IngredientRecipes_Ingredients_IngredientId",
-                        column: x => x.IngredientId,
-                        principalTable: "Ingredients",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_IngredientRecipes_Recipes_RecipeId",
-                        column: x => x.RecipeId,
-                        principalTable: "Recipes",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "RecipeDevices",
                 columns: table => new
                 {
@@ -192,10 +166,36 @@ namespace Westeros.Diet.Data.Migrations
                         name: "FK_RecipeDevices_Devices_DeviceId",
                         column: x => x.DeviceId,
                         principalTable: "Devices",
-                        principalColumn: "ID",
+                        principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_RecipeDevices_Recipes_RecipeId",
+                        column: x => x.RecipeId,
+                        principalTable: "Recipes",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "RecipeIngridients",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    IngredientId = table.Column<int>(nullable: false),
+                    RecipeId = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_RecipeIngridients", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_RecipeIngridients_Ingredients_IngredientId",
+                        column: x => x.IngredientId,
+                        principalTable: "Ingredients",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_RecipeIngridients_Recipes_RecipeId",
                         column: x => x.RecipeId,
                         principalTable: "Recipes",
                         principalColumn: "Id",
@@ -252,16 +252,6 @@ namespace Westeros.Diet.Data.Migrations
                 column: "RecipeId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_IngredientRecipes_IngredientId",
-                table: "IngredientRecipes",
-                column: "IngredientId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_IngredientRecipes_RecipeId",
-                table: "IngredientRecipes",
-                column: "RecipeId");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_RecipeDevices_DeviceId",
                 table: "RecipeDevices",
                 column: "DeviceId");
@@ -269,6 +259,16 @@ namespace Westeros.Diet.Data.Migrations
             migrationBuilder.CreateIndex(
                 name: "IX_RecipeDevices_RecipeId",
                 table: "RecipeDevices",
+                column: "RecipeId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_RecipeIngridients_IngredientId",
+                table: "RecipeIngridients",
+                column: "IngredientId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_RecipeIngridients_RecipeId",
+                table: "RecipeIngridients",
                 column: "RecipeId");
         }
 
@@ -284,10 +284,10 @@ namespace Westeros.Diet.Data.Migrations
                 name: "EntryRecipes");
 
             migrationBuilder.DropTable(
-                name: "IngredientRecipes");
+                name: "RecipeDevices");
 
             migrationBuilder.DropTable(
-                name: "RecipeDevices");
+                name: "RecipeIngridients");
 
             migrationBuilder.DropTable(
                 name: "UserProfiles");
@@ -296,10 +296,10 @@ namespace Westeros.Diet.Data.Migrations
                 name: "Entries");
 
             migrationBuilder.DropTable(
-                name: "Ingredients");
+                name: "Devices");
 
             migrationBuilder.DropTable(
-                name: "Devices");
+                name: "Ingredients");
 
             migrationBuilder.DropTable(
                 name: "Recipes");

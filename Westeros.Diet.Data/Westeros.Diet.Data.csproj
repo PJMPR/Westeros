@@ -17,6 +17,8 @@
     <Compile Remove="Migrations\20181113123620_DietMigration.cs" />
     <Compile Remove="Migrations\20181113124646_DietMigration.cs" />
     <Compile Remove="Migrations\20181210161156_Diet.cs" />
+    <Compile Remove="Migrations\20181210170930_Diet.cs" />
+    <Compile Remove="Migrations\20181210173239_Diet.cs" />
   </ItemGroup>
 
   <ItemGroup>

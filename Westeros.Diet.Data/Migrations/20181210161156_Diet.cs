@@ -56,7 +56,7 @@ namespace Westeros.Diet.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Recipe",
+                name: "Recipes",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
@@ -145,7 +145,7 @@ namespace Westeros.Diet.Data.Migrations
                     table.ForeignKey(
                         name: "FK_EntryRecipes_Recipe_RecipeId",
                         column: x => x.RecipeId,
-                        principalTable: "Recipe",
+                        principalTable: "Recipes",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -171,7 +171,7 @@ namespace Westeros.Diet.Data.Migrations
                     table.ForeignKey(
                         name: "FK_IngredientRecipes_Recipe_RecipeId",
                         column: x => x.RecipeId,
-                        principalTable: "Recipe",
+                        principalTable: "Recipes",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -197,7 +197,7 @@ namespace Westeros.Diet.Data.Migrations
                     table.ForeignKey(
                         name: "FK_RecipeDevices_Recipe_RecipeId",
                         column: x => x.RecipeId,
-                        principalTable: "Recipe",
+                        principalTable: "Recipes",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -302,7 +302,7 @@ namespace Westeros.Diet.Data.Migrations
                 name: "Devices");
 
             migrationBuilder.DropTable(
-                name: "Recipe");
+                name: "Recipes");
         }
     }
 }

@@ -139,7 +139,7 @@ namespace Westeros.Diet.Data.Migrations
                     b.ToTable("IngredientRecipes");
                 });
 
-            modelBuilder.Entity("Westeros.Diet.Data.Model.Recipe", b =>
+            modelBuilder.Entity("Westeros.Diet.Data.Model.Recipes", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -169,7 +169,7 @@ namespace Westeros.Diet.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Recipe");
+                    b.ToTable("Recipes");
                 });
 
             modelBuilder.Entity("Westeros.Diet.Data.Model.RecipeDevice", b =>
@@ -264,7 +264,7 @@ namespace Westeros.Diet.Data.Migrations
                         .HasForeignKey("IngredientId")
                         .OnDelete(DeleteBehavior.Cascade);
 
-                    b.HasOne("Westeros.Diet.Data.Model.Recipe", "Recipe")
+                    b.HasOne("Westeros.Diet.Data.Model.Recipes", "Recipes")
                         .WithMany("IngredientRecipes")
                         .HasForeignKey("RecipeId")
                         .OnDelete(DeleteBehavior.Cascade);
@@ -277,7 +277,7 @@ namespace Westeros.Diet.Data.Migrations
                         .HasForeignKey("DeviceId")
                         .OnDelete(DeleteBehavior.Cascade);
 
-                    b.HasOne("Westeros.Diet.Data.Model.Recipe", "Recipe")
+                    b.HasOne("Westeros.Diet.Data.Model.Recipes", "Recipes")
                         .WithMany("RecipeDevices")
                         .HasForeignKey("RecipeId")
                         .OnDelete(DeleteBehavior.Cascade);
@@ -290,7 +290,7 @@ namespace Westeros.Diet.Data.Migrations
                         .HasForeignKey("EntryId")
                         .OnDelete(DeleteBehavior.Cascade);
 
-                    b.HasOne("Westeros.Diet.Data.Model.Recipe", "Recipe")
+                    b.HasOne("Westeros.Diet.Data.Model.Recipes", "Recipes")
                         .WithMany("EntryRecipes")
                         .HasForeignKey("RecipeId")
                         .OnDelete(DeleteBehavior.Cascade);

@@ -10,7 +10,7 @@ using Westeros.Diet.Data.Repositories;
 namespace Westeros.Diet.Data.Migrations
 {
     [DbContext(typeof(DietDbContext))]
-    [Migration("20181210175445_Diet")]
+    [Migration("20181210180817_Diet")]
     partial class Diet
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -67,9 +67,13 @@ namespace Westeros.Diet.Data.Migrations
 
                     b.Property<DateTime>("Date");
 
+                    b.Property<int>("UserProfileId");
+
                     b.Property<double>("Weight");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("UserProfileId");
 
                     b.ToTable("Entries");
                 });
@@ -242,6 +246,14 @@ namespace Westeros.Diet.Data.Migrations
                     b.HasOne("Westeros.Diet.Data.Model.UserProfile", "UserProfile")
                         .WithMany()
                         .HasForeignKey("UserProfileId");
+                });
+
+            modelBuilder.Entity("Westeros.Diet.Data.Model.Entry", b =>
+                {
+                    b.HasOne("Westeros.Diet.Data.Model.UserProfile", "UserProfile")
+                        .WithMany("Entries")
+                        .HasForeignKey("UserProfileId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("Westeros.Diet.Data.Model.IngredientEntry", b =>

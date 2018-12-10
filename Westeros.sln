@@ -41,8 +41,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Westeros.Events.Data", "Wes
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Westeros.Events.Tests", "Westeros.Events.Tests\Westeros.Events.Tests.csproj", "{FA80C60C-FE72-439E-AC56-0ED3C6B2E0EC}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Demo", "Demo", "{D6E949C4-45D3-4FF3-BBFF-403F983A1B51}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Westeros.Demo.Data", "Westeros.Demo.Data\Westeros.Demo.Data.csproj", "{1A5252A1-3451-4A29-A170-3EB5CDEF6520}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Westeros.Demo.Service", "Westeros.Demo.Service\Westeros.Demo.Service.csproj", "{D7B98491-D7ED-4A9D-9FE2-B01D8BCE752A}"

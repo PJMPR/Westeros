@@ -40,7 +40,7 @@ namespace Westeros.Diet.Data.Migrations
 
                     b.Property<DateTime>("Date");
 
-                    b.Property<double>("Weight");
+                    b.Property<decimal>("Weight");
 
                     b.HasKey("Id");
 
@@ -95,21 +95,21 @@ namespace Westeros.Diet.Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<double>("AveragePrice");
+                    b.Property<decimal>("AveragePrice");
 
                     b.Property<int>("Calories");
 
-                    b.Property<double>("Carbohydrates");
+                    b.Property<decimal>("Carbohydrates");
 
                     b.Property<int>("Category");
 
-                    b.Property<double>("Fats");
+                    b.Property<decimal>("Fats");
 
                     b.Property<string>("Image");
 
                     b.Property<string>("Name");
 
-                    b.Property<double>("Proteins");
+                    b.Property<decimal>("Proteins");
 
                     b.HasKey("Id");
 
@@ -143,7 +143,7 @@ namespace Westeros.Diet.Data.Migrations
 
                     b.Property<int>("Calories");
 
-                    b.Property<double>("Carbohydrates");
+                    b.Property<decimal>("Carbohydrates");
 
                     b.Property<int>("Cuisine");
 
@@ -151,7 +151,7 @@ namespace Westeros.Diet.Data.Migrations
 
                     b.Property<int>("Difficulty");
 
-                    b.Property<double>("Fats");
+                    b.Property<decimal>("Fats");
 
                     b.Property<string>("Image");
 
@@ -161,7 +161,7 @@ namespace Westeros.Diet.Data.Migrations
 
                     b.Property<string>("PriceBar");
 
-                    b.Property<double>("Proteins");
+                    b.Property<decimal>("Proteins");
 
                     b.HasKey("Id");
 

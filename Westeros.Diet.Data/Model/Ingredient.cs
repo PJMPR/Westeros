@@ -23,11 +23,11 @@ namespace Westeros.Diet.Data.Model
         public string Name { get; private set; }
         public CategoryType Category { get; private set; }
         public int Calories { get; private set; }
-        public double Fats { get; private set; }
-        public double Carbohydrates { get; private set; }
-        public double Proteins { get; private set; }
+        public decimal Fats { get; private set; }
+        public decimal Carbohydrates { get; private set; }
+        public decimal Proteins { get; private set; }
         public string Image { get; private set; }
-        public double AveragePrice { get; private set; }
+        public decimal AveragePrice { get; private set; }
         public ICollection<IngredientRecipe> IngredientRecipes { get; set; }
         public ICollection<EntryRecipe> EntryRecipes { get; set; }
 

@@ -9,7 +9,7 @@ namespace Westeros.Diet.Data.Model
         [Key]
         public int Id { get; set; }
         public DateTime Date { get; set; }
-        public double Weight { get; set; }
+        public decimal Weight { get; set; }
         //private ICollection<IIngredient> _ingredients ;
         public ICollection<EntryIngredient> EntryIngredients { get; set; }
         public ICollection<EntryRecipe> EntryRecipes { get; set; }

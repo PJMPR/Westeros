@@ -39,9 +39,9 @@ namespace Westeros.Diet.Data.Model
         public int Id { get; private set; }
         public string Name { get; private set; }
         public int Calories { get; private set; }
-        public double Proteins { get; private set; }
-        public double Carbohydrates { get; private set; }
-        public double Fats { get; private set; }
+        public decimal Proteins { get; private set; }
+        public decimal Carbohydrates { get; private set; }
+        public decimal Fats { get; private set; }
         public CuisineType Cuisine { get; private set; }
         public string Description { get; private set; } 
         public int PrepTime { get; private set; }
@@ -91,7 +91,7 @@ namespace Westeros.Diet.Data.Model
 
         private string CalculatePriceBar(IEnumerable<Ingredient> ingredients)
         {
-            double Price = 0;
+            decimal Price = 0;
 
             foreach (Ingredient ing in ingredients)
             {

@@ -11,15 +11,15 @@ namespace Westeros.Diet.Data.Model
 
         public enum Goal  {LoseWeight, KeepWeight, GetMuscles};
 
-        public double BmiCalculate(UserProfile userProfile) {
+        public decimal BmiCalculate(UserProfile userProfile) {
            return ((userProfile.Weight) / ((userProfile.Height) * (userProfile.Height)));
         }
 
         //podstawowe zapotrzebowanie kaloryczne
 
-      private double BmrCalculate() {
+      private decimal BmrCalculate() {
  
-            double bmr =0;
+            decimal bmr =0;
 
             if (userProfile.Gender == Gender.Female) {
                 bmr = ((9.99 * userProfile.Weight)+
@@ -37,9 +37,9 @@ namespace Westeros.Diet.Data.Model
             return bmr;
         }
 
-        public double TotalCaloricDemand(PhysicalActivity physicalActivity, Goal goal)
+        public decimal TotalCaloricDemand(PhysicalActivity physicalActivity, Goal goal)
         {
-           double totalBmr = BmrCalculate();
+           decimal totalBmr = BmrCalculate();
             
             switch (physicalActivity) {
 

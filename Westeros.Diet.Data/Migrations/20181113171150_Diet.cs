@@ -28,7 +28,7 @@ namespace Westeros.Diet.Data.Migrations
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     Date = table.Column<DateTime>(nullable: false),
-                    Weight = table.Column<double>(nullable: false)
+                    Weight = table.Column<decimal>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -44,11 +44,11 @@ namespace Westeros.Diet.Data.Migrations
                     Name = table.Column<string>(nullable: true),
                     Category = table.Column<int>(nullable: false),
                     Calories = table.Column<int>(nullable: false),
-                    Fats = table.Column<double>(nullable: false),
-                    Carbohydrates = table.Column<double>(nullable: false),
-                    Proteins = table.Column<double>(nullable: false),
+                    Fats = table.Column<decimal>(nullable: false),
+                    Carbohydrates = table.Column<decimal>(nullable: false),
+                    Proteins = table.Column<decimal>(nullable: false),
                     Image = table.Column<string>(nullable: true),
-                    AveragePrice = table.Column<double>(nullable: false)
+                    AveragePrice = table.Column<decimal>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -63,9 +63,9 @@ namespace Westeros.Diet.Data.Migrations
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     Name = table.Column<string>(nullable: true),
                     Calories = table.Column<int>(nullable: false),
-                    Proteins = table.Column<double>(nullable: false),
-                    Carbohydrates = table.Column<double>(nullable: false),
-                    Fats = table.Column<double>(nullable: false),
+                    Proteins = table.Column<decimal>(nullable: false),
+                    Carbohydrates = table.Column<decimal>(nullable: false),
+                    Fats = table.Column<decimal>(nullable: false),
                     Cuisine = table.Column<int>(nullable: false),
                     Description = table.Column<string>(nullable: true),
                     PrepTime = table.Column<int>(nullable: false),

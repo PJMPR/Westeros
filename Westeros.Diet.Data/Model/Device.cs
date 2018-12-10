@@ -8,7 +8,7 @@ namespace Westeros.Diet.Data.Model
     public class Device
     {
         [Key]
-        public int ID { get; set; }
+        public int Id { get; set; }
         public string Name { get; set; }
         public ICollection<RecipeDevice> RecipeDevices { get; set; }
     }

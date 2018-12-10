@@ -20,7 +20,7 @@ namespace Westeros.Ranking.Data.Repositories
                 @"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=StarkBazaDanych;Integrated Security=True;");
         }
 
-        public DbSet<Komentarz> Komentarz { get; set; }
+        public DbSet<Oceny> Oceny { get; set; }
         public DbSet<Przepis> PrzepisyOdwiedziny { get; set; }
         public DbSet<Dieta> DietyOdwiedziny { get; set; }
     }

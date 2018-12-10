@@ -10,25 +10,26 @@ namespace Westeros.Ranking.Service
     {
         static void Main()
         {
-            /*
-            StarkApiClient client = new StarkApiClient("http://localhost:3142/");
-            KomentarzDto k = new KomentarzDto
+            
+            StarkApiClient client = new StarkApiClient("http://localhost:3143/");
+            OcenaDto k = new OcenaDto
             {
                 Data = new DateTime(1111, 12, 12, 12, 12, 12),
                 Nick = "OreDa",
                 Tekst = "ASD",
+                Ocena = 6,
                 resourceId = 1,
                 resourceName = "Dieta"
             };
-            //client.AddNewKomentarz(k);
-            IEnumerable<KomentarzDto> lista;
+            client.AddNewKomentarz(k);
+            IEnumerable<OcenaDto> lista;
             lista = client.AllKomentarze();
-            foreach (KomentarzDto komentarzDto in lista)
+            foreach (OcenaDto komentarzDto in lista)
             {
                 Console.WriteLine(komentarzDto.ToString());
             }
             Console.Read();
-            */
+            
         }
     }
 }

@@ -20,8 +20,8 @@ namespace Westeros.UserProfile.Data
         public string   login   { get; set; }
         public string   email   { get; set; }
         public int      age     { get; set; }
-        public double   weight  { get; set; }
-        public double   height  { get; set; }
+        public decimal  weight  { get; set; }
+        public decimal  height  { get; set; }
         public Gender   gender  { get; set; }
 
         public User() { }
@@ -31,7 +31,5 @@ namespace Westeros.UserProfile.Data
             this.login = login;
             this.email = email;
         }
-
-
     }
 }

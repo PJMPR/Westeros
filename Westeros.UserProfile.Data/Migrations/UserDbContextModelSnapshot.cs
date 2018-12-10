@@ -30,9 +30,9 @@ namespace Westeros.UserProfile.Data.Migrations
 
                     b.Property<string>("email");
 
-                    b.Property<Gender>("gender");
+                    b.Property<int>("gender");
 
-                    b.Property<double>("height");
+                    b.Property<decimal>("height");
 
                     b.Property<string>("login");
 
@@ -40,7 +40,7 @@ namespace Westeros.UserProfile.Data.Migrations
 
                     b.Property<string>("surname");
 
-                    b.Property<double>("weight");
+                    b.Property<decimal>("weight");
 
                     b.HasKey("id");
 

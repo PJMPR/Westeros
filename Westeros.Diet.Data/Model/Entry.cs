@@ -13,5 +13,7 @@ namespace Westeros.Diet.Data.Model
         //private ICollection<IIngredient> _ingredients ;
         public ICollection<IngredientEntry> EntryIngredients { get; set; }
         public ICollection<RecipeEntry> EntryRecipes { get; set; }
+        public int UserProfileId { get; set; }
+        public UserProfile UserProfile { get; set; }
     }
 }

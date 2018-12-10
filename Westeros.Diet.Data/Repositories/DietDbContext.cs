@@ -21,7 +21,7 @@ namespace Westeros.Diet.Data.Repositories
         public DbSet<DietPlan> DietPlans { get; set; }
         public DbSet<Recipe> Recipes { get; set; }
         public DbSet<Entry> Entries { get; set; }
-        public DbSet<IngredientRecipe> IngredientRecipes { get; set; }
+        public DbSet<RecipeIngridient> IngredientRecipes { get; set; }
         public DbSet<IngredientEntry> EntryIngredients { get; set; }
         public DbSet<RecipeEntry> EntryRecipes { get; set; }
         public DbSet<UserProfile> UserProfiles { get; set; }

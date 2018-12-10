@@ -177,7 +177,7 @@ namespace Westeros.Diet.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "RecipeIngridients",
+                name: "RecipeIngredients",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
@@ -187,15 +187,15 @@ namespace Westeros.Diet.Data.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_RecipeIngridients", x => x.Id);
+                    table.PrimaryKey("PK_RecipeIngredients", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_RecipeIngridients_Ingredients_IngredientId",
+                        name: "FK_RecipeIngredients_Ingredients_IngredientId",
                         column: x => x.IngredientId,
                         principalTable: "Ingredients",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_RecipeIngridients_Recipes_RecipeId",
+                        name: "FK_RecipeIngredients_Recipes_RecipeId",
                         column: x => x.RecipeId,
                         principalTable: "Recipes",
                         principalColumn: "Id",
@@ -262,13 +262,13 @@ namespace Westeros.Diet.Data.Migrations
                 column: "RecipeId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_RecipeIngridients_IngredientId",
-                table: "RecipeIngridients",
+                name: "IX_RecipeIngredients_IngredientId",
+                table: "RecipeIngredients",
                 column: "IngredientId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_RecipeIngridients_RecipeId",
-                table: "RecipeIngridients",
+                name: "IX_RecipeIngredients_RecipeId",
+                table: "RecipeIngredients",
                 column: "RecipeId");
         }
 
@@ -287,7 +287,7 @@ namespace Westeros.Diet.Data.Migrations
                 name: "RecipeDevices");
 
             migrationBuilder.DropTable(
-                name: "RecipeIngridients");
+                name: "RecipeIngredients");
 
             migrationBuilder.DropTable(
                 name: "UserProfiles");

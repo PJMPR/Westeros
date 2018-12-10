@@ -49,7 +49,7 @@ namespace Westeros.Diet.Data.Model
         public string PriceBar { get; set; }
         public string Image { get; set; }
         public ICollection<IngredientRecipe> IngredientRecipes { get; set; }
-        public ICollection<EntryRecipe> EntryRecipes { get; set; }
+        public ICollection<RecipeEntry> EntryRecipes { get; set; }
         public ICollection<RecipeDevice> RecipeDevices { get; set; } 
 
         [NotMapped]

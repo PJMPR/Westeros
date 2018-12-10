@@ -11,7 +11,7 @@ namespace Westeros.Diet.Data.Model
         public DateTime Date { get; set; }
         public double Weight { get; set; }
         //private ICollection<IIngredient> _ingredients ;
-        public ICollection<EntryIngredient> EntryIngredients { get; set; }
-        public ICollection<EntryRecipe> EntryRecipes { get; set; }
+        public ICollection<IngredientEntry> EntryIngredients { get; set; }
+        public ICollection<RecipeEntry> EntryRecipes { get; set; }
     }
 }

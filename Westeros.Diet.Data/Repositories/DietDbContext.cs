@@ -18,13 +18,12 @@ namespace Westeros.Diet.Data.Repositories
         public DbSet<Device> Devices { get; set; }
         public DbSet<RecipeDevice> RecipeDevices { get; set; }
         public DbSet<Ingredient> Ingredients { get; set; }
-        public DbSet<RecipeIngridient> RecipeIngridients { get; set; }
         public DbSet<DietPlan> DietPlans { get; set; }
         public DbSet<Recipe> Recipe { get; set; }
         public DbSet<Entry> Entries { get; set; }
         public DbSet<IngredientRecipe> IngredientRecipes { get; set; }
-        public DbSet<EntryIngredient> EntryIngredients { get; set; }
-        public DbSet<EntryRecipe> EntryRecipes { get; set; }
+        public DbSet<IngredientEntry> EntryIngredients { get; set; }
+        public DbSet<RecipeEntry> EntryRecipes { get; set; }
         public DbSet<UserProfile> UserProfiles { get; set; }
     }
 }

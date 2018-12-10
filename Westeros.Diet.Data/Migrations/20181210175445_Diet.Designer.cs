@@ -10,7 +10,7 @@ using Westeros.Diet.Data.Repositories;
 namespace Westeros.Diet.Data.Migrations
 {
     [DbContext(typeof(DietDbContext))]
-    [Migration("20181113171150_Diet")]
+    [Migration("20181210175445_Diet")]
     partial class Diet
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -23,15 +23,40 @@ namespace Westeros.Diet.Data.Migrations
 
             modelBuilder.Entity("Westeros.Diet.Data.Model.Device", b =>
                 {
-                    b.Property<int>("ID")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("Name");
 
-                    b.HasKey("ID");
+                    b.HasKey("Id");
 
-                    b.ToTable("Device");
+                    b.ToTable("Devices");
+                });
+
+            modelBuilder.Entity("Westeros.Diet.Data.Model.DietPlan", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("Calories");
+
+                    b.Property<decimal>("Carbohydrates");
+
+                    b.Property<decimal>("Fats");
+
+                    b.Property<string>("Name");
+
+                    b.Property<decimal>("Proteins");
+
+                    b.Property<int?>("UserProfileId");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserProfileId");
+
+                    b.ToTable("DietPlans");
                 });
 
             modelBuilder.Entity("Westeros.Diet.Data.Model.Entry", b =>
@@ -47,48 +72,6 @@ namespace Westeros.Diet.Data.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Entries");
-                });
-
-            modelBuilder.Entity("Westeros.Diet.Data.Model.EntryIngredient", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int>("EntryId");
-
-                    b.Property<int>("IngredientId");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("EntryId");
-
-                    b.HasIndex("IngredientId");
-
-                    b.ToTable("EntryIngredients");
-                });
-
-            modelBuilder.Entity("Westeros.Diet.Data.Model.EntryRecipe", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int>("EntryId");
-
-                    b.Property<int?>("IngredientId");
-
-                    b.Property<int>("RecipeId");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("EntryId");
-
-                    b.HasIndex("IngredientId");
-
-                    b.HasIndex("RecipeId");
-
-                    b.ToTable("EntryRecipes");
                 });
 
             modelBuilder.Entity("Westeros.Diet.Data.Model.Ingredient", b =>
@@ -115,26 +98,26 @@ namespace Westeros.Diet.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Ingredient");
+                    b.ToTable("Ingredients");
                 });
 
-            modelBuilder.Entity("Westeros.Diet.Data.Model.IngredientRecipe", b =>
+            modelBuilder.Entity("Westeros.Diet.Data.Model.IngredientEntry", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("IngredientId");
+                    b.Property<int>("EntryId");
 
-                    b.Property<int>("RecipeId");
+                    b.Property<int>("IngredientId");
 
                     b.HasKey("Id");
 
+                    b.HasIndex("EntryId");
+
                     b.HasIndex("IngredientId");
 
-                    b.HasIndex("RecipeId");
-
-                    b.ToTable("IngredientRecipes");
+                    b.ToTable("EntryIngredients");
                 });
 
             modelBuilder.Entity("Westeros.Diet.Data.Model.Recipe", b =>
@@ -167,7 +150,7 @@ namespace Westeros.Diet.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Recipe");
+                    b.ToTable("Recipes");
                 });
 
             modelBuilder.Entity("Westeros.Diet.Data.Model.RecipeDevice", b =>
@@ -186,10 +169,82 @@ namespace Westeros.Diet.Data.Migrations
 
                     b.HasIndex("RecipeId");
 
-                    b.ToTable("RecipeDevice");
+                    b.ToTable("RecipeDevices");
                 });
 
-            modelBuilder.Entity("Westeros.Diet.Data.Model.EntryIngredient", b =>
+            modelBuilder.Entity("Westeros.Diet.Data.Model.RecipeEntry", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("EntryId");
+
+                    b.Property<int>("RecipeId");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("EntryId");
+
+                    b.HasIndex("RecipeId");
+
+                    b.ToTable("EntryRecipes");
+                });
+
+            modelBuilder.Entity("Westeros.Diet.Data.Model.RecipeIngredients", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("IngredientId");
+
+                    b.Property<int>("RecipeId");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("IngredientId");
+
+                    b.HasIndex("RecipeId");
+
+                    b.ToTable("RecipeIngredients");
+                });
+
+            modelBuilder.Entity("Westeros.Diet.Data.Model.UserProfile", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("Age");
+
+                    b.Property<string>("Email");
+
+                    b.Property<int>("Gender");
+
+                    b.Property<double>("Height");
+
+                    b.Property<string>("Login");
+
+                    b.Property<string>("Name");
+
+                    b.Property<string>("Surname");
+
+                    b.Property<double>("Weight");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("UserProfiles");
+                });
+
+            modelBuilder.Entity("Westeros.Diet.Data.Model.DietPlan", b =>
+                {
+                    b.HasOne("Westeros.Diet.Data.Model.UserProfile", "UserProfile")
+                        .WithMany()
+                        .HasForeignKey("UserProfileId");
+                });
+
+            modelBuilder.Entity("Westeros.Diet.Data.Model.IngredientEntry", b =>
                 {
                     b.HasOne("Westeros.Diet.Data.Model.Entry", "Entry")
                         .WithMany("EntryIngredients")
@@ -197,21 +252,30 @@ namespace Westeros.Diet.Data.Migrations
                         .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("Westeros.Diet.Data.Model.Ingredient", "Ingredient")
-                        .WithMany()
+                        .WithMany("IngredientEntries")
                         .HasForeignKey("IngredientId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
-            modelBuilder.Entity("Westeros.Diet.Data.Model.EntryRecipe", b =>
+            modelBuilder.Entity("Westeros.Diet.Data.Model.RecipeDevice", b =>
+                {
+                    b.HasOne("Westeros.Diet.Data.Model.Device", "Device")
+                        .WithMany("RecipeDevices")
+                        .HasForeignKey("DeviceId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("Westeros.Diet.Data.Model.Recipe", "Recipe")
+                        .WithMany("RecipeDevices")
+                        .HasForeignKey("RecipeId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("Westeros.Diet.Data.Model.RecipeEntry", b =>
                 {
                     b.HasOne("Westeros.Diet.Data.Model.Entry", "Entry")
                         .WithMany("EntryRecipes")
                         .HasForeignKey("EntryId")
                         .OnDelete(DeleteBehavior.Cascade);
-
-                    b.HasOne("Westeros.Diet.Data.Model.Ingredient")
-                        .WithMany("EntryRecipes")
-                        .HasForeignKey("IngredientId");
 
                     b.HasOne("Westeros.Diet.Data.Model.Recipe", "Recipe")
                         .WithMany("EntryRecipes")
@@ -219,7 +283,7 @@ namespace Westeros.Diet.Data.Migrations
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
-            modelBuilder.Entity("Westeros.Diet.Data.Model.IngredientRecipe", b =>
+            modelBuilder.Entity("Westeros.Diet.Data.Model.RecipeIngredients", b =>
                 {
                     b.HasOne("Westeros.Diet.Data.Model.Ingredient", "Ingredient")
                         .WithMany("IngredientRecipes")
@@ -228,19 +292,6 @@ namespace Westeros.Diet.Data.Migrations
 
                     b.HasOne("Westeros.Diet.Data.Model.Recipe", "Recipe")
                         .WithMany("IngredientRecipes")
-                        .HasForeignKey("RecipeId")
-                        .OnDelete(DeleteBehavior.Cascade);
-                });
-
-            modelBuilder.Entity("Westeros.Diet.Data.Model.RecipeDevice", b =>
-                {
-                    b.HasOne("Westeros.Diet.Data.Model.Device", "Device")
-                        .WithMany()
-                        .HasForeignKey("DeviceId")
-                        .OnDelete(DeleteBehavior.Cascade);
-
-                    b.HasOne("Westeros.Diet.Data.Model.Recipe", "Recipe")
-                        .WithMany("RecipeDevices")
                         .HasForeignKey("RecipeId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });

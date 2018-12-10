@@ -15,18 +15,15 @@ namespace Westeros.Diet.Data.Repositories
             optionsBuilder.UseSqlServer(@"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=DietDatabase;Integrated Security=True;");
         }
 
-        public DbSet<Ingredient> Ingredient { get; set; }
-        public DbSet<Recipe> Recipe { get; set; }
+        public DbSet<Device> Devices { get; set; }
+        public DbSet<RecipeDevice> RecipeDevices { get; set; }
+        public DbSet<Ingredient> Ingredients { get; set; }
+        public DbSet<DietPlan> DietPlans { get; set; }
+        public DbSet<Recipe> Recipes { get; set; }
         public DbSet<Entry> Entries { get; set; }
-        public DbSet<IngredientRecipe> IngredientRecipes { get; set; }
-        public DbSet<EntryIngredient> EntryIngredients { get; set; }
-        public DbSet<EntryRecipe> EntryRecipes { get; set; }
+        public DbSet<RecipeIngredients> RecipeIngredients { get; set; }
+        public DbSet<IngredientEntry> EntryIngredients { get; set; }
+        public DbSet<RecipeEntry> EntryRecipes { get; set; }
         public DbSet<UserProfile> UserProfiles { get; set; }
-
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
-        {
-            //modelBuilder.Entity<IngredientRecipe>()
-            //    .HasKey(x => x.Id);
-        }
     }
 }

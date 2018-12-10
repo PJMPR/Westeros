@@ -36,24 +36,24 @@ namespace Westeros.Diet.Data.Model
 
     public class Recipe
     {
-        public int Id { get; private set; }
-        public string Name { get; private set; }
-        public int Calories { get; private set; }
-        public double Proteins { get; private set; }
-        public double Carbohydrates { get; private set; }
-        public double Fats { get; private set; }
-        public CuisineType Cuisine { get; private set; }
-        public string Description { get; private set; } 
-        public int PrepTime { get; private set; }
-        public DifficultyType Difficulty { get; private set; }
-        public string PriceBar { get; private set; }
-        public string Image { get; private set; }
-        public ICollection<IngredientRecipe> IngredientRecipes { get; set; }
-        public ICollection<EntryRecipe> EntryRecipes { get; set; }
+        public int Id { get; set; }
+        public string Name { get; set; }
+        public int Calories { get; set; }
+        public double Proteins { get; set; }
+        public double Carbohydrates { get; set; }
+        public double Fats { get; set; }
+        public CuisineType Cuisine { get; set; }
+        public string Description { get; set; } 
+        public int PrepTime { get; set; }
+        public DifficultyType Difficulty { get; set; }
+        public string PriceBar { get; set; }
+        public string Image { get; set; }
+        public ICollection<RecipeIngredients> IngredientRecipes { get; set; }
+        public ICollection<RecipeEntry> EntryRecipes { get; set; }
         public ICollection<RecipeDevice> RecipeDevices { get; set; } 
 
         [NotMapped]
-        private List<string> _tags;
+        List<string> _tags;
         [NotMapped]
         public List<string> Tag
         {
@@ -66,7 +66,7 @@ namespace Westeros.Diet.Data.Model
             return _tags.ToList();    
         }
 
-        private List<string> GenerateTags()
+        List<string> GenerateTags()
         {
             var tags = new List<string>();
 
@@ -89,7 +89,7 @@ namespace Westeros.Diet.Data.Model
             return tags;
         }
 
-        private string CalculatePriceBar(IEnumerable<Ingredient> ingredients)
+        string CalculatePriceBar(IEnumerable<Ingredient> ingredients)
         {
             double Price = 0;
 

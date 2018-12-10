@@ -6,9 +6,22 @@ using System.Threading.Tasks;
 
 namespace Westeros.Diet.Data.Model
 {
-    public enum PhysicalActivity { ExtremelyInactive, Inactive, ModeratelyActive, Active, VigorouslyActive, ExtremelyActive };
+    public enum PhysicalActivity
+    {
+        ExtremelyInactive,
+        Inactive,
+        ModeratelyActive,
+        Active,
+        VigorouslyActive,
+        ExtremelyActive
+    };
 
-    public enum Goal { LoseWeight, KeepWeight, GetMuscles };
+    public enum Goal
+    {
+        LoseWeight,
+        KeepWeight,
+        GetMuscles
+    };
 
     public static class Calculator
     {       

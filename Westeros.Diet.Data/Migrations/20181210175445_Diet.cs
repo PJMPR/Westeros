@@ -9,16 +9,16 @@ namespace Westeros.Diet.Data.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "Device",
+                name: "Devices",
                 columns: table => new
                 {
-                    ID = table.Column<int>(nullable: false)
+                    Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     Name = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Device", x => x.ID);
+                    table.PrimaryKey("PK_Devices", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -36,7 +36,7 @@ namespace Westeros.Diet.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Ingredient",
+                name: "Ingredients",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
@@ -52,11 +52,11 @@ namespace Westeros.Diet.Data.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Ingredient", x => x.Id);
+                    table.PrimaryKey("PK_Ingredients", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
-                name: "Recipe",
+                name: "Recipes",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
@@ -75,7 +75,27 @@ namespace Westeros.Diet.Data.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Recipe", x => x.Id);
+                    table.PrimaryKey("PK_Recipes", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "UserProfiles",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    Name = table.Column<string>(nullable: true),
+                    Surname = table.Column<string>(nullable: true),
+                    Login = table.Column<string>(nullable: true),
+                    Email = table.Column<string>(nullable: true),
+                    Gender = table.Column<int>(nullable: false),
+                    Age = table.Column<int>(nullable: false),
+                    Weight = table.Column<double>(nullable: false),
+                    Height = table.Column<double>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_UserProfiles", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -97,9 +117,9 @@ namespace Westeros.Diet.Data.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_EntryIngredients_Ingredient_IngredientId",
+                        name: "FK_EntryIngredients_Ingredients_IngredientId",
                         column: x => x.IngredientId,
-                        principalTable: "Ingredient",
+                        principalTable: "Ingredients",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -111,8 +131,7 @@ namespace Westeros.Diet.Data.Migrations
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     EntryId = table.Column<int>(nullable: false),
-                    RecipeId = table.Column<int>(nullable: false),
-                    IngredientId = table.Column<int>(nullable: true)
+                    RecipeId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -124,47 +143,15 @@ namespace Westeros.Diet.Data.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_EntryRecipes_Ingredient_IngredientId",
-                        column: x => x.IngredientId,
-                        principalTable: "Ingredient",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_EntryRecipes_Recipe_RecipeId",
+                        name: "FK_EntryRecipes_Recipes_RecipeId",
                         column: x => x.RecipeId,
-                        principalTable: "Recipe",
+                        principalTable: "Recipes",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
-                name: "IngredientRecipes",
-                columns: table => new
-                {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    IngredientId = table.Column<int>(nullable: false),
-                    RecipeId = table.Column<int>(nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_IngredientRecipes", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_IngredientRecipes_Ingredient_IngredientId",
-                        column: x => x.IngredientId,
-                        principalTable: "Ingredient",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_IngredientRecipes_Recipe_RecipeId",
-                        column: x => x.RecipeId,
-                        principalTable: "Recipe",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "RecipeDevice",
+                name: "RecipeDevices",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
@@ -174,20 +161,75 @@ namespace Westeros.Diet.Data.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_RecipeDevice", x => x.Id);
+                    table.PrimaryKey("PK_RecipeDevices", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_RecipeDevice_Device_DeviceId",
+                        name: "FK_RecipeDevices_Devices_DeviceId",
                         column: x => x.DeviceId,
-                        principalTable: "Device",
-                        principalColumn: "ID",
+                        principalTable: "Devices",
+                        principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_RecipeDevice_Recipe_RecipeId",
+                        name: "FK_RecipeDevices_Recipes_RecipeId",
                         column: x => x.RecipeId,
-                        principalTable: "Recipe",
+                        principalTable: "Recipes",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
+
+            migrationBuilder.CreateTable(
+                name: "RecipeIngredients",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    IngredientId = table.Column<int>(nullable: false),
+                    RecipeId = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_RecipeIngredients", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_RecipeIngredients_Ingredients_IngredientId",
+                        column: x => x.IngredientId,
+                        principalTable: "Ingredients",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_RecipeIngredients_Recipes_RecipeId",
+                        column: x => x.RecipeId,
+                        principalTable: "Recipes",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "DietPlans",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    Name = table.Column<string>(nullable: true),
+                    Calories = table.Column<int>(nullable: false),
+                    Proteins = table.Column<decimal>(nullable: false),
+                    Carbohydrates = table.Column<decimal>(nullable: false),
+                    Fats = table.Column<decimal>(nullable: false),
+                    UserProfileId = table.Column<int>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_DietPlans", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_DietPlans_UserProfiles_UserProfileId",
+                        column: x => x.UserProfileId,
+                        principalTable: "UserProfiles",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_DietPlans_UserProfileId",
+                table: "DietPlans",
+                column: "UserProfileId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_EntryIngredients_EntryId",
@@ -205,38 +247,36 @@ namespace Westeros.Diet.Data.Migrations
                 column: "EntryId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_EntryRecipes_IngredientId",
-                table: "EntryRecipes",
-                column: "IngredientId");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_EntryRecipes_RecipeId",
                 table: "EntryRecipes",
                 column: "RecipeId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_IngredientRecipes_IngredientId",
-                table: "IngredientRecipes",
-                column: "IngredientId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_IngredientRecipes_RecipeId",
-                table: "IngredientRecipes",
-                column: "RecipeId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_RecipeDevice_DeviceId",
-                table: "RecipeDevice",
+                name: "IX_RecipeDevices_DeviceId",
+                table: "RecipeDevices",
                 column: "DeviceId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_RecipeDevice_RecipeId",
-                table: "RecipeDevice",
+                name: "IX_RecipeDevices_RecipeId",
+                table: "RecipeDevices",
+                column: "RecipeId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_RecipeIngredients_IngredientId",
+                table: "RecipeIngredients",
+                column: "IngredientId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_RecipeIngredients_RecipeId",
+                table: "RecipeIngredients",
                 column: "RecipeId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.DropTable(
+                name: "DietPlans");
+
             migrationBuilder.DropTable(
                 name: "EntryIngredients");
 
@@ -244,22 +284,25 @@ namespace Westeros.Diet.Data.Migrations
                 name: "EntryRecipes");
 
             migrationBuilder.DropTable(
-                name: "IngredientRecipes");
+                name: "RecipeDevices");
 
             migrationBuilder.DropTable(
-                name: "RecipeDevice");
+                name: "RecipeIngredients");
+
+            migrationBuilder.DropTable(
+                name: "UserProfiles");
 
             migrationBuilder.DropTable(
                 name: "Entries");
 
             migrationBuilder.DropTable(
-                name: "Ingredient");
+                name: "Devices");
 
             migrationBuilder.DropTable(
-                name: "Device");
+                name: "Ingredients");
 
             migrationBuilder.DropTable(
-                name: "Recipe");
+                name: "Recipes");
         }
     }
 }

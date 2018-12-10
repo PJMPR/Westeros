@@ -1,0 +1,56 @@
+﻿@model IEnumerable<Westeros.Ranking.Data.Model.Oceny>
+
+@{
+    ViewData["Title"] = "View";
+}
+
+<h2>View</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Data)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Nick)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Tekst)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Ocena)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.resourceId)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.resourceName)
+                </th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Data)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Nick)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Tekst)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Ocena)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.resourceId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.resourceName)
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

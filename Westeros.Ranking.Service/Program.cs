@@ -21,9 +21,9 @@ namespace Westeros.Ranking.Service
                 resourceId = 1,
                 resourceName = "Dieta"
             };
-            client.AddNewKomentarz(k);
+            client.AddNewOcena(k);
             IEnumerable<OcenaDto> lista;
-            lista = client.AllKomentarze();
+            lista = client.AllOceny();
             foreach (OcenaDto komentarzDto in lista)
             {
                 Console.WriteLine(komentarzDto.ToString());

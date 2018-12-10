@@ -14,34 +14,34 @@ namespace Westeros.Ranking.ApiClient
             _httpClient = new HttpClient {BaseAddress = new Uri(baseAddress)};
         }
 
-        public async void AddNewKomentarz(OcenaDto komentarz)
+        public async void AddNewOcena(OcenaDto Ocena)
         {
-            await _httpClient.PostAsJsonAsync("api/Oceny", komentarz);
+            await _httpClient.PostAsJsonAsync("api/OcenyApi", Ocena);
         }
 
-        public IEnumerable<OcenaDto> AllKomentarze()
+        public IEnumerable<OcenaDto> AllOceny()
         {
             return _httpClient
-                .GetAsync("api/Oceny")
+                .GetAsync("api/OcenyApi")
                 .Result
                 .Content
                 .ReadAsAsync<IEnumerable<OcenaDto>>()
                 .Result;
         }
 
-        public async void DeleteKomentarz(int id)
+        public async void DeleteOcena(int id)
         {
-            await _httpClient.DeleteAsync($"api/Oceny/{id}");
+            await _httpClient.DeleteAsync($"api/OcenyApi/{id}");
         }
 
-        public OcenaDto GetKomentarz(int id)
+        public OcenaDto GetOcena(int id)
         {
-            return _httpClient.GetAsync($"api/Oceny/{id}").Result.Content.ReadAsAsync<OcenaDto>().Result;
+            return _httpClient.GetAsync($"api/OcenyApi/{id}").Result.Content.ReadAsAsync<OcenaDto>().Result;
         }
 
-        public async void UpdateKomentarz(OcenaDto komentarz)
+        public async void UpdateOcena(OcenaDto Ocena)
         {
-            await _httpClient.PutAsJsonAsync("api/Oceny", komentarz);
+            await _httpClient.PutAsJsonAsync("api/OcenyApi", Ocena);
         }
 
         public async void AddNewPrzepis(PrzepisDto Przepis)

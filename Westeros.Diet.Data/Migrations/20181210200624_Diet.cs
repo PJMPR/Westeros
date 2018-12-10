@@ -114,14 +114,13 @@ namespace Westeros.Diet.Data.Migrations
                 name: "RecipeIngredients",
                 columns: table => new
                 {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     IngredientId = table.Column<int>(nullable: false),
-                    RecipeId = table.Column<int>(nullable: false)
+                    RecipeId = table.Column<int>(nullable: false),
+                    IngredientQuantity = table.Column<double>(nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_RecipeIngredients", x => x.Id);
+                    table.PrimaryKey("PK_RecipeIngredients", x => new { x.IngredientId, x.RecipeId });
                     table.ForeignKey(
                         name: "FK_RecipeIngredients_Ingredients_IngredientId",
                         column: x => x.IngredientId,
@@ -233,6 +232,31 @@ namespace Westeros.Diet.Data.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.InsertData(
+                table: "Devices",
+                columns: new[] { "Id", "Name" },
+                values: new object[,]
+                {
+                    { 1, "Mikrofalówka" },
+                    { 2, "Talerz" },
+                    { 3, "Widelec" },
+                    { 4, "Garnek" },
+                    { 5, "Patelnia" },
+                    { 6, "Wok" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Ingredients",
+                columns: new[] { "Id", "AveragePrice", "Calories", "Carbohydrates", "Category", "Fats", "Image", "Name", "Proteins" },
+                values: new object[,]
+                {
+                    { 1, 3.5, 250, 0.0, 2, 15.0, null, "Wołowina", 26.0 },
+                    { 2, 1.0, 402, 1.3, 4, 33.0, null, "Ser", 25.0 },
+                    { 3, 1.5, 272, 0.0, 2, 25.0, null, "Drób", 11.0 },
+                    { 4, 4.0, 208, 0.0, 3, 12.0, null, "Łosoś", 20.0 },
+                    { 5, 0.8, 66, 17.0, 1, 0.4, null, "Winogrona", 0.6 }
+                });
+
             migrationBuilder.CreateIndex(
                 name: "IX_DietPlans_UserProfileId",
                 table: "DietPlans",
@@ -272,11 +296,6 @@ namespace Westeros.Diet.Data.Migrations
                 name: "IX_RecipeDevices_RecipeId",
                 table: "RecipeDevices",
                 column: "RecipeId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_RecipeIngredients_IngredientId",
-                table: "RecipeIngredients",
-                column: "IngredientId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_RecipeIngredients_RecipeId",

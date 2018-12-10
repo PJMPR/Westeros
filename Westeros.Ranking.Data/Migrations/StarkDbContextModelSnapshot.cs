@@ -3,6 +3,8 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
+using Microsoft.EntityFrameworkCore.Storage;
+using Microsoft.EntityFrameworkCore.Storage.Internal;
 using System;
 using Westeros.Ranking.Data.Repositories;
 
@@ -15,15 +17,13 @@ namespace Westeros.Ranking.Data.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "2.1.4-rtm-31024")
-                .HasAnnotation("Relational:MaxIdentifierLength", 128)
+                .HasAnnotation("ProductVersion", "2.0.3-rtm-10026")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
             modelBuilder.Entity("Westeros.Ranking.Data.Model.Dieta", b =>
                 {
                     b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .ValueGeneratedOnAdd();
 
                     b.Property<int>("DietaId");
 
@@ -34,15 +34,16 @@ namespace Westeros.Ranking.Data.Migrations
                     b.ToTable("DietyOdwiedziny");
                 });
 
-            modelBuilder.Entity("Westeros.Ranking.Data.Model.Komentarz", b =>
+            modelBuilder.Entity("Westeros.Ranking.Data.Model.Oceny", b =>
                 {
                     b.Property<int>("id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .ValueGeneratedOnAdd();
 
                     b.Property<DateTime>("Data");
 
                     b.Property<string>("Nick");
+
+                    b.Property<int>("Ocena");
 
                     b.Property<string>("Tekst");
 
@@ -52,14 +53,13 @@ namespace Westeros.Ranking.Data.Migrations
 
                     b.HasKey("id");
 
-                    b.ToTable("Komentarz");
+                    b.ToTable("Oceny");
                 });
 
             modelBuilder.Entity("Westeros.Ranking.Data.Model.Przepis", b =>
                 {
                     b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .ValueGeneratedOnAdd();
 
                     b.Property<int>("IloscOdwiedzin");
 

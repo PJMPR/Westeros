@@ -1,21 +1,23 @@
-﻿using System.Linq;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Westeros.Ranking.Data.Repositories;
 
 namespace Westeros.Ranking.Web.Controllers
 {
-    public class KomentarzeController : Controller
+    public class OcenaController : Controller
     {
         private readonly StarkDbContext _context;
 
-        public KomentarzeController(StarkDbContext c)
+        public OcenaController(StarkDbContext c)
         {
             _context = c;
         }
-
         public IActionResult View()
         {
-            return View(_context.Komentarz.ToList());
+            return View(_context.Oceny.ToArray());
         }
     }
 }

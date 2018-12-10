@@ -5,11 +5,11 @@ namespace Westeros.Ranking.ApiClient
 {
     interface IStarkApiClient
     {
-        void AddNewKomentarz(KomentarzDto komentarz);
-        IEnumerable<KomentarzDto> AllKomentarze();
-        void DeleteKomentarz(int id);
-        KomentarzDto GetKomentarz(int id);
-        void UpdateKomentarz(KomentarzDto komentarz);
+        void AddNewOcena(OcenaDto Ocena);
+        IEnumerable<OcenaDto> AllOceny();
+        void DeleteOcena(int id);
+        OcenaDto GetOcena(int id);
+        void UpdateOcena(OcenaDto Ocena);
 
 
         void AddNewPrzepis(PrzepisDto przepis);

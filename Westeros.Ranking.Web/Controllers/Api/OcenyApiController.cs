@@ -1,6 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Westeros.Ranking.Data.Model;
@@ -9,57 +11,57 @@ using Westeros.Ranking.Data.Repositories;
 namespace Westeros.Ranking.Web.Controllers.Api
 {
     [Produces("application/json")]
-    [Route("api/KomentarzeApi")]
-    public class KomentarzeApiController : Controller
+    [Route("api/OcenyApi")]
+    public class OcenyApiController : Controller
     {
         private readonly StarkDbContext _context;
 
-        public KomentarzeApiController(StarkDbContext context)
+        public OcenyApiController(StarkDbContext context)
         {
             _context = context;
         }
 
-        // GET: api/KomentarzeApi
+        // GET: api/OcenyApi
         [HttpGet]
-        public IEnumerable<Komentarz> GetKomentarz()
+        public IEnumerable<Oceny> GetOceny()
         {
-            return _context.Komentarz;
+            return _context.Oceny;
         }
 
-        // GET: api/KomentarzeApi/5
+        // GET: api/OcenyApi/5
         [HttpGet("{id}")]
-        public async Task<IActionResult> GetKomentarz([FromRoute] int id)
+        public async Task<IActionResult> GetOceny([FromRoute] int id)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            var komentarz = await _context.Komentarz.SingleOrDefaultAsync(m => m.id == id);
+            var oceny = await _context.Oceny.SingleOrDefaultAsync(m => m.id == id);
 
-            if (komentarz == null)
+            if (oceny == null)
             {
                 return NotFound();
             }
 
-            return Ok(komentarz);
+            return Ok(oceny);
         }
 
-        // PUT: api/KomentarzeApi/5
+        // PUT: api/OcenyApi/5
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutKomentarz([FromRoute] int id, [FromBody] Komentarz komentarz)
+        public async Task<IActionResult> PutOceny([FromRoute] int id, [FromBody] Oceny oceny)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            if (id != komentarz.id)
+            if (id != oceny.id)
             {
                 return BadRequest();
             }
 
-            _context.Entry(komentarz).State = EntityState.Modified;
+            _context.Entry(oceny).State = EntityState.Modified;
 
             try
             {
@@ -67,7 +69,7 @@ namespace Westeros.Ranking.Web.Controllers.Api
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!KomentarzExists(id))
+                if (!OcenyExists(id))
                 {
                     return NotFound();
                 }
@@ -80,45 +82,45 @@ namespace Westeros.Ranking.Web.Controllers.Api
             return NoContent();
         }
 
-        // POST: api/KomentarzeApi
+        // POST: api/OcenyApi
         [HttpPost]
-        public async Task<IActionResult> PostKomentarz([FromBody] Komentarz komentarz)
+        public async Task<IActionResult> PostOceny([FromBody] Oceny oceny)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            _context.Komentarz.Add(komentarz);
+            _context.Oceny.Add(oceny);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetKomentarz", new { id = komentarz.id }, komentarz);
+            return CreatedAtAction("GetOceny", new { id = oceny.id }, oceny);
         }
 
-        // DELETE: api/KomentarzeApi/5
+        // DELETE: api/OcenyApi/5
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteKomentarz([FromRoute] int id)
+        public async Task<IActionResult> DeleteOceny([FromRoute] int id)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            var komentarz = await _context.Komentarz.SingleOrDefaultAsync(m => m.id == id);
-            if (komentarz == null)
+            var oceny = await _context.Oceny.SingleOrDefaultAsync(m => m.id == id);
+            if (oceny == null)
             {
                 return NotFound();
             }
 
-            _context.Komentarz.Remove(komentarz);
+            _context.Oceny.Remove(oceny);
             await _context.SaveChangesAsync();
 
-            return Ok(komentarz);
+            return Ok(oceny);
         }
 
-        private bool KomentarzExists(int id)
+        private bool OcenyExists(int id)
         {
-            return _context.Komentarz.Any(e => e.id == id);
+            return _context.Oceny.Any(e => e.id == id);
         }
     }
 }

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Westeros.Ranking.Data
+namespace Westeros.Ranking.Data.Model
 {
     public class Komentarz
     {
@@ -8,5 +8,7 @@ namespace Westeros.Ranking.Data
         public DateTime Data { get; set; }
         public string Tekst {get; set; }
         public string Nick { get; set; }
+        public int resourceId { get; set; }
+        public string resourceName { get; set; }
     }
 }

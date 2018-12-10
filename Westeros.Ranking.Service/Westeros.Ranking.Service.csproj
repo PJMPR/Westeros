@@ -6,8 +6,11 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Westeros.Demo.Data\Westeros.Demo.Data.csproj" />
-    <ProjectReference Include="..\Westeros.Ranking.Data\Westeros.Ranking.Data.csproj" />
+    <ProjectReference Include="..\Westeros.Ranking.ApiClient\Westeros.Ranking.ApiClient.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Properties\" />
   </ItemGroup>
 
 </Project>

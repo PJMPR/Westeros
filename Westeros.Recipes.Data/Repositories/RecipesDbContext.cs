@@ -19,9 +19,8 @@ namespace Westeros.Recipes.Data.Repositories
 
         public DbSet<Ingridient> Ingridients { get; set; }
         public DbSet<Recipe> Recipes { get; set; }
-        public DbSet<IngridientRecipe> IngridientRecipes { get; set; }
         public DbSet<Device> Devices { get; set; }
-        public DbSet<DeviceRecipe> DeviceRecipes { get; set; }
-                
+        public DbSet<RecipeDevice> RecipeDevice { get; set; }
+        public DbSet<RecipeIngridient> RecipeIngridient { get; set; }
     }
 }

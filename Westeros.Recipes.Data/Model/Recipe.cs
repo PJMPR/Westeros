@@ -6,51 +6,45 @@ using Westeros.Recipes.Data.Model;
 
 namespace Westeros.Recipes.Data
 {
+    public enum DifficultyType { Amateur, Easy, Medium, Hard, Masterchef };
+    public enum CuisineType { Polish, Italian, Spanish, French, Scandinavian, Hungarian, Arabic, African, Thai, Japanese, Chinese, Russian, American, Other };
+
     public class Recipe
     {
         public int Id { get; set; } // Id przepisu
         public string Name { get; set; } // Nazwa przepisu
-        public ICollection<Ingridient> Ingridients { get; set; } // Lista (kolekcja) sk³adników
+        public ICollection<Ingridient> Ingridients { get; set; } = new HashSet<Ingridient>(); // Lista (kolekcja) skÂ³adnikÃ³w
 
-        public double Calories { get; private set; } // Suma kalorii wszystkich sk³adników
-        public double Proteins { get; private set; } // Suma bia³ek
-        public double Carbohydrates { get; private set; } // Suma wêglowodanów
-        public double Fats { get; private set; } // Suma wszystkich t³uszczy
+        public double Calories { get; private set; } // Suma kalorii wszystkich skÂ³adnikÃ³w
+        public double Proteins { get; private set; } // Suma biaÂ³ek
+        public double Carbohydrates { get; private set; } // Suma wÃªglowodanÃ³w
+        public double Fats { get; private set; } // Suma wszystkich tÂ³uszczy
 
-        public enum CuisineType { Polish, Italian, Spanish, French, Scandinavian, Hungarian, Arabic, African, Thai, Japanese, Chinese, Russian, American, Other };
-        public CuisineType Cuisine { get; set; } // Typ kuchni w³oska, azjatycka itp
-
-        public ICollection<Device> Devices { get; set;} // Przyrz¹dy które potrzebujemy: piekarnik, blender itp.
+        
+        public CuisineType Cuisine { get; set; } // Typ kuchni wÂ³oska, azjatycka itp
+        public ICollection<Device> Devices { get; set; } = new HashSet<Device>(); // PrzyrzÂ¹dy ktÃ³re potrzebujemy: piekarnik, blender itp.
         public string Description { get; set; } // Opis przepisu
         public int PrepTime { get; set; } // Czas przygotowania w minutach
-        public enum DifficultyType { Amateur, Easy, Medium, Hard, Masterchef }; 
-        public DifficultyType Difficulty {get; set; } // Poziom trudnoœci [1-5]
-
+        public DifficultyType Difficulty { get; set; } // Poziom trudnoÅ“ci [1-5]
         public string PriceBar { get; set; } // Czy danie jest tanie/drogie
-        public string PhotoPath { get; set; } // Œcie¿ka do zdjêcia przepisu
+        public string PhotoPath { get; set; } // Å’cieÂ¿ka do zdjÃªcia przepisu
         [NotMapped]
-        private List<string> tags = new List<string>(); // Lista tagów
-
-        public Recipe(string name, CuisineType cuisine, string description, int prepTime, DifficultyType difficulty, string photoPath, string priceBar)
+        private List<string> _tags;
+        [NotMapped]
+        public List<string> Tag
         {
-            Name = name;
-//            this.ingridients = ingridients;
-            Cuisine = cuisine;
-      //      this.devices = devices;
-            Description = description;
-            PrepTime = prepTime;
-            Difficulty = difficulty;
-            PhotoPath = photoPath;
-            PriceBar = priceBar;
-
-           //CalculateMakros(this.ingridients);
-            GenerateTags();
-
+            get { return _tags ?? (_tags = GenerateTags()); }
         }
+
+        public Recipe NewInstance()
+        {
+            return new Recipe();
+        }
+       
 
         public static double CaloriesCalc(List<Ingridient>ingList)
         {
-            // Kalkulator kalorii - liczy sumê kalorii wszystkich sk³adników
+            // Kalkulator kalorii - liczy sumÃª kalorii wszystkich skÂ³adnikÃ³w
             double sumCalories = 0;
 
             foreach(Ingridient ing in ingList)
@@ -63,7 +57,7 @@ namespace Westeros.Recipes.Data
    
         public static double ProteinsCalc(List<Ingridient> ingList)
         {
-            // Kalkulator bia³ek - liczy sumê bia³ek wszystkich sk³adników
+            // Kalkulator biaÂ³ek - liczy sumÃª biaÂ³ek wszystkich skÂ³adnikÃ³w
             double sumProteins = 0;
 
             foreach (Ingridient ing in ingList)
@@ -76,7 +70,7 @@ namespace Westeros.Recipes.Data
 
         public static double CarbsCalc(List<Ingridient> ingList)
         {
-            // Kalkulator wêglowodanów - liczy sumê wêglowodanów wszystkich sk³adników
+            // Kalkulator wÃªglowodanÃ³w - liczy sumÃª wÃªglowodanÃ³w wszystkich skÂ³adnikÃ³w
             double sumCarbs = 0;
 
             foreach (Ingridient ing in ingList)
@@ -89,7 +83,7 @@ namespace Westeros.Recipes.Data
 
         public static double FatsCalc(List<Ingridient> ingList)
         {
-            // Kalkulator t³uszczy - liczy sumê t³uszczy wszystkich sk³adników
+            // Kalkulator tÂ³uszczy - liczy sumÃª tÂ³uszczy wszystkich skÂ³adnikÃ³w
             double sumFats = 0;
 
             foreach (Ingridient ing in ingList)
@@ -108,8 +102,8 @@ namespace Westeros.Recipes.Data
             Carbohydrates = CarbsCalc(ingList);
         }
 
-        public string CalculatePriceBar(List<Ingridient> ingList) {
-
+        public string CalculatePriceBar(ICollection<Ingridient> ingList) 
+        {
             double Price = 0;
 
             foreach (Ingridient ing in ingList)
@@ -117,31 +111,35 @@ namespace Westeros.Recipes.Data
                 Price += ing.AvgPrice;
             }
 
-            if (Price < 10) return "Bardzo tani";
-            else if (Price >= 10 && Price < 15) return "Tani";
-            else if (Price >= 15 && Price < 25) return "Œreni";
-            else if (Price >= 25 && Price < 40) return "Drogi";
-            else return "Bardzo drogi";
+            if (Price < 10) return "Bardzo tanie";
+            else if (Price >= 10 && Price < 15) return "Tanie";
+            else if (Price >= 15 && Price < 25) return "Å’renio drogie";
+            else if (Price >= 25 && Price < 40) return "Drogie";
+            else return "Bardzo drogie";
       
         }
 
-        public void GenerateTags() {
+
+        public List<string> GenerateTags()
+        {
+            List<string> tagi = new List<string>();
 
             foreach (Ingridient ing in Ingridients)
             {
-                tags.Add(ing.Name);
+                tagi.Add(ing.Name);
             }
 
             foreach (var dev in Devices)
             {
-                tags.Add(dev.Name);
+                tagi.Add(dev.Name);
             }
 
-            tags.Add(Cuisine.ToString());
-            tags.Add(Difficulty.ToString());
-            tags.Add(PriceBar);
-        }
-        
-    }
+            tagi.Add(CalculatePriceBar(Ingridients));
 
+            tagi.Add(Difficulty.ToString());
+            return tagi;
+
+        }
+    }
 }
+

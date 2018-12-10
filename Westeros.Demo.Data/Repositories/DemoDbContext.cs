@@ -12,9 +12,15 @@ namespace Westeros.Demo.Data.Repositories
         {
 
         }
+        public DemoDbContext(DbContextOptions<DemoDbContext> options) :base(options)
+        {
+
+        }
+
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer(@"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=DemoDatabase;Integrated Security=True;");
+            optionsBuilder.UseSqlServer("Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=DemoDatabase;Integrated Security=True;");
+            base.OnConfiguring(optionsBuilder);
         }
 
         public DbSet<Person> People { get; set; }

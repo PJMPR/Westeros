@@ -1,22 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace Westeros.Diet.Data.Model
 {
     public class Entry
     {
-        public int Id { get; }
-        public DateTime Date { get; }
+        [Key]
+        public int Id { get; set; }
+        public DateTime Date { get; set; }
         public double Weight { get; set; }
-        private List<IIngredient> _ingredients;
-        
-        public Entry(int id, DateTime date, double weight, List<IIngredient> ingredients=null)
-        {
-            Id = id;
-            Date = date;
-            Weight = weight;
-            _ingredients = ingredients ?? new List<IIngredient>();
-
-        }
+        //private ICollection<IIngredient> _ingredients ;
+        public ICollection<EntryIngredient> EntryIngredients { get; set; }
+        public ICollection<EntryRecipe> EntryRecipes { get; set; }
     }
 }

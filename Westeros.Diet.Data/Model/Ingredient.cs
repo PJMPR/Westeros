@@ -17,7 +17,7 @@ namespace Westeros.Diet.Data.Model
         Other
     };
 
-    public class Ingredient //: IIngredient
+    public class Ingredient
     {
         public int Id { get; private set; }
         public string Name { get; private set; }
@@ -29,53 +29,7 @@ namespace Westeros.Diet.Data.Model
         public string Image { get; private set; }
         public double AveragePrice { get; private set; }
         public ICollection<IngredientRecipe> IngredientRecipes { get; set; }
-
-
-        public Ingredient( string name, CategoryType category, int calories, double fats, double carbohydrates, double proteins, string image, double averagePrice)
-        {
-            Name = name;
-            Category = category;
-            Calories = calories;
-            Fats = fats;
-            Carbohydrates = carbohydrates;
-            Proteins = proteins;
-            Image = image;
-            AveragePrice = averagePrice;
-        }
-
-        public Ingredient(int id, string name, CategoryType category, int calories, double fats, double carbohydrates, double proteins, string image, double averagePrice) 
-            : this(name, category, calories, fats, carbohydrates, proteins, image, averagePrice)
-        {
-            Id = id;
-        }
-
-        public static Ingredient GetIngredient(int id)
-        {
-            using (var context = new DietDbContext())
-            {
-                return context.Ingredient.Single(i => i.Id == id);
-            }
-        }
-
-        public static List<Ingredient> GetAllIngredients()
-        {
-            using (var context = new DietDbContext())
-            {
-                return context.Ingredient.ToList();
-            }
-        }
-
-        public static List<Ingredient> GetIngredientsForRecipe(int recipeId)
-        {
-            using (var context = new DietDbContext())
-            {
-                var ingredients = from ir in context.IngredientRecipes
-                                  where ir.RecipeId == recipeId
-                                  select ir.Ingredient;
-
-                return ingredients.ToList();
-            }
-        }
+        public ICollection<EntryRecipe> EntryRecipes { get; set; }
 
         public override string ToString()
         {

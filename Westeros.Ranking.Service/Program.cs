@@ -1,24 +1,34 @@
 ﻿using System;
-using Westeros.Ranking;
-using Westeros.Ranking.Data;
-using Westeros.Ranking.Data.Repositories;
+using System.Collections;
+using System.Collections.Generic;
+using Westeros.Ranking.ApiClient;
+using Westeros.Ranking.ApiClient.Contracts;
 
 namespace Westeros.Ranking.Service
 {
     class Program
     {
-        static void Main(string[] args)
+        static void Main()
         {
-            Komentarz k = new Komentarz() {Data = new DateTime(2001, 10, 1), Nick = "OreDa", Tekst = "testowy Koment"};
-            Komentarz k2 = new Komentarz() {Data = new DateTime(2001, 12, 21), Nick = "OreJaNai", Tekst = "asdasdasd"};
-
-            Dieta d=new Dieta();
-
-            Console.WriteLine(k.ToString());
-            StarkDbContext ctx = new StarkDbContext();
-            ctx.Komentarz.Add(k);
-            ctx.Komentarz.Add(k2);
-            ctx.SaveChanges();
+            /*
+            StarkApiClient client = new StarkApiClient("http://localhost:3142/");
+            KomentarzDto k = new KomentarzDto
+            {
+                Data = new DateTime(1111, 12, 12, 12, 12, 12),
+                Nick = "OreDa",
+                Tekst = "ASD",
+                resourceId = 1,
+                resourceName = "Dieta"
+            };
+            //client.AddNewKomentarz(k);
+            IEnumerable<KomentarzDto> lista;
+            lista = client.AllKomentarze();
+            foreach (KomentarzDto komentarzDto in lista)
+            {
+                Console.WriteLine(komentarzDto.ToString());
+            }
+            Console.Read();
+            */
         }
     }
 }

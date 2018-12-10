@@ -48,7 +48,7 @@ namespace Westeros.Diet.Data.Model
         public DifficultyType Difficulty { get; set; }
         public string PriceBar { get; set; }
         public string Image { get; set; }
-        public ICollection<RecipeIngredients> IngredientRecipes { get; set; }
+        public ICollection<RecipeIngredient> RecipeIngredients { get; set; }
         public ICollection<RecipeEntry> EntryRecipes { get; set; }
         public ICollection<RecipeDevice> RecipeDevices { get; set; } 
 
@@ -71,7 +71,7 @@ namespace Westeros.Diet.Data.Model
             var tags = new List<string>();
 
 
-            foreach (var ing in IngredientRecipes)
+            foreach (var ing in RecipeIngredients)
             {
                 tags.Add(ing.Ingredient.Name);
             }
@@ -82,7 +82,7 @@ namespace Westeros.Diet.Data.Model
             }
 
 
-            var ingredients = IngredientRecipes.Select(i => i.Ingredient);
+            var ingredients = RecipeIngredients.Select(i => i.Ingredient);
             tags.Add(CalculatePriceBar(ingredients));
             tags.Add(Difficulty.ToString());
 

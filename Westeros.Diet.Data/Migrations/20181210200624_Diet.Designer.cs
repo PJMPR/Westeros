@@ -10,7 +10,7 @@ using Westeros.Diet.Data.Repositories;
 namespace Westeros.Diet.Data.Migrations
 {
     [DbContext(typeof(DietDbContext))]
-    [Migration("20181210180817_Diet")]
+    [Migration("20181210200624_Diet")]
     partial class Diet
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -32,6 +32,15 @@ namespace Westeros.Diet.Data.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Devices");
+
+                    b.HasData(
+                        new { Id = 1, Name = "Mikrofalówka" },
+                        new { Id = 2, Name = "Talerz" },
+                        new { Id = 3, Name = "Widelec" },
+                        new { Id = 4, Name = "Garnek" },
+                        new { Id = 5, Name = "Patelnia" },
+                        new { Id = 6, Name = "Wok" }
+                    );
                 });
 
             modelBuilder.Entity("Westeros.Diet.Data.Model.DietPlan", b =>
@@ -103,6 +112,14 @@ namespace Westeros.Diet.Data.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Ingredients");
+
+                    b.HasData(
+                        new { Id = 1, AveragePrice = 3.5, Calories = 250, Carbohydrates = 0.0, Category = 2, Fats = 15.0, Name = "Wołowina", Proteins = 26.0 },
+                        new { Id = 2, AveragePrice = 1.0, Calories = 402, Carbohydrates = 1.3, Category = 4, Fats = 33.0, Name = "Ser", Proteins = 25.0 },
+                        new { Id = 3, AveragePrice = 1.5, Calories = 272, Carbohydrates = 0.0, Category = 2, Fats = 25.0, Name = "Drób", Proteins = 11.0 },
+                        new { Id = 4, AveragePrice = 4.0, Calories = 208, Carbohydrates = 0.0, Category = 3, Fats = 12.0, Name = "Łosoś", Proteins = 20.0 },
+                        new { Id = 5, AveragePrice = 0.8, Calories = 66, Carbohydrates = 17.0, Category = 1, Fats = 0.4, Name = "Winogrona", Proteins = 0.6 }
+                    );
                 });
 
             modelBuilder.Entity("Westeros.Diet.Data.Model.IngredientEntry", b =>
@@ -195,19 +212,15 @@ namespace Westeros.Diet.Data.Migrations
                     b.ToTable("EntryRecipes");
                 });
 
-            modelBuilder.Entity("Westeros.Diet.Data.Model.RecipeIngredients", b =>
+            modelBuilder.Entity("Westeros.Diet.Data.Model.RecipeIngredient", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
                     b.Property<int>("IngredientId");
 
                     b.Property<int>("RecipeId");
 
-                    b.HasKey("Id");
+                    b.Property<double>("IngredientQuantity");
 
-                    b.HasIndex("IngredientId");
+                    b.HasKey("IngredientId", "RecipeId");
 
                     b.HasIndex("RecipeId");
 
@@ -295,7 +308,7 @@ namespace Westeros.Diet.Data.Migrations
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
-            modelBuilder.Entity("Westeros.Diet.Data.Model.RecipeIngredients", b =>
+            modelBuilder.Entity("Westeros.Diet.Data.Model.RecipeIngredient", b =>
                 {
                     b.HasOne("Westeros.Diet.Data.Model.Ingredient", "Ingredient")
                         .WithMany("IngredientRecipes")
@@ -303,7 +316,7 @@ namespace Westeros.Diet.Data.Migrations
                         .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("Westeros.Diet.Data.Model.Recipe", "Recipe")
-                        .WithMany("IngredientRecipes")
+                        .WithMany("RecipeIngredients")
                         .HasForeignKey("RecipeId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });

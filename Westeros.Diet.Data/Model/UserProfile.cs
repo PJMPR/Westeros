@@ -24,6 +24,6 @@ namespace Westeros.Diet.Data.Model
         public int Age { get; set; }
         public double Weight { get; set; }
         public double Height { get; set; }
-        private ICollection<Entry> Entries;
+        public ICollection<Entry> Entries { get; set; }
     }
 }

@@ -6,7 +6,7 @@ namespace Microsoft.Extensions.DependencyInjection
     public static class  EventsApiRegistry
     {
 
-        public static IServiceCollection AddDemoClient(this IServiceCollection services, IConfiguration config)
+        public static IServiceCollection AddEventApiClient(this IServiceCollection services, IConfiguration config)
         {
 
             return services.AddTransient<IEventsApiClient>(s => new MessageApiClient(config.GetSection("EventApiClient").Value));

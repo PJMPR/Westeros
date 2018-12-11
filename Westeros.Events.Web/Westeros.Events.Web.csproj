@@ -16,6 +16,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Westeros.Events.ApiClient\Westeros.Events.ApiClient.csproj" />
     <ProjectReference Include="..\Westeros.Events.Data\Westeros.Events.Data.csproj" />
     <ProjectReference Include="..\Westeros.Events.Service\Westeros.Events.Service.csproj" />
   </ItemGroup>

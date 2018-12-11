@@ -12,10 +12,10 @@ namespace Westeros.Events.Web.Controllers.Api
     [Route("api/Messages")]
     public class PeopleApiController : Controller
     {
-       IGenericRepository<Message> _message;
+       IGenericRepository<IMessage> _message;
        // IMapper _mapper;
 
-        public PeopleApiController(IGenericRepository<Message> message)
+        public PeopleApiController(IGenericRepository<IMessage> message)
         {
             _message = message;
             //_mapper = mapper;

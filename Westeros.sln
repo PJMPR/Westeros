@@ -71,6 +71,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Westeros.Events.ApiClient",
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Westeros.Events.Web", "Westeros.Events.Web\Westeros.Events.Web.csproj", "{2D6E2630-321D-4060-8AEF-E66723DDE55F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Westeros.Diet.ApiClient", "ClassLibrary1\Westeros.Diet.ApiClient.csproj", "{C255DBA3-BFB7-4C80-A94E-EDAB0D2CF7C7}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -189,6 +191,10 @@ Global
 		{2D6E2630-321D-4060-8AEF-E66723DDE55F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2D6E2630-321D-4060-8AEF-E66723DDE55F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2D6E2630-321D-4060-8AEF-E66723DDE55F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C255DBA3-BFB7-4C80-A94E-EDAB0D2CF7C7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C255DBA3-BFB7-4C80-A94E-EDAB0D2CF7C7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C255DBA3-BFB7-4C80-A94E-EDAB0D2CF7C7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C255DBA3-BFB7-4C80-A94E-EDAB0D2CF7C7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -221,6 +227,7 @@ Global
 		{EEDC1CFB-FC9D-490B-938B-B3BFD1C86171} = {5113E526-FA97-4B59-963E-81D57ADF0BD8}
 		{F15A7B80-B26E-4C78-A094-33F210E223BF} = {914F11BD-4E7F-43A8-9D8B-F69A4F24ABC0}
 		{2D6E2630-321D-4060-8AEF-E66723DDE55F} = {914F11BD-4E7F-43A8-9D8B-F69A4F24ABC0}
+		{C255DBA3-BFB7-4C80-A94E-EDAB0D2CF7C7} = {57D9A443-5180-4E5C-A723-7FDDF1F70C44}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {F8666760-B389-4285-BAAF-F02AF5076C34}

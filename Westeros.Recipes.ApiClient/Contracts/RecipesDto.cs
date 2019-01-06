@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
-using Westeros.Diet.Data.Model;
+
 using Westeros.Recipes.Data;
+using Westeros.Recipes.Data.Model;
 
 namespace Westeros.Demo.ApiClient.Contracts
 {

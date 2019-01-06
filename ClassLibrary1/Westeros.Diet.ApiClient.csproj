@@ -2,8 +2,6 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp2.0</TargetFramework>
-    <RootNamespace>Westeros.Diet.ApiClient</RootNamespace>
-    <AssemblyName>Westeros.Diet.ApiClient</AssemblyName>
   </PropertyGroup>
 
   <ItemGroup>

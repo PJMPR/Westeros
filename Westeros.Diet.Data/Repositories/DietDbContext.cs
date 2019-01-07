@@ -49,36 +49,39 @@ namespace Westeros.Diet.Data.Repositories
 
             modelBuilder.Entity<Ingredient>().HasData(ing1, ing2, ing3, ing4, ing5);
 
-            var rec1 = new Recipe { Id = 1, Name = "Masa"};
-            rec1.RecipeIngredients.
-            rec1.RecipeDevices.Add(new RecipeDevice { RecipeId = 1, DeviceId = 1 });
-            rec1.RecipeDevices.Add(new RecipeDevice { RecipeId = 1, DeviceId = 2 });
-            rec1.RecipeDevices.Add(new RecipeDevice { RecipeId = 1, DeviceId = 3 });
+            //var rec1 = new Recipe { Id = 1, Name = "Masa"};
+            //rec1.RecipeDevices.Add(new RecipeDevice { RecipeId = 1, DeviceId = 1 });
+            //rec1.RecipeDevices.Add(new RecipeDevice { RecipeId = 1, DeviceId = 2 });
+            //rec1.RecipeDevices.Add(new RecipeDevice { RecipeId = 1, DeviceId = 3 });
 
-            rec1.RecipeIngredients.Add(new RecipeIngredient { Recipe = rec1, Ingredient = ing1, IngredientQuantity = 5 });
-            rec1.RecipeIngredients.Add(new RecipeIngredient { Recipe = rec1, Ingredient = ing2, IngredientQuantity = 1 });
-            rec1.RecipeIngredients.Add(new RecipeIngredient { Recipe = rec1, Ingredient = ing4, IngredientQuantity = 2 });
+            //rec1.RecipeIngredients.Add(new RecipeIngredient { Recipe = rec1, Ingredient = ing1, IngredientQuantity = 5 });
+            //rec1.RecipeIngredients.Add(new RecipeIngredient { Recipe = rec1, Ingredient = ing2, IngredientQuantity = 1 });
+            //rec1.RecipeIngredients.Add(new RecipeIngredient { Recipe = rec1, Ingredient = ing4, IngredientQuantity = 2 });
 
             var rec2 = new Recipe { Id = 2, Name = "Redukcja" };
+            modelBuilder.Entity<Recipe>().HasData(/*rec1,*/ rec2/*, rec3*/);
+
             rec2.RecipeDevices.Add(new RecipeDevice { Recipe = rec2, Device = dev5 });
-            rec2.RecipeDevices.Add(new RecipeDevice { Recipe = rec2, Device = dev2 });
+            modelBuilder.Entity<Recipe>().HasData(/*rec1,*/ rec2/*, rec3*/);
 
-            rec1.RecipeIngredients.Add(new RecipeIngredient { Recipe = rec1, Ingredient = ing2, IngredientQuantity = 8 });
-            rec1.RecipeIngredients.Add(new RecipeIngredient { Recipe = rec1, Ingredient = ing5, IngredientQuantity = 8 });
+            //rec2.RecipeDevices.Add(new RecipeDevice { Recipe = rec2, Device = dev2 });
 
-            var rec3 = new Recipe { Id = 3, Name = "Utrzymanie" };
-            rec3.RecipeDevices.Add(new RecipeDevice { Recipe = rec3, Device = dev4 });
-            rec3.RecipeDevices.Add(new RecipeDevice { Recipe = rec3, Device = dev1 });
-            rec3.RecipeDevices.Add(new RecipeDevice { Recipe = rec3, Device = dev2 });
-            rec3.RecipeDevices.Add(new RecipeDevice { Recipe = rec3, Device = dev5 });
+            //rec2.RecipeIngredients.Add(new RecipeIngredient { Recipe = rec2, Ingredient = ing2, IngredientQuantity = 8 });
+            //rec2.RecipeIngredients.Add(new RecipeIngredient { Recipe = rec2, Ingredient = ing5, IngredientQuantity = 8 });
 
-            rec3.RecipeIngredients.Add(new RecipeIngredient { Recipe = rec3, Ingredient = ing1, IngredientQuantity = 1 });
-            rec3.RecipeIngredients.Add(new RecipeIngredient { Recipe = rec3, Ingredient = ing2, IngredientQuantity = 0.5 });
-            rec3.RecipeIngredients.Add(new RecipeIngredient { Recipe = rec3, Ingredient = ing3, IngredientQuantity = 8 });
-            rec3.RecipeIngredients.Add(new RecipeIngredient { Recipe = rec3, Ingredient = ing4, IngredientQuantity = 2 });
-            rec3.RecipeIngredients.Add(new RecipeIngredient { Recipe = rec3, Ingredient = ing5, IngredientQuantity = 1.5 });
+            //var rec3 = new Recipe { Id = 3, Name = "Utrzymanie" };
+            //rec3.RecipeDevices.Add(new RecipeDevice { Recipe = rec3, Device = dev4 });
+            //rec3.RecipeDevices.Add(new RecipeDevice { Recipe = rec3, Device = dev1 });
+            //rec3.RecipeDevices.Add(new RecipeDevice { Recipe = rec3, Device = dev2 });
+            //rec3.RecipeDevices.Add(new RecipeDevice { Recipe = rec3, Device = dev5 });
 
-            modelBuilder.Entity<Recipe>().HasData(rec1, rec2, rec3);
+            //rec3.RecipeIngredients.Add(new RecipeIngredient { Recipe = rec3, Ingredient = ing1, IngredientQuantity = 1 });
+            //rec3.RecipeIngredients.Add(new RecipeIngredient { Recipe = rec3, Ingredient = ing2, IngredientQuantity = 0.5 });
+            //rec3.RecipeIngredients.Add(new RecipeIngredient { Recipe = rec3, Ingredient = ing3, IngredientQuantity = 8 });
+            //rec3.RecipeIngredients.Add(new RecipeIngredient { Recipe = rec3, Ingredient = ing4, IngredientQuantity = 2 });
+            //rec3.RecipeIngredients.Add(new RecipeIngredient { Recipe = rec3, Ingredient = ing5, IngredientQuantity = 1.5 });
+
+            modelBuilder.Entity<Recipe>().HasData(/*rec1,*/ rec2/*, rec3*/);
 
         }
     }

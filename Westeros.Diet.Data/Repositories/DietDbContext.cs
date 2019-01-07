@@ -50,7 +50,7 @@ namespace Westeros.Diet.Data.Repositories
             modelBuilder.Entity<Ingredient>().HasData(ing1, ing2, ing3, ing4, ing5);
 
             var rec1 = new Recipe { Id = 1, Name = "Masa"};
-            rec1.RecipeIngredients.Add
+            rec1.RecipeIngredients.
             rec1.RecipeDevices.Add(new RecipeDevice { RecipeId = 1, DeviceId = 1 });
             rec1.RecipeDevices.Add(new RecipeDevice { RecipeId = 1, DeviceId = 2 });
             rec1.RecipeDevices.Add(new RecipeDevice { RecipeId = 1, DeviceId = 3 });

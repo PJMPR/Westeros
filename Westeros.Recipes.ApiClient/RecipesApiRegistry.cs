@@ -9,7 +9,7 @@ namespace Microsoft.Extensions.DependencyInjection
         public static IServiceCollection AddDemoClient(this IServiceCollection services, IConfiguration config)
         {
             
-            return services.AddTransient<IRecipesApiClient>(s=>new RecipesApiClient(config.GetSection("RecipesApi").Value));
+            return services.AddTransient<IRecipesApiClient>(s=>new RecipesApiClient(config.GetSection("Recipes").Value));
         }
     }
 }

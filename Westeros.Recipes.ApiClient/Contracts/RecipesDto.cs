@@ -18,7 +18,7 @@ namespace Westeros.Demo.ApiClient.Contracts
         public double Proteins { get; private set; } 
         public double Carbohydrates { get; private set; } 
         public double Fats { get; private set; } 
-
+        public Boolean IsNew { get; set; } = true;
 
         public CuisineType Cuisine { get; set; } 
         public ICollection<Device> Devices { get; set; } = new HashSet<Device>(); 

@@ -19,7 +19,7 @@ namespace Westeros.Recipes.Data
         public double Proteins { get; private set; } // Suma bia³ek
         public double Carbohydrates { get; private set; } // Suma wêglowodanów
         public double Fats { get; private set; } // Suma wszystkich t³uszczy
-
+        public Boolean IsNew { get; set; } = true;
         
         public CuisineType Cuisine { get; set; } // Typ kuchni w³oska, azjatycka itp
         public ICollection<Device> Devices { get; set; } = new HashSet<Device>(); // Przyrz¹dy które potrzebujemy: piekarnik, blender itp.

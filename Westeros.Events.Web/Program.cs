@@ -21,5 +21,7 @@ namespace Westeros.Events.Web
             WebHost.CreateDefaultBuilder(args)
                 .UseStartup<Startup>()
                 .Build();
+
+        
     }
 }

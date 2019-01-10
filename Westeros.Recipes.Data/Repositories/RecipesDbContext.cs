@@ -17,10 +17,10 @@ namespace Westeros.Recipes.Data.Repositories
             optionsBuilder.UseSqlServer(@"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=RecipesDatabase;Integrated Security=True;");
         }
 
-        public DbSet<Ingridient> Ingridients { get; set; }
+        public DbSet<Ingridient> Ingredients { get; set; }
         public DbSet<Recipe> Recipes { get; set; }
         public DbSet<Device> Devices { get; set; }
         public DbSet<RecipeDevice> RecipeDevice { get; set; }
-        public DbSet<RecipeIngridient> RecipeIngridient { get; set; }
+        public DbSet<RecipeIngridient> RecipeIngredients { get; set; }
     }
 }

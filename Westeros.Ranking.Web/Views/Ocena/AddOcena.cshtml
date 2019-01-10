@@ -1,0 +1,54 @@
+﻿@model Westeros.Ranking.Data.Model.Oceny
+
+@{
+    ViewData["Title"] = "AddOcena";
+}
+
+<h2>AddOcena</h2>
+
+<h4>Oceny</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="AddOcena" method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Data" class="control-label"></label>
+                <input asp-for="Data" class="form-control" />
+                <span asp-validation-for="Data" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Nick" class="control-label"></label>
+                <input asp-for="Nick" class="form-control" />
+                <span asp-validation-for="Nick" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Tekst" class="control-label"></label>
+                <input asp-for="Tekst" class="form-control" />
+                <span asp-validation-for="Tekst" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Ocena" class="control-label"></label>
+                <input asp-for="Ocena" class="form-control" />
+                <span asp-validation-for="Ocena" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="resourceId" class="control-label"></label>
+                <input asp-for="resourceId" class="form-control" />
+                <span asp-validation-for="resourceId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="resourceName" class="control-label"></label>
+                <input asp-for="resourceName" class="form-control" />
+                <span asp-validation-for="resourceName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

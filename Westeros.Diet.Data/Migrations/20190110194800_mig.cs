@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Westeros.Diet.Data.Migrations
 {
-    public partial class Diet : Migration
+    public partial class mig : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

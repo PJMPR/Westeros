@@ -10,8 +10,8 @@ using Westeros.Diet.Data.Repositories;
 namespace Westeros.Diet.Data.Migrations
 {
     [DbContext(typeof(DietDbContext))]
-    [Migration("20181210200624_Diet")]
-    partial class Diet
+    [Migration("20190110194800_mig")]
+    partial class mig
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

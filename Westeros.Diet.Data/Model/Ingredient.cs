@@ -28,8 +28,8 @@ namespace Westeros.Diet.Data.Model
         public double Proteins { get; set; }
         public string Image { get; set; }
         public double AveragePrice { get; set; }
-        public ICollection<RecipeIngredient> IngredientRecipes { get; set; }
-        public ICollection<IngredientEntry> IngredientEntries { get; set; }
+        public ICollection<RecipeIngredient> IngredientRecipes { get; set; } = new List<RecipeIngredient>();
+        public ICollection<IngredientEntry> IngredientEntries { get; set; } = new List<IngredientEntry>();
 
         public override string ToString()
         {

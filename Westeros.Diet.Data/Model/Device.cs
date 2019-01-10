@@ -10,6 +10,6 @@ namespace Westeros.Diet.Data.Model
         [Key]
         public int Id { get; set; }
         public string Name { get; set; }
-        public ICollection<RecipeDevice> RecipeDevices { get; set; }
+        public ICollection<RecipeDevice> RecipeDevices { get; set; } = new List<RecipeDevice>();
     }
 }

@@ -38,28 +38,28 @@ namespace Westeros.Diet.Data.Model
     {
         public int Id { get; set; }
         public string Name { get; set; }
-        public int Calories { get; set; }
-        public double Proteins { get; set; }
-        public double Carbohydrates { get; set; }
-        public double Fats { get; set; }
+        [NotMapped]
+        public int Calories { get { return RecipeIngredients.Sum(i => i.Ingredient.Calories); } }
+        [NotMapped]
+        public double Proteins { get { return RecipeIngredients.Sum(i => i.Ingredient.Proteins); } }
+        [NotMapped]
+        public double Carbohydrates { get { return RecipeIngredients.Sum(i => i.Ingredient.Carbohydrates); } }
+        [NotMapped]
+        public double Fats { get { return RecipeIngredients.Sum(i => i.Ingredient.Fats); } } 
         public CuisineType Cuisine { get; set; }
         public string Description { get; set; } 
         public int PrepTime { get; set; }
         public DifficultyType Difficulty { get; set; }
-        public string PriceBar { get; set; }
+        [NotMapped]
+        public string PriceBar { get { return CalculatePriceBar(); } }
         public string Image { get; set; }
-        public ICollection<RecipeIngredient> RecipeIngredients { get; set; }
-        public ICollection<RecipeEntry> EntryRecipes { get; set; }
-        public ICollection<RecipeDevice> RecipeDevices { get; set; } 
-
+        public ICollection<RecipeIngredient> RecipeIngredients { get; set; } = new List<RecipeIngredient>();
+        public ICollection<RecipeEntry> EntryRecipes { get; set; } = new List<RecipeEntry>();
+        public ICollection<RecipeDevice> RecipeDevices { get; set; } = new List<RecipeDevice>();
         [NotMapped]
         List<string> _tags;
         [NotMapped]
-        public List<string> Tag
-        {
-            get { return _tags ?? (_tags = GenerateTags()); }
-        }
-
+        public List<string> Tag { get { return GenerateTags(); } }
 
         public List<string> GetAllTags()
         {
@@ -69,8 +69,7 @@ namespace Westeros.Diet.Data.Model
         List<string> GenerateTags()
         {
             var tags = new List<string>();
-
-
+            
             foreach (var ing in RecipeIngredients)
             {
                 tags.Add(ing.Ingredient.Name);
@@ -81,21 +80,20 @@ namespace Westeros.Diet.Data.Model
                 tags.Add(dev.Device.Name);
             }
 
-
             var ingredients = RecipeIngredients.Select(i => i.Ingredient);
-            tags.Add(CalculatePriceBar(ingredients));
+            tags.Add(PriceBar);
             tags.Add(Difficulty.ToString());
 
             return tags;
         }
 
-        string CalculatePriceBar(IEnumerable<Ingredient> ingredients)
+        private string CalculatePriceBar()
         {
             double Price = 0;
 
-            foreach (Ingredient ing in ingredients)
+            foreach (var ing in RecipeIngredients)
             {
-                Price += ing.AveragePrice;
+                Price += ing.Ingredient.AveragePrice;
             }
 
             if (Price < 10) return "Bardzo tanie";

@@ -14,6 +14,7 @@ namespace Westeros.Diet.Data.Repositories
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
+            optionsBuilder.EnableSensitiveDataLogging();
             optionsBuilder.UseSqlServer(@"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=DietDatabase;Integrated Security=True;");
         }
 
@@ -49,35 +50,40 @@ namespace Westeros.Diet.Data.Repositories
 
             modelBuilder.Entity<Ingredient>().HasData(ing1, ing2, ing3, ing4, ing5);
 
-            var rec1 = new Recipe { Id = 1, Name = "Masa"};
-            //rec1.RecipeDevices.Add(new RecipeDevice { RecipeId = 1, DeviceId = 1 });
-            //rec1.RecipeDevices.Add(new RecipeDevice { RecipeId = 1, DeviceId = 2 });
-            //rec1.RecipeDevices.Add(new RecipeDevice { RecipeId = 1, DeviceId = 3 });
-            var xd = new RecipeIngredient { Recipe = rec1, Ingredient = ing1, IngredientQuantity = 5 };
-            rec1.RecipeIngredients.Add(xd);
-            rec1.RecipeIngredients.Add(new RecipeIngredient { Recipe = rec1, Ingredient = ing2, IngredientQuantity = 1 });
-            rec1.RecipeIngredients.Add(new RecipeIngredient { Recipe = rec1, Ingredient = ing4, IngredientQuantity = 2 });
-
+            var rec1 = new Recipe { Id = 1, Name = "Masa" };
             var rec2 = new Recipe { Id = 2, Name = "Redukcja" };
-            rec2.RecipeDevices.Add(new RecipeDevice { Recipe = rec2, Device = dev5 });
-            rec2.RecipeDevices.Add(new RecipeDevice { Recipe = rec2, Device = dev2 });
-
-            rec1.RecipeIngredients.Add(new RecipeIngredient { Recipe = rec1, Ingredient = ing2, IngredientQuantity = 8 });
-            rec1.RecipeIngredients.Add(new RecipeIngredient { Recipe = rec1, Ingredient = ing5, IngredientQuantity = 8 });
-
             var rec3 = new Recipe { Id = 3, Name = "Utrzymanie" };
-            rec3.RecipeDevices.Add(new RecipeDevice { Recipe = rec3, Device = dev4 });
-            rec3.RecipeDevices.Add(new RecipeDevice { Recipe = rec3, Device = dev1 });
-            rec3.RecipeDevices.Add(new RecipeDevice { Recipe = rec3, Device = dev2 });
-            rec3.RecipeDevices.Add(new RecipeDevice { Recipe = rec3, Device = dev5 });
 
-            rec3.RecipeIngredients.Add(new RecipeIngredient { Recipe = rec3, Ingredient = ing1, IngredientQuantity = 1 });
-            rec3.RecipeIngredients.Add(new RecipeIngredient { Recipe = rec3, Ingredient = ing2, IngredientQuantity = 0.5 });
-            rec3.RecipeIngredients.Add(new RecipeIngredient { Recipe = rec3, Ingredient = ing3, IngredientQuantity = 8 });
-            rec3.RecipeIngredients.Add(new RecipeIngredient { Recipe = rec3, Ingredient = ing4, IngredientQuantity = 2 });
-            rec3.RecipeIngredients.Add(new RecipeIngredient { Recipe = rec3, Ingredient = ing5, IngredientQuantity = 1.5 });
+            modelBuilder.Entity<Recipe>().HasData(rec1, rec2, rec3);
 
-            //modelBuilder.Entity<Recipe>().HasData(rec1, rec2, rec3);
+            var rd1 = new RecipeDevice { Id = 1, RecipeId = 1, DeviceId = 1 };
+            var rd2 = new RecipeDevice { Id = 2, RecipeId = 1, DeviceId = 2 };
+            var rd3 = new RecipeDevice { Id = 3, RecipeId = 1, DeviceId = 3 };
+
+            var rd4 = new RecipeDevice { Id = 4, RecipeId = 2, DeviceId = 5 };
+            var rd5 = new RecipeDevice { Id = 5, RecipeId = 2, DeviceId = 3 };
+
+            var rd6 = new RecipeDevice { Id = 6, RecipeId = 3, DeviceId = 6 };
+            var rd7 = new RecipeDevice { Id = 7, RecipeId = 3, DeviceId = 2 };
+            var rd8 = new RecipeDevice { Id = 8, RecipeId = 3, DeviceId = 1 };
+            var rd9 = new RecipeDevice { Id = 9, RecipeId = 3, DeviceId = 4 };
+
+            modelBuilder.Entity<RecipeDevice>().HasData(rd1, rd2, rd3, rd4, rd5, rd6, rd7, rd8, rd9);
+
+            var ingRec1 = new RecipeIngredient { RecipeId = 1, IngredientId = 1, IngredientQuantity = 5 };
+            var ingRec2 = new RecipeIngredient { RecipeId = 1, IngredientId = 2, IngredientQuantity = 1 };
+            var ingRec3 = new RecipeIngredient { RecipeId = 1, IngredientId = 4, IngredientQuantity = 2 };
+
+            var ingRec4 = new RecipeIngredient { RecipeId = 2, IngredientId = 2, IngredientQuantity = 8 };
+            var ingRec5 = new RecipeIngredient { RecipeId = 2, IngredientId = 5, IngredientQuantity = 8 };
+
+            var ingRec6 = new RecipeIngredient { RecipeId = 3, IngredientId = 1, IngredientQuantity = 1 };
+            var ingRec7 = new RecipeIngredient { RecipeId = 3, IngredientId = 2, IngredientQuantity = 0.5 };
+            var ingRec8 = new RecipeIngredient { RecipeId = 3, IngredientId = 3, IngredientQuantity = 8 };
+            var ingRec9 = new RecipeIngredient { RecipeId = 3, IngredientId = 4, IngredientQuantity = 2 };
+            var ingRec10 = new RecipeIngredient { RecipeId = 3, IngredientId = 5, IngredientQuantity = 1.5 };
+
+            modelBuilder.Entity<RecipeIngredient>().HasData(ingRec1, ingRec2, ingRec3, ingRec4, ingRec5, ingRec6, ingRec7, ingRec8, ingRec9, ingRec10);
 
         }
     }

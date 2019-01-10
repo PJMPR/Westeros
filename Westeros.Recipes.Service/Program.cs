@@ -10,85 +10,15 @@ namespace Westeros.Recipes.Service
     {
         static void Main(string[] args)
         {
-            using (var c = new RecipesDbContext())
+
+            using (var context = new RecipesDbContext())
             {
-                c.Devices.Add(new Device()
-                {
-                    Name = "Piekarnik"
-                }
-                );
-                c.Devices.Add(new Device()
-                {
-                    Name = "Blender"
-                }
-                );
-                c.Devices.Add(new Device()
-                {
-                    Name = "Mikser"
-                }
-                );
-                
-                c.SaveChanges();
+                context.Database.EnsureDeleted();
+                context.Database.EnsureCreated();
 
-                var Przepis = new Recipe {
-                    Name = "Spaghetti Bolognese"
-                };
-                var Ingridient1 = new Ingridient
-                {
-                    Name = "Makaron",
-                    AvgPrice = 6
-                };
-                var Ingridient2 = new Ingridient
-                {
-                    Name = "Pomidory",
-                    AvgPrice = 8
-                };
-                var Ingridient3 = new Ingridient
-                {
-                    Name = "Mieso",
-                    AvgPrice = 14
-                };
-
-                c.SaveChanges();
-
-                //Przepis.RecipeIngredients.Add(Ingridient1);
-                //Przepis.Ingredients.Add(Ingridient2);
-                //Przepis.Ingredients.Add(Ingridient3);
-           
-                Przepis.Difficulty = DifficultyType.Easy;
-                Przepis.Cuisine = CuisineType.Italian;
-
-                Console.WriteLine("Lista tagów:");
-                var i = 0;
-
-                foreach (var item in Przepis.Tag)
-                {
-                    i++;
-                    Console.WriteLine("[" + i + "] " + item);
-                }               
-                
-
-
-
-                //c.Devices.ToList().ForEach(x => Console.WriteLine(x.Name));
-
-              Console.WriteLine("Hello World!");
+                Console.WriteLine("Hello World!");
+                Console.ReadKey();
             }
-          
-            using (var c = new RecipesDbContext())
-            {
-                //c.Devices.Add(new Device()
-                //{
-                //    Name = "xD"
-                //}
-                //);
-
-                //c.savechanges();
-
-                c.Devices.ToList().ForEach(x => Console.WriteLine(x.Name));
-
-            }
-            Console.ReadKey();
         }
     }
 }

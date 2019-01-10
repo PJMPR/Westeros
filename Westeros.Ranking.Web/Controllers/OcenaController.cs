@@ -1,12 +1,7 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.ApplicationInsights.AspNetCore.Extensions;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using SQLitePCL;
 using Westeros.Ranking.Data.Model;
 using Westeros.Ranking.Data.Repositories;
 using Westeros.Ranking.Web.Models;
@@ -21,6 +16,7 @@ namespace Westeros.Ranking.Web.Controllers
         {
             _context = c;
         }
+
         public IActionResult View()
         {
             return View(_context.Oceny.ToArray());
@@ -35,22 +31,36 @@ namespace Westeros.Ranking.Web.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult AddOcena(AddOcenaClass a)
         {
-            ArrayList Attributes = new ArrayList(a.UrlElements.Substring(1).Split('='));
-            Oceny newOcena=new Oceny();
+            var IsClassOk = false;
+            List<string> Attributes = null;
+            if (a.UrlElements.Length > 0)
+                Attributes = new List<string>(a.UrlElements.Substring(1).Split('='));
+            else
+                return RedirectToAction(nameof(View));
+            var newOcena = new Oceny();
             newOcena.Ocena = a.Ocena;
             newOcena.Data = DateTime.Now;
             newOcena.Nick = a.Nick;
             newOcena.Tekst = a.Tekst;
-            
+            if (Attributes.Contains("resourceId") && Attributes.Contains("resourceName"))
+            {
+                newOcena.resourceId =
+                    Convert.ToInt32(Attributes[Attributes.FindIndex(x => x.Equals("resourceId")) + 1]);
+                newOcena.resourceName = Attributes[Attributes.FindIndex(x => x.Equals("resourceName")) + 1];
+                IsClassOk = true;
+            }
+
             try
             {
-                if (ModelState.IsValid)
+                if (ModelState.IsValid && IsClassOk)
                 {
                     _context.Oceny.Add(newOcena);
                     _context.SaveChanges();
                 }
                 else
-                return View(a);
+                {
+                    return View(a);
+                }
 
                 return RedirectToAction(nameof(View));
             }

@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using Westeros.Recipes.Data.Model;
 
-namespace Westeros.Recipes.Data
+namespace Westeros.Recipes.Data.Model
 {
     public enum DifficultyType
     {

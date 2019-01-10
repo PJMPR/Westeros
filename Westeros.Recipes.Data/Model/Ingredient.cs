@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using Westeros.Recipes.Data.Model;
 
-namespace Westeros.Recipes.Data
+namespace Westeros.Recipes.Data.Model
 {
     public enum CategoryType
     {

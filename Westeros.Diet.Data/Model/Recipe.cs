@@ -2,15 +2,23 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
-using Microsoft.EntityFrameworkCore;
-using Westeros.Diet.Data.Repositories;
+using Westeros.Diet.Data.Model;
 
-namespace Westeros.Diet.Data.Model
+namespace Westeros.Diet.Data
 {
+    public enum DifficultyType
+    {
+        Amateur,
+        Easy,
+        Medium,
+        Hard,
+        Masterchef
+    };
+
     public enum CuisineType
     {
         Polish,
-        Italian,
+        talian,
         Spanish,
         French,
         Scandinavian,
@@ -25,69 +33,87 @@ namespace Westeros.Diet.Data.Model
         Other
     };
 
-    public enum DifficultyType
-    {
-        Amateur,
-        Easy,
-        Medium,
-        Hard,
-        Masterchef
-    };
-
     public class Recipe
     {
         public int Id { get; set; }
         public string Name { get; set; }
         [NotMapped]
-        public int Calories { get { return RecipeIngredients.Sum(i => i.Ingredient.Calories); } }
+        public double Calories => CaloriesCalc();
         [NotMapped]
-        public double Proteins { get { return RecipeIngredients.Sum(i => i.Ingredient.Proteins); } }
+        public double Proteins => ProteinsCalc();
         [NotMapped]
-        public double Carbohydrates { get { return RecipeIngredients.Sum(i => i.Ingredient.Carbohydrates); } }
+        public double Carbohydrates => CarbsCalc();
         [NotMapped]
-        public double Fats { get { return RecipeIngredients.Sum(i => i.Ingredient.Fats); } } 
+        public double Fats => FatsCalc();
+        public Boolean IsNew { get; set; } = true;
         public CuisineType Cuisine { get; set; }
-        public string Description { get; set; } 
+        public string Description { get; set; }
         public int PrepTime { get; set; }
         public DifficultyType Difficulty { get; set; }
         [NotMapped]
-        public string PriceBar { get { return CalculatePriceBar(); } }
-        public string Image { get; set; }
-        public ICollection<RecipeIngredient> RecipeIngredients { get; set; } = new List<RecipeIngredient>();
-        public ICollection<RecipeEntry> EntryRecipes { get; set; } = new List<RecipeEntry>();
-        public ICollection<RecipeDevice> RecipeDevices { get; set; } = new List<RecipeDevice>();
+        public string PriceBar => CalculatePriceBar();
+        public string PhotoPath { get; set; }
         [NotMapped]
-        List<string> _tags;
-        [NotMapped]
-        public List<string> Tag { get { return GenerateTags(); } }
+        public List<string> Tag => GenerateTags();
+        public ICollection<RecipeDevice> RecipeDevices { get; set; } = new HashSet<RecipeDevice>();
+        public ICollection<RecipeIngredient> RecipeIngredients { get; set; } = new HashSet<RecipeIngredient>();
 
-        public List<string> GetAllTags()
+
+        public Recipe NewInstance()
         {
-            return _tags.ToList();    
+            return new Recipe();
         }
 
-        List<string> GenerateTags()
+        private double CaloriesCalc()
         {
-            var tags = new List<string>();
-            
+            double sumCalories = 0;
+
             foreach (var ing in RecipeIngredients)
             {
-                tags.Add(ing.Ingredient.Name);
+                sumCalories += ing.Ingredient.Calories;
             }
 
-            foreach (var dev in RecipeDevices)
-            {
-                tags.Add(dev.Device.Name);
-            }
-
-            var ingredients = RecipeIngredients.Select(i => i.Ingredient);
-            tags.Add(PriceBar);
-            tags.Add(Difficulty.ToString());
-
-            return tags;
+            return sumCalories;
         }
 
-        private string CalculatePriceBar()
+        private double ProteinsCalc()
+        {
+            double sumProteins = 0;
+
+            foreach (var ing in RecipeIngredients)
+            {
+                sumProteins += ing.Ingredient.Proteins;
+            }
+
+            return sumProteins;
+        }
+
+        private double CarbsCalc()
+        {
+            double sumCarbs = 0;
+
+            foreach (var ing in RecipeIngredients)
+            {
+                sumCarbs += ing.Ingredient.Carbohydrates;
+            }
+
+            return sumCarbs;
+        }
+
+        private double FatsCalc()
+        {
+            double sumFats = 0;
+
+            foreach (var ing in RecipeIngredients)
+            {
+                sumFats += ing.Ingredient.Fats;
+            }
+
+            return sumFats;
+        }
+
+
+        public string CalculatePriceBar()
         {
             double Price = 0;
 
@@ -103,9 +129,25 @@ namespace Westeros.Diet.Data.Model
             else return "Bardzo drogie";
         }
 
-        public override string ToString()
+        public List<string> GenerateTags()
         {
-            return $"{Id} {Name} {Calories} {Fats} {Carbohydrates} {Proteins} {Image} ";
+            var tags = new List<string>();
+
+            foreach (var ing in RecipeIngredients)
+            {
+                tags.Add(ing.Ingredient.Name);
+            }
+
+            foreach (var dev in RecipeDevices)
+            {
+                tags.Add(dev.Device.Name);
+            }
+
+            tags.Add(PriceBar);
+            tags.Add(Difficulty.ToString());
+
+            return tags;
         }
     }
 }
+

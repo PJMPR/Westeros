@@ -19,21 +19,17 @@ namespace Westeros.Diet.Data.Model
 
     public class Ingredient
     {
+        [Key]
         public int Id { get; set; }
-        public string Name { get; set; }
-        public CategoryType Category { get; set; }
         public int Calories { get; set; }
-        public double Fats { get; set; }
         public double Carbohydrates { get; set; }
+        public double Fats { get; set; }
         public double Proteins { get; set; }
-        public string Image { get; set; }
+        public CategoryType Category { get; set; }
+        public string Name { get; set; }
         public double AveragePrice { get; set; }
-        public ICollection<RecipeIngredient> IngredientRecipes { get; set; } = new List<RecipeIngredient>();
-        public ICollection<IngredientEntry> IngredientEntries { get; set; } = new List<IngredientEntry>();
-
-        public override string ToString()
-        {
-            return $"{Id} {Name} {Category} {Calories} {Fats} {Carbohydrates} {Proteins} {Image} {AveragePrice}";
-        }
+        public string PhotoPath { get; set; }
+        public ICollection<RecipeIngredient> RecipeIngredients { get; set; } = new HashSet<RecipeIngredient>();
+        public ICollection<IngredientEntry> IngredientEntries { get; set; } = new HashSet<IngredientEntry>();
     }
 }

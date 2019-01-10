@@ -12,7 +12,7 @@ namespace Westeros.Recipes.Data.Migrations
                 values: new object[] { 1, 0.0, 0.0, 0, null, 0, 0.0, true, "Kotlet Chedar", null, 0, null, 0.0 });
 
             migrationBuilder.InsertData(
-                table: "RecipeDevice",
+                table: "RecipeDevices",
                 columns: new[] { "Id", "DeviceId", "RecipeId" },
                 values: new object[] { 1, 5, 1 });
 
@@ -25,7 +25,7 @@ namespace Westeros.Recipes.Data.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DeleteData(
-                table: "RecipeDevice",
+                table: "RecipeDevices",
                 keyColumn: "Id",
                 keyValue: 1);
 

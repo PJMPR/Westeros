@@ -51,9 +51,9 @@ namespace Westeros.Recipes.Service
 
                 c.SaveChanges();
 
-                Przepis.Ingridients.Add(Ingridient1);
-                Przepis.Ingridients.Add(Ingridient2);
-                Przepis.Ingridients.Add(Ingridient3);
+                //Przepis.RecipeIngredients.Add(Ingridient1);
+                //Przepis.Ingredients.Add(Ingridient2);
+                //Przepis.Ingredients.Add(Ingridient3);
            
                 Przepis.Difficulty = DifficultyType.Easy;
                 Przepis.Cuisine = CuisineType.Italian;

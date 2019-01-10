@@ -51,7 +51,7 @@ namespace Westeros.Recipes.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Ingridients",
+                name: "Ingredients",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
@@ -104,7 +104,7 @@ namespace Westeros.Recipes.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "RecipeIngridient",
+                name: "RecipeIngredients",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
@@ -118,7 +118,7 @@ namespace Westeros.Recipes.Data.Migrations
                     table.ForeignKey(
                         name: "FK_RecipeIngridient_Ingridients_IngridientId",
                         column: x => x.IngridientId,
-                        principalTable: "Ingridients",
+                        principalTable: "Ingredients",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
@@ -136,7 +136,7 @@ namespace Westeros.Recipes.Data.Migrations
 
             migrationBuilder.CreateIndex(
                 name: "IX_Ingridients_RecipeId",
-                table: "Ingridients",
+                table: "Ingredients",
                 column: "RecipeId");
 
             migrationBuilder.CreateIndex(
@@ -151,12 +151,12 @@ namespace Westeros.Recipes.Data.Migrations
 
             migrationBuilder.CreateIndex(
                 name: "IX_RecipeIngridient_IngridientId",
-                table: "RecipeIngridient",
+                table: "RecipeIngredients",
                 column: "IngridientId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_RecipeIngridient_RecipeId",
-                table: "RecipeIngridient",
+                table: "RecipeIngredients",
                 column: "RecipeId");
         }
 
@@ -166,13 +166,13 @@ namespace Westeros.Recipes.Data.Migrations
                 name: "RecipeDevice");
 
             migrationBuilder.DropTable(
-                name: "RecipeIngridient");
+                name: "RecipeIngredients");
 
             migrationBuilder.DropTable(
                 name: "Devices");
 
             migrationBuilder.DropTable(
-                name: "Ingridients");
+                name: "Ingredients");
 
             migrationBuilder.DropTable(
                 name: "Recipes");

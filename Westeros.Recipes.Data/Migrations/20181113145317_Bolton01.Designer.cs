@@ -49,7 +49,7 @@ namespace Westeros.Recipes.Data.Migrations
 
                     b.HasIndex("RecipeId");
 
-                    b.ToTable("Ingridients");
+                    b.ToTable("Ingredients");
                 });
 
             modelBuilder.Entity("Westeros.Recipes.Data.Model.Device", b =>
@@ -88,7 +88,7 @@ namespace Westeros.Recipes.Data.Migrations
                     b.ToTable("RecipeDevice");
                 });
 
-            modelBuilder.Entity("Westeros.Recipes.Data.Model.RecipeIngridient", b =>
+            modelBuilder.Entity("Westeros.Recipes.Data.Model.RecipeIngredients", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -104,7 +104,7 @@ namespace Westeros.Recipes.Data.Migrations
 
                     b.HasIndex("RecipeId");
 
-                    b.ToTable("RecipeIngridient");
+                    b.ToTable("RecipeIngredients");
                 });
 
             modelBuilder.Entity("Westeros.Recipes.Data.Recipe", b =>
@@ -143,7 +143,7 @@ namespace Westeros.Recipes.Data.Migrations
             modelBuilder.Entity("Westeros.Recipes.Data.Ingridient", b =>
                 {
                     b.HasOne("Westeros.Recipes.Data.Recipe")
-                        .WithMany("Ingridients")
+                        .WithMany("Ingredients")
                         .HasForeignKey("RecipeId");
                 });
 
@@ -167,7 +167,7 @@ namespace Westeros.Recipes.Data.Migrations
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
-            modelBuilder.Entity("Westeros.Recipes.Data.Model.RecipeIngridient", b =>
+            modelBuilder.Entity("Westeros.Recipes.Data.Model.RecipeIngredients", b =>
                 {
                     b.HasOne("Westeros.Recipes.Data.Ingridient", "Ingridient")
                         .WithMany()

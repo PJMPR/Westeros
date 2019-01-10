@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using Westeros.Recipes.Data.Model;
 
 namespace Westeros.Recipes.Data
 {
@@ -17,6 +18,7 @@ namespace Westeros.Recipes.Data
         public double Calories { get; set; } // Kalorie
         public string PhotoPath { get; set; } // Ścieżka do zdjęcia składnika
         public double AvgPrice { get; set; } // Średnia cena
+        public ICollection<RecipeIngridient> RecipeIngridients { get; set; } = new HashSet<RecipeIngridient>();
 
         public static Ingridient GetIngridient(int id)
         {

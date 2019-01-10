@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Linq;
 using Westeros.Recipes.Data.Model;
 
 namespace Westeros.Recipes.Data
@@ -13,7 +14,7 @@ namespace Westeros.Recipes.Data
     {
         public int Id { get; set; } // Id przepisu
         public string Name { get; set; } // Nazwa przepisu
-        public ICollection<Ingridient> Ingridients { get; set; } = new HashSet<Ingridient>(); // Lista (kolekcja) sk³adników
+        public ICollection<RecipeIngridient> RecipeIngredients { get; set; } = new HashSet<RecipeIngridient>(); // Lista (kolekcja) sk³adników
 
         public double Calories { get; private set; } // Suma kalorii wszystkich sk³adników
         public double Proteins { get; private set; } // Suma bia³ek
@@ -22,7 +23,7 @@ namespace Westeros.Recipes.Data
 
         
         public CuisineType Cuisine { get; set; } // Typ kuchni w³oska, azjatycka itp
-        public ICollection<Device> Devices { get; set; } = new HashSet<Device>(); // Przyrz¹dy które potrzebujemy: piekarnik, blender itp.
+        public ICollection<RecipeDevice> RecipeDevices { get; set; } = new HashSet<RecipeDevice>(); // Przyrz¹dy które potrzebujemy: piekarnik, blender itp.
         public string Description { get; set; } // Opis przepisu
         public int PrepTime { get; set; } // Czas przygotowania w minutach
         public DifficultyType Difficulty { get; set; } // Poziom trudnoœci [1-5]
@@ -102,7 +103,7 @@ namespace Westeros.Recipes.Data
             Carbohydrates = CarbsCalc(ingList);
         }
 
-        public string CalculatePriceBar(ICollection<Ingridient> ingList) 
+        public string CalculatePriceBar(IEnumerable<Ingridient> ingList) 
         {
             double Price = 0;
 
@@ -124,17 +125,18 @@ namespace Westeros.Recipes.Data
         {
             List<string> tagi = new List<string>();
 
-            foreach (Ingridient ing in Ingridients)
+            foreach (var ing in RecipeIngredients)
             {
-                tagi.Add(ing.Name);
+                tagi.Add(ing.Ingridient.Name);
             }
 
-            foreach (var dev in Devices)
+            foreach (var dev in RecipeDevices)
             {
-                tagi.Add(dev.Name);
+                tagi.Add(dev.Device.Name);
             }
 
-            tagi.Add(CalculatePriceBar(Ingridients));
+            var Ingredients = RecipeIngredients.Select(i => i.Ingridient);
+            tagi.Add(CalculatePriceBar(Ingredients));
 
             tagi.Add(Difficulty.ToString());
             return tagi;

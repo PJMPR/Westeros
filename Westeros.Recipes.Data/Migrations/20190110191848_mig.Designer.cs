@@ -2,15 +2,17 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Westeros.Recipes.Data.Repositories;
 
 namespace Westeros.Recipes.Data.Migrations
 {
     [DbContext(typeof(RecipesDbContext))]
-    partial class RecipesDbContextModelSnapshot : ModelSnapshot
+    [Migration("20190110191848_mig")]
+    partial class mig
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -92,10 +94,6 @@ namespace Westeros.Recipes.Data.Migrations
                     b.HasIndex("RecipeId");
 
                     b.ToTable("RecipeDevice");
-
-                    b.HasData(
-                        new { Id = 1, DeviceId = 5, RecipeId = 1 }
-                    );
                 });
 
             modelBuilder.Entity("Westeros.Recipes.Data.Model.RecipeIngredient", b =>
@@ -113,10 +111,6 @@ namespace Westeros.Recipes.Data.Migrations
                     b.HasIndex("RecipeId");
 
                     b.ToTable("RecipeIngredients");
-
-                    b.HasData(
-                        new { IngridientId = 2, RecipeId = 1, Id = 1 }
-                    );
                 });
 
             modelBuilder.Entity("Westeros.Recipes.Data.Recipe", b =>
@@ -152,10 +146,6 @@ namespace Westeros.Recipes.Data.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Recipes");
-
-                    b.HasData(
-                        new { Id = 1, Calories = 0.0, Carbohydrates = 0.0, Cuisine = 0, Difficulty = 0, Fats = 0.0, IsNew = true, Name = "Kotlet Chedar", PrepTime = 0, Proteins = 0.0 }
-                    );
                 });
 
             modelBuilder.Entity("Westeros.Recipes.Data.Model.RecipeDevice", b =>

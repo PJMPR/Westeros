@@ -11,6 +11,7 @@
     <Compile Remove="Migrations\20181113144556_Bolton01.cs" />
     <Compile Remove="Migrations\20181113145317_Bolton01.cs" />
     <Compile Remove="Migrations\20190110181223_mig.cs" />
+    <Compile Remove="Migrations\20190110192634_test.cs" />
   </ItemGroup>
 
   <ItemGroup>

@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Westeros.Recipes.Data.Migrations
 {
-    public partial class mig : Migration
+    public partial class xd : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

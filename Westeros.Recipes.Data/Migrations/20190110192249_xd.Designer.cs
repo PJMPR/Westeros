@@ -9,8 +9,8 @@ using Westeros.Recipes.Data.Repositories;
 namespace Westeros.Recipes.Data.Migrations
 {
     [DbContext(typeof(RecipesDbContext))]
-    [Migration("20190110181223_mig")]
-    partial class mig
+    [Migration("20190110192249_xd")]
+    partial class xd
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

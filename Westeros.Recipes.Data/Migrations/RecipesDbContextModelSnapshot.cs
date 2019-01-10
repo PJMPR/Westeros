@@ -75,7 +75,7 @@ namespace Westeros.Recipes.Data.Migrations
                     );
                 });
 
-            modelBuilder.Entity("Westeros.Recipes.Data.Model.RecipeDevice", b =>
+            modelBuilder.Entity("Westeros.Recipes.Data.Model.RecipeDevices", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -91,7 +91,7 @@ namespace Westeros.Recipes.Data.Migrations
 
                     b.HasIndex("RecipeId");
 
-                    b.ToTable("RecipeDevice");
+                    b.ToTable("RecipeDevices");
 
                     b.HasData(
                         new { Id = 1, DeviceId = 5, RecipeId = 1 }
@@ -158,7 +158,7 @@ namespace Westeros.Recipes.Data.Migrations
                     );
                 });
 
-            modelBuilder.Entity("Westeros.Recipes.Data.Model.RecipeDevice", b =>
+            modelBuilder.Entity("Westeros.Recipes.Data.Model.RecipeDevices", b =>
                 {
                     b.HasOne("Westeros.Recipes.Data.Model.Device", "Device")
                         .WithMany()

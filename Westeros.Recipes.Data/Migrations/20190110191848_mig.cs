@@ -65,7 +65,7 @@ namespace Westeros.Recipes.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "RecipeDevice",
+                name: "RecipeDevices",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
@@ -142,12 +142,12 @@ namespace Westeros.Recipes.Data.Migrations
 
             migrationBuilder.CreateIndex(
                 name: "IX_RecipeDevice_DeviceId",
-                table: "RecipeDevice",
+                table: "RecipeDevices",
                 column: "DeviceId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_RecipeDevice_RecipeId",
-                table: "RecipeDevice",
+                table: "RecipeDevices",
                 column: "RecipeId");
 
             migrationBuilder.CreateIndex(
@@ -164,7 +164,7 @@ namespace Westeros.Recipes.Data.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "RecipeDevice");
+                name: "RecipeDevices");
 
             migrationBuilder.DropTable(
                 name: "RecipeIngredients");

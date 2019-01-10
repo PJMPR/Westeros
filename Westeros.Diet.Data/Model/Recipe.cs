@@ -60,7 +60,6 @@ namespace Westeros.Diet.Data.Model
             get { return _tags ?? (_tags = GenerateTags()); }
         }
 
-
         public List<string> GetAllTags()
         {
             return _tags.ToList();    
@@ -69,8 +68,7 @@ namespace Westeros.Diet.Data.Model
         List<string> GenerateTags()
         {
             var tags = new List<string>();
-
-
+            
             foreach (var ing in RecipeIngredients)
             {
                 tags.Add(ing.Ingredient.Name);
@@ -80,7 +78,6 @@ namespace Westeros.Diet.Data.Model
             {
                 tags.Add(dev.Device.Name);
             }
-
 
             var ingredients = RecipeIngredients.Select(i => i.Ingredient);
             tags.Add(CalculatePriceBar(ingredients));

@@ -11,8 +11,21 @@ namespace Westeros.Diet.Service
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
-            Console.ReadKey();
+            using (var context = new DietDbContext())
+            {
+                try
+                {
+                    context.Database.EnsureCreated();
+
+                    Console.WriteLine("Hello World!");
+                    Console.ReadKey();
+                }
+                finally
+                {
+                    context.Database.EnsureDeleted();
+
+                }
+            }
         }
     }
 }

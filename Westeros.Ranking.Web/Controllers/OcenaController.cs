@@ -1,9 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Westeros.Ranking.Data.Model;
 using Westeros.Ranking.Data.Repositories;
+using Westeros.Ranking.Web.Models;
 
 namespace Westeros.Ranking.Web.Controllers
 {
@@ -15,9 +16,60 @@ namespace Westeros.Ranking.Web.Controllers
         {
             _context = c;
         }
+
         public IActionResult View()
         {
             return View(_context.Oceny.ToArray());
+        }
+
+        public IActionResult AddOcena()
+        {
+            return View(new AddOcenaClass());
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult AddOcena(AddOcenaClass a)
+        {
+            var IsClassOk = false;
+            List<string> Attributes = null;
+            if (a.UrlElements.Length > 0)
+                Attributes = new List<string>(a.UrlElements.Substring(1).Split('?'));
+            else
+                return RedirectToAction(nameof(View));
+            var newOcena = new Oceny();
+            newOcena.Ocena = a.Ocena;
+            newOcena.Data = DateTime.Now;
+            newOcena.Nick = a.Nick;
+            newOcena.Tekst = a.Tekst;
+            
+            //this dragons do work
+            if (Attributes.Find(x=>x.Contains("resourceId"))!=null && Attributes.Find(x => x.Contains("resourceName")) != null)
+            {
+                //newOcena.resourceName = Attributes[Attributes.FindIndex(x => x.Contains("resourceName"))];
+                newOcena.resourceId = Convert.ToInt32(Attributes[Attributes.FindIndex(x => x.Contains("resourceId"))].Split('=')[1]);
+                newOcena.resourceName = Attributes[Attributes.FindIndex(x => x.Contains("resourceName"))].Split('=')[1];
+                IsClassOk = true;
+            }
+
+            try
+            {
+                if (ModelState.IsValid && IsClassOk)
+                {
+                    _context.Oceny.Add(newOcena);
+                    _context.SaveChanges();
+                }
+                else
+                {
+                    return View(a);
+                }
+
+                return RedirectToAction(nameof(View));
+            }
+            catch
+            {
+                return RedirectToAction(nameof(View));
+            }
         }
     }
 }

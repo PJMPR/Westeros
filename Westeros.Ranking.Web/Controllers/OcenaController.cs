@@ -34,7 +34,7 @@ namespace Westeros.Ranking.Web.Controllers
             var IsClassOk = false;
             List<string> Attributes = null;
             if (a.UrlElements.Length > 0)
-                Attributes = new List<string>(a.UrlElements.Substring(1).Split('='));
+                Attributes = new List<string>(a.UrlElements.Substring(1).Split('?'));
             else
                 return RedirectToAction(nameof(View));
             var newOcena = new Oceny();
@@ -42,11 +42,13 @@ namespace Westeros.Ranking.Web.Controllers
             newOcena.Data = DateTime.Now;
             newOcena.Nick = a.Nick;
             newOcena.Tekst = a.Tekst;
-            if (Attributes.Contains("resourceId") && Attributes.Contains("resourceName"))
+            
+            //this dragons do work
+            if (Attributes.Find(x=>x.Contains("resourceId"))!=null && Attributes.Find(x => x.Contains("resourceName")) != null)
             {
-                newOcena.resourceId =
-                    Convert.ToInt32(Attributes[Attributes.FindIndex(x => x.Equals("resourceId")) + 1]);
-                newOcena.resourceName = Attributes[Attributes.FindIndex(x => x.Equals("resourceName")) + 1];
+                //newOcena.resourceName = Attributes[Attributes.FindIndex(x => x.Contains("resourceName"))];
+                newOcena.resourceId = Convert.ToInt32(Attributes[Attributes.FindIndex(x => x.Contains("resourceId"))].Split('=')[1]);
+                newOcena.resourceName = Attributes[Attributes.FindIndex(x => x.Contains("resourceName"))].Split('=')[1];
                 IsClassOk = true;
             }
 

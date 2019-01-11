@@ -54,7 +54,7 @@ namespace Westeros.Diet.Web.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Date,Weight")] Entry entry)
+        public async Task<IActionResult> Create([Bind("Id,Date,Weight,UserProfileId")] Entry entry)
         {
             if (ModelState.IsValid)
             {
@@ -86,7 +86,7 @@ namespace Westeros.Diet.Web.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Date,Weight")] Entry entry)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Date,Weight,UserProfileId")] Entry entry)
         {
             if (id != entry.Id)
             {

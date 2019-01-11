@@ -31,6 +31,7 @@ namespace Westeros.Diet.Data.Repositories
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<IngredientEntry>().HasKey(p => new { p.IngredientId, p.EntryId });
             modelBuilder.Entity<RecipeIngredient>().HasKey(p => new { p.IngredientId, p.RecipeId });
 
             var dev1 = new Device { Id = 1, Name = "Mikrofalówka" };
@@ -100,7 +101,27 @@ namespace Westeros.Diet.Data.Repositories
 
             modelBuilder.Entity<Entry>().HasData(ent1, ent2, ent3, ent4, ent5, ent6);
 
+            var ie1 = new IngredientEntry { EntryId = 1, IngredientId = 1, IngredientQuantity = 5 };
+            var ie2 = new IngredientEntry { EntryId = 2, IngredientId = 5, IngredientQuantity = 0.5 };
 
+            var ie3 = new IngredientEntry { EntryId = 4, IngredientId = 5, IngredientQuantity = 0.15 };
+            var ie4 = new IngredientEntry { EntryId = 4, IngredientId = 2, IngredientQuantity = 1.5 };
+            var ie5 = new IngredientEntry { EntryId = 6, IngredientId = 4, IngredientQuantity = 8.5 };
+
+            modelBuilder.Entity<IngredientEntry>().HasData(ie1, ie2, ie3, ie4, ie5);
+
+            var re1 = new RecipeEntry { Id = 1, EntryId = 1, RecipeId = 2 };
+            var re2 = new RecipeEntry { Id = 2, EntryId = 1, RecipeId = 2 };
+            var re3 = new RecipeEntry { Id = 3, EntryId = 2, RecipeId = 2 };
+            var re4 = new RecipeEntry { Id = 4, EntryId = 2, RecipeId = 3 };
+            var re5 = new RecipeEntry { Id = 5, EntryId = 3, RecipeId = 3 };
+
+            var re6 = new RecipeEntry { Id = 6, EntryId = 4, RecipeId = 1 };
+            var re7 = new RecipeEntry { Id = 7, EntryId = 4, RecipeId = 1 };
+            var re8 = new RecipeEntry { Id = 8, EntryId = 5, RecipeId = 2 };
+            var re9 = new RecipeEntry { Id = 9, EntryId = 6, RecipeId = 2 };
+
+            modelBuilder.Entity<RecipeEntry>().HasData(re1, re2, re3, re4, re5, re6, re7, re8, re9);
 
         }
     }

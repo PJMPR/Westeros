@@ -17,9 +17,9 @@ namespace Westeros.Recipes.Web.Controllers
 
         public IActionResult Recipe()
         {
-            ViewData["Message"] = "Recipes panels will go here";
-            ViewData["Title"] = "Recipes";
+            ViewData["Name"] = "Hardboiled Eggs";
 
+            
             return View();
         }
 

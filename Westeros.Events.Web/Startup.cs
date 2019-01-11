@@ -16,17 +16,20 @@ namespace Westeros.Events.Web
 {
     public class Startup
     {
-        public Startup(IConfiguration configuration)
+        public Startup(IConfiguration configuration, IHostingEnvironment env)
         {
-            Configuration = configuration;
+            this.HostingEnvironment = env;
+            this.Configuration = configuration;
         }
-
+        public IHostingEnvironment HostingEnvironment { get; }
         public IConfiguration Configuration { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+             services.AddSingleton<Microsoft.Extensions.Hosting.IHostedService, ASPNETCoreScheduler.Scheduler.EventsTask>();
             services.AddEventApiClient(Configuration);
+            services.AddEventService(Configuration);
             services.AddRepositories();  
             services.AddMvc();
             //services.AddContext(Configuration);

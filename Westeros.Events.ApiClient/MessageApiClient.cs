@@ -2,7 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Net.Http;
-using Westeros.Events.Data.Model;
+using Westeros.Events.ApiClient.Contracts;
 
 namespace Westeros.Events.ApiClient
 {
@@ -17,13 +17,13 @@ namespace Westeros.Events.ApiClient
 
         }
 
-        public IEnumerable<Message> All()
+        public IEnumerable<MessageDto> All()
         {
             return _httpClient
                 .GetAsync("api/Message")
                 .Result
                 .Content
-                .ReadAsAsync<IEnumerable<Message>>()
+                .ReadAsAsync<IEnumerable<MessageDto>>()
                 .Result;
         }
 
@@ -32,17 +32,17 @@ namespace Westeros.Events.ApiClient
             await _httpClient.DeleteAsync($"api/Message/{id}");
         }
 
-        public Message GetById(int id)
+        public MessageDto GetById(int id)
         {
             return _httpClient
                        .GetAsync($"api/Message/{id}")
                        .Result
                        .Content
-                       .ReadAsAsync<Message>()
-.Result;
+                       .ReadAsAsync<MessageDto>()
+                        .Result;
         }
 
-        public async void SendMessage(Message message)
+        public async void SendMessage(MessageDto message)
         {
             await _httpClient.PostAsJsonAsync("api/Message", message);
         }

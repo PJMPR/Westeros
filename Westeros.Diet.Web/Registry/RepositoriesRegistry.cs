@@ -15,8 +15,8 @@ namespace Westeros.Diet.Web.Registry
         public static IServiceCollection AddRepositories(this IServiceCollection services)
         {
             return services.AddTransient<IGenericRepository<Entry>, GenericRepository<Entry>>()
-                .AddTransient<IGenericRepository<EntryIngredient>, GenericRepository<EntryIngredient>>()
-                .AddTransient<IGenericRepository<EntryRecipe>, GenericRepository<EntryRecipe>>();
+                .AddTransient<IGenericRepository<IngredientEntry>, GenericRepository<IngredientEntry>>()
+                .AddTransient<IGenericRepository<RecipeEntry>, GenericRepository<RecipeEntry>>();
         }
     }
 }

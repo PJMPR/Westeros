@@ -12,10 +12,16 @@ namespace Westeros.Diet.Data.Repositories
 
         }
 
+        public DietDbContext(DbContextOptions<DietDbContext> options) : base(options)
+        {
+
+        }
+
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.EnableSensitiveDataLogging();
             optionsBuilder.UseSqlServer(@"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=DietDatabase;Integrated Security=True;");
+            base.OnConfiguring(optionsBuilder);
         }
 
         public DbSet<Device> Devices { get; set; }

@@ -85,6 +85,23 @@ namespace Westeros.Diet.Data.Repositories
 
             modelBuilder.Entity<RecipeIngredient>().HasData(ingRec1, ingRec2, ingRec3, ingRec4, ingRec5, ingRec6, ingRec7, ingRec8, ingRec9, ingRec10);
 
+            var up1 = new UserProfile { Id = 1, Age = 18, Email = "a@a.pl", Height = 175, Name = "Jan", Surname = "Sikora", Weight = 90, Login = "xXxDragonSlayerxXx", Sex = Sex.Male };
+            var up2 = new UserProfile { Id = 2, Age = 22, Email = "b@b.pl", Height = 165, Name = "Marta", Surname = "Kawecik", Weight = 45, Login = "KsIeZnIcZkA69", Sex = Sex.Female };
+
+            modelBuilder.Entity<UserProfile>().HasData(up1, up2);
+
+            var ent1 = new Entry { Id = 1, UserProfileId = 1, Date = DateTime.Now.AddDays(-1), Weight = 90 };
+            var ent2 = new Entry { Id = 2, UserProfileId = 1, Date = DateTime.Now.AddDays(-1), Weight = 89 };
+            var ent3 = new Entry { Id = 3, UserProfileId = 1, Date = DateTime.Now, Weight = 88 };
+
+            var ent4 = new Entry { Id = 4, UserProfileId = 2, Date = DateTime.Now.AddHours(-3), Weight = 45 };
+            var ent5 = new Entry { Id = 5, UserProfileId = 2, Date = DateTime.Now.AddHours(-1), Weight = 46 };
+            var ent6 = new Entry { Id = 6, UserProfileId = 2, Date = DateTime.Now, Weight = 44 };
+
+            modelBuilder.Entity<Entry>().HasData(ent1, ent2, ent3, ent4, ent5, ent6);
+
+
+
         }
     }
 }

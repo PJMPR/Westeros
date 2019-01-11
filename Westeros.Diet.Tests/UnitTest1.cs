@@ -35,7 +35,7 @@ namespace Westeros.Diet.Tests
             userProfile.Age = 25;
             userProfile.Height = 1.87;
             userProfile.Weight = 93;
-            userProfile.Gender = Gender.Male;
+            userProfile.Sex = Sex.Male;
 
             var userWeight = userProfile.Weight;
             var userHeight = userProfile.Height;
@@ -57,7 +57,7 @@ namespace Westeros.Diet.Tests
             userProfile.Age = 25;
             userProfile.Height =1.87D;
             userProfile.Weight = 93D;
-            userProfile.Gender = Gender.Male;
+            userProfile.Sex = Sex.Male;
 
             var userWeight = userProfile.Weight;
             var userHeight = userProfile.Height;

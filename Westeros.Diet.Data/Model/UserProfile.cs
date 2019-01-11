@@ -7,7 +7,7 @@ using Westeros.Diet.Data.Repositories;
 
 namespace Westeros.Diet.Data.Model
 {
-    public enum Gender
+    public enum Sex
     {
         Male,
         Female
@@ -20,7 +20,7 @@ namespace Westeros.Diet.Data.Model
         public string Surname { get; set; }
         public string Login { get; set; }
         public string Email { get; set; }
-        public Gender Gender { get; set; }
+        public Sex Sex { get; set; }
         public int Age { get; set; }
         public double Weight { get; set; }
         public double Height { get; set; }

@@ -34,13 +34,13 @@ namespace Westeros.Diet.Data.Model
  
             double bmr =0;
 
-            if (userProfile.Gender == Gender.Female) {
+            if (userProfile.Sex == Sex.Female) {
                 bmr = ((9.99 * userProfile.Weight)  +
                         (6.25 * userProfile.Height*100) -
                          (4.92 * userProfile.Age) - 161);
                 return bmr;
             }
-            if (userProfile.Gender == Gender.Male)
+            if (userProfile.Sex == Sex.Male)
             {
                 bmr = ((9.99 * userProfile.Weight)  +
                         (6.25 * userProfile.Height * 100) -

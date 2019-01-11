@@ -237,7 +237,7 @@ namespace Westeros.Diet.Data.Migrations
 
                     b.Property<string>("Email");
 
-                    b.Property<int>("Gender");
+                    b.Property<int>("Sex");
 
                     b.Property<double>("Height");
 

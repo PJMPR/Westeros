@@ -4,6 +4,7 @@
     ViewData["Title"] = "Sing in";
 }
 
+
 <h2>Sing in</h2>
 <h4>Choose your profile</h4>
 @*<p>
@@ -74,11 +75,7 @@
                 @Html.DisplayFor(modelItem => item.Height)
             </td>
             <td>
-                @*<a asp-action="SingIn" asp-route-id="@item.Id">Pick </a>*@
-                <form>
-                    <input type="hidden" asp-for="@item.Id" />
-                    <input type="submit" name="response" value="Accept" formaction=@Url.Action("SingIn") formmethod="post" class="btn btn-primary" />
-                </form>
+                <a asp-action="SingIn" asp-route-id="@item.Id">Pick </a>
             </td>
         </tr>
 }

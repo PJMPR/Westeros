@@ -5,6 +5,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.EntityFrameworkCore;
 using Westeros.Diet.Data.Repositories;
 using Westeros.Diet.Web.Registry;
+using System;
 
 namespace Westeros.Diet.Web
 {
@@ -22,6 +23,8 @@ namespace Westeros.Diet.Web
         {
             services.AddRepositories();
             services.AddMvc();
+            services.AddSession(options => { options.IdleTimeout = TimeSpan.FromSeconds(10); });
+            services.AddDistributedMemoryCache();
             var connection = Configuration.GetConnectionString("DietDB");
             services.AddDbContext<DietDbContext>(options => options.UseSqlServer(connection));
         }
@@ -40,6 +43,8 @@ namespace Westeros.Diet.Web
             }
 
             app.UseStaticFiles();
+
+            app.UseSession();
 
             app.UseMvc(routes =>
             {

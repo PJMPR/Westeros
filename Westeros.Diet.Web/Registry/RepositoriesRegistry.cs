@@ -16,7 +16,14 @@ namespace Westeros.Diet.Web.Registry
         {
             return services.AddTransient<IGenericRepository<Entry>, GenericRepository<Entry>>()
                 .AddTransient<IGenericRepository<IngredientEntry>, GenericRepository<IngredientEntry>>()
-                .AddTransient<IGenericRepository<RecipeEntry>, GenericRepository<RecipeEntry>>();
+                .AddTransient<IGenericRepository<RecipeEntry>, GenericRepository<RecipeEntry>>()
+                .AddTransient<IGenericRepository<Recipe>, GenericRepository<Recipe>>()
+                .AddTransient<IGenericRepository<RecipeDevice>, GenericRepository<RecipeDevice>>()
+                .AddTransient<IGenericRepository<RecipeIngredient>, GenericRepository<RecipeIngredient>>()
+                .AddTransient<IGenericRepository<DietPlan>, GenericRepository<DietPlan>>()
+                .AddTransient<IGenericRepository<UserProfile>, GenericRepository<UserProfile>>()
+                .AddTransient<IGenericRepository<Ingredient>, GenericRepository<Ingredient>>()
+                .AddTransient<IGenericRepository<Device>, GenericRepository<Device>>();
         }
     }
 }

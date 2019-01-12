@@ -14,6 +14,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Westeros.Recipes.Data\Westeros.Recipes.Data.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Content Update="Views\Home\Recipe.cshtml">
       <Pack>$(IncludeRazorContentInPack)</Pack>
     </Content>

@@ -47,12 +47,8 @@ namespace Westeros.Demo.ApiClient
                        .Result;
         }
 
-        public async void DeleteRecipe(int id)
-        {
-            await _httpClient.DeleteAsync($"api/Recipes/{id}");
-        }
 
-
+     
 
          public async void AddIngredient(IngredientsDto ingredient)
         {
@@ -62,15 +58,18 @@ namespace Westeros.Demo.ApiClient
         {
             await _httpClient.PutAsJsonAsync("api/Ingredients", ingredient);
         }
-        public IEnumerable<IngredientsDto> AllIngredients()
+
+        public IEnumerable<IngredientsDto> AllIngrednients()
         {
             return _httpClient
+
                 .GetAsync("api/Ingredients")
                 .Result
                 .Content
                 .ReadAsAsync<IEnumerable<IngredientsDto>>()
                 .Result;
         }
+
         public IngredientsDto GetIngredient(int id)
         {
             return _httpClient

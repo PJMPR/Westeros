@@ -1,0 +1,110 @@
+﻿@model IEnumerable<Westeros.Recipes.Data.Model.Recipe>
+
+
+@{
+    ViewData["Title"] = "Index";
+
+}
+<div class="container" style="padding-top:1vh">
+    <div class="row">
+        @foreach (var item in Model)
+        {
+            <div class="col-sm-6 col-md-4">
+                <div class="thumbnail">
+                    <img src="https://via.placeholder.com/300" alt="...">
+                    <div class="caption">
+                        <h3>@Html.DisplayFor(modelItem => item.Name)</h3>
+                        <h4 style="display:inline">@Html.DisplayFor(modelItem => item.PrepTime) minutes</h4>
+                        <h4 style="display:inline">@Html.DisplayFor(modelItem => item.Difficulty)</h4>
+                        <button type="button" class="btn btn-primary btn-md" data-toggle="modal" data-target="#myModal">
+                            More Info
+                        </button>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">Recipe Name</h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-sm-5 col-md-5">
+                        <img src="https://via.placeholder.com/300" alt="..." />
+                    </div>
+                    <div class="col-sm-2 col-md-2"></div>
+                    <div class="col-sm-5 col-md-5">
+                        <h5>List of ingredients</h5>
+                        <ul class="list-group">
+                                <li class="list-group-item">
+                                </li>
+
+                            </ul>
+                        </div>
+                    </div>
+                    <hr />
+                    <div class="row">
+                        <div class="panel panel-primary col-sm-6 col-md-6">
+                            <div class="panel-heading">
+                                <h3 class="panel-title">Proteins</h3>
+                            </div>
+                            <div class="panel-body">
+                                0.4 mg
+                            </div>
+                        </div>
+
+                        <div class="panel panel-success col-sm-6 col-md-6">
+                            <div class="panel-heading">
+                                <h3 class="panel-title">Carbohydrates</h3>
+                            </div>
+                            <div class="panel-body">
+                                0.4 mg
+                            </div>
+                        </div>
+
+                        <div class="panel panel-danger col-sm-6 col-md-6">
+                            <div class="panel-heading">
+                                <h3 class="panel-title">Fats</h3>
+                            </div>
+                            <div class="panel-body">
+                                0.4 mg
+                            </div>
+                        </div>
+
+                        <div class="panel panel-warning col-sm-6 col-md-6">
+                            <div class="panel-heading">
+                                <h3 class="panel-title">Calories</h3>
+                            </div>
+                            <div class="panel-body">
+                                2345kcal
+                            </div>
+                        </div>
+
+
+                    </div>
+
+                    <div>
+                        <h5>Description</h5>
+                        <p class="alert-info">
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                            Proin luctus arcu non molestie posuere. Aliquam maximus risus ut maximus fringilla.
+                            Donec placerat nulla eget dolor vulputate dapibus vitae quis libero.
+                            Proin sagittis ipsum a scelerisque tristique. In leo magna, tempor vel porttitor at, fringilla eu urna.
+                            Donec nibh diam, malesuada et egestas eu, porttitor at elit. Nullam vestibulum maximus risus.
+                            Sed accumsan nisi vitae est elementum ornare.
+                        </p>
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>

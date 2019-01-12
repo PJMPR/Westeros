@@ -12,6 +12,12 @@ namespace Westeros.Recipes.Data.Repositories
         {
 
         }
+
+        public RecipesDbContext(DbContextOptions<RecipesDbContext> options) : base(options)
+        {
+
+        }
+
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.UseSqlServer(@"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=RecipesDatabase;Integrated Security=True;");

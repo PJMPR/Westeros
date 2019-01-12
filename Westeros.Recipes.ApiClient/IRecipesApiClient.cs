@@ -12,11 +12,11 @@ namespace Westeros.Demo.ApiClient
         void UpdateRecipe(RecipesDto Recipe);
 
 
-        void AddIngridient(IngridientsDto Ingridient);
-        IEnumerable<IngridientsDto> AllIngridients();
-        void DeleteIngridient(int id);
-        IngridientsDto GetIngridient(int id);
-        void UpdateIngridient(IngridientsDto Ingridient);
+        void AddIngredient(IngredientsDto ingredient);
+        IEnumerable<IngredientsDto> AllIngredients();
+        void DeleteIngredient(int id);
+        IngredientsDto GetIngredient(int id);
+        void UpdateIngredient(IngredientsDto ingredient);
 
     }
 }

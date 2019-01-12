@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 using Westeros.Recipes.Data;
 using Westeros.Recipes.Data.Model;
@@ -12,7 +13,7 @@ namespace Westeros.Demo.ApiClient.Contracts
     {
         public int Id { get; set; } 
         public string Name { get; set; } 
-        public ICollection<Ingridient> Ingridients { get; set; } = new HashSet<Ingridient>();
+        public ICollection<RecipeIngredient> Ingredients { get; set; } = new HashSet<RecipeIngredient>();
 
         public double Calories { get; private set; } 
         public double Proteins { get; private set; } 

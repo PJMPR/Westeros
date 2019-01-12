@@ -2,10 +2,10 @@
 
 namespace Westeros.Demo.ApiClient.Contracts
 {
-    public class IngridientsDto
+    public class IngredientsDto
     {
         public int Id { get; set; } 
-        public int IngridientId { get; set; }
+        public int IngredientId { get; set; }
         public string Name { get; set; } 
         public enum CategoryType { Vegetable, Fruit, Meat, Fish, Dairy, Delicacies, Other };
         public CategoryType Category { get; set; } 

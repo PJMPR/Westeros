@@ -20,36 +20,70 @@ namespace Westeros.Demo.ApiClient
 
 
 
-        public async void AddNewPerson(IngridientsDto personToAdd)
+        public async void AddRecipe(RecipesDto Recipe)
         {
-            await _httpClient.PostAsJsonAsync("api/People", personToAdd);
+            await _httpClient.PostAsJsonAsync("api/Recipes", Recipe);
         }
-        public async void UpdatePerson(IngridientsDto personToUpdate)
+        public async void UpdateRecipe(RecipesDto Recipe)
         {
-            await _httpClient.PutAsJsonAsync("api/People", personToUpdate);
+            await _httpClient.PutAsJsonAsync("api/Recipes", Recipe);
         }
-        public IEnumerable<IngridientsDto> All()
+        public IEnumerable<RecipesDto> AllRecipes()
         {
             return _httpClient
-                .GetAsync("api/People")
+                .GetAsync("api/Recipes")
+                .Result
+                .Content
+                .ReadAsAsync<IEnumerable<RecipesDto>>()
+                .Result;
+        }
+        public RecipesDto GetRecipe(int id)
+        {
+            return _httpClient
+                       .GetAsync($"api/Recipes/{id}")
+                       .Result
+                       .Content
+                       .ReadAsAsync<RecipesDto>()
+                       .Result;
+        }
+
+        public async void DeleteRecipe(int id)
+        {
+            await _httpClient.DeleteAsync($"api/Recipes/{id}");
+        }
+
+
+
+         public async void AddIngridient(IngridientsDto Ingridient)
+        {
+            await _httpClient.PostAsJsonAsync("api/Ingridients", Ingridient);
+        }
+        public async void UpdateIngridient(IngridientsDto Ingridient)
+        {
+            await _httpClient.PutAsJsonAsync("api/Ingridients", Ingridient);
+        }
+        public IEnumerable<IngridientsDto> AllIngridients()
+        {
+            return _httpClient
+                .GetAsync("api/Ingridients")
                 .Result
                 .Content
                 .ReadAsAsync<IEnumerable<IngridientsDto>>()
                 .Result;
         }
-        public IngridientsDto GetById(int id)
+        public IngridientsDto GetIngridient(int id)
         {
             return _httpClient
-                       .GetAsync($"api/People/{id}")
+                       .GetAsync($"api/Ingridients/{id}")
                        .Result
                        .Content
                        .ReadAsAsync<IngridientsDto>()
                        .Result;
         }
 
-        public async void DeletePerson(int id)
+        public async void DeleteIngridient(int id)
         {
-            await _httpClient.DeleteAsync($"api/People/{id}");
+            await _httpClient.DeleteAsync($"api/Ingridients/{id}");
         }
 
     }

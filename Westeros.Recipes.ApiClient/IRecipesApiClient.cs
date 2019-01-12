@@ -5,10 +5,18 @@ namespace Westeros.Demo.ApiClient
 {
     public interface IRecipesApiClient
     {
-        void AddNewPerson(IngridientsDto personToAdd);
-        IEnumerable<IngridientsDto> All();
-        void DeletePerson(int id);
-        IngridientsDto GetById(int id);
-        void UpdatePerson(IngridientsDto personToUpdate);
+        void AddRecipe(RecipesDto Recipe);
+        IEnumerable<RecipesDto> AllRecipes();
+        void DeleteRecipe(int id);
+        RecipesDto GetRecipe(int id);
+        void UpdateRecipe(RecipesDto Recipe);
+
+
+        void AddIngridient(IngridientsDto Ingridient);
+        IEnumerable<IngridientsDto> AllIngridients();
+        void DeleteIngridient(int id);
+        IngridientsDto GetIngridient(int id);
+        void UpdateIngridient(IngridientsDto Ingridient);
+
     }
 }

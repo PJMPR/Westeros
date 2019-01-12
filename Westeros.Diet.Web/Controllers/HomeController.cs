@@ -13,14 +13,12 @@ namespace Westeros.Diet.Web.Controllers
     {
         public IActionResult Index()
         {
-            HttpContext.Session.SetString("Test", "xDDD");
             return View();
         }
 
         public IActionResult About()
         {
-            //ViewData["Message"] = "Your application description page.";
-            ViewBag.Message = HttpContext.Session.GetString("Test");
+            ViewData["Message"] = "Your application description page.";
             return View();
         }
 

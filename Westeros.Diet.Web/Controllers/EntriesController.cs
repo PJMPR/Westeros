@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Westeros.Diet.Data.Model;
@@ -22,31 +23,50 @@ namespace Westeros.Diet.Web.Controllers
         // GET: Entries
         public async Task<IActionResult> Index()
         {
+            if (HttpContext.Session.GetInt32("Id") == null)
+            {
+                return RedirectToAction(nameof(UserProfileController.SignIn));
+            }
+
             return View(await _context.Entries.ToListAsync());
         }
 
         // GET: Entries/Details/5
         public async Task<IActionResult> Details(int? id)
         {
-            if (id == null)
+            if (HttpContext.Session.GetInt32("Id") == null)
             {
-                return NotFound();
+               return RedirectToAction(nameof(UserProfileController.SignIn));
             }
-
-            var entry = await _context.Entries
-                .SingleOrDefaultAsync(m => m.Id == id);
-            if (entry == null)
+            else
             {
-                return NotFound();
-            }
+                if (id == null)
+                {
+                    return NotFound();
+                }
 
-            return View(entry);
+                var entry = await _context.Entries
+                    .SingleOrDefaultAsync(m => m.Id == id);
+                if (entry == null)
+                {
+                    return NotFound();
+                }
+
+                return View(entry);
+            }
         }
 
         // GET: Entries/Create
         public IActionResult Create()
         {
-            return View();
+            if (HttpContext.Session.GetInt32("Id") == null)
+            {
+                return RedirectToAction(nameof(UserProfileController.SignIn));
+            }
+            else
+            {
+                return View();
+            }
         }
 
         // POST: Entries/Create
@@ -54,15 +74,24 @@ namespace Westeros.Diet.Web.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Date,Weight,UserProfileId")] Entry entry)
+        public async Task<IActionResult> Create([Bind("Id,Date,Weight")] Entry entry)
         {
-            if (ModelState.IsValid)
+            if (HttpContext.Session.GetInt32("Id") == null)
             {
-                _context.Add(entry);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction(nameof(UserProfileController.SignIn));
             }
-            return View(entry);
+            else
+            {
+
+                if (ModelState.IsValid)
+                {
+                    entry.UserProfileId = (int)HttpContext.Session.GetInt32("Id");
+                    _context.Add(entry);
+                    await _context.SaveChangesAsync();
+                    return RedirectToAction(nameof(Index));
+                }
+                return View(entry);
+            }
         }
 
         // GET: Entries/Edit/5
@@ -144,7 +173,6 @@ namespace Westeros.Diet.Web.Controllers
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
-
         private bool EntryExists(int id)
         {
             return _context.Entries.Any(e => e.Id == id);

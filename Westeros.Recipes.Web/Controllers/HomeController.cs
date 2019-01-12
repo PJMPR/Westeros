@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Westeros.Recipes.Data;
 using Westeros.Recipes.Web.Models;
 
 namespace Westeros.Recipes.Web.Controllers
@@ -15,7 +16,7 @@ namespace Westeros.Recipes.Web.Controllers
             return View();
         }
 
-        public IActionResult Recipe()
+        public IActionResult Recipe(Recipe recipe)
         {
             ViewData["Name"] = "Hardboiled Eggs";
 

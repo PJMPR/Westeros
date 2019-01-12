@@ -6,8 +6,10 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Westeros.Recipes.Data.Repositories;
 
 namespace Westeros.Recipes.Web
 {
@@ -23,7 +25,12 @@ namespace Westeros.Recipes.Web
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddRepositories();
+
             services.AddMvc();
+            var connection = Configuration.GetConnectionString("RecipesDB");
+            services.AddDbContext<RecipesDbContext>(options => options.UseSqlServer(connection));
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -48,5 +55,7 @@ namespace Westeros.Recipes.Web
                     template: "{controller=Home}/{action=Index}/{id?}");
             });
         }
+
+        
     }
 }

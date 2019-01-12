@@ -70,21 +70,23 @@ namespace Westeros.Diet.Web.Controllers
             return View(userProfiles);
         }
 
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public ActionResult SingIn(UserProfileModel profileModel)
-        //{
-        //    if (_repository.GetByID(profileModel.Id) == null)
-        //    {
-        //        return View();
-        //    }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult SingIn([Bind("Id")] UserProfileModel profileModel)
+        {
+            if (_repository.GetByID(profileModel.Id) == null)
+            {
+                //return View();
+                return RedirectToAction(nameof(Index), controllerName: "Home");
 
-        //    HttpContext.Session.SetInt32("Id", profileModel.Id);
-        //    HttpContext.Session.SetString("Name", profileModel.Name);
+            }
 
-        //    return RedirectToAction(nameof(Index));
+            HttpContext.Session.SetInt32("Id", profileModel.Id);
+            HttpContext.Session.SetString("Name", profileModel.Name);
 
-        //}
+            return RedirectToAction(nameof(Index), controllerName: "Home");
+
+        }
 
         public ActionResult SingOut()
         {

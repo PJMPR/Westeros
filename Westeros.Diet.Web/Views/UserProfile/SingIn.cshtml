@@ -74,7 +74,11 @@
                 @Html.DisplayFor(modelItem => item.Height)
             </td>
             <td>
-                <a asp-action="SingIn" asp-route-id="@item.Id">Pick </a>
+                @*<a asp-action="SingIn" asp-route-id="@item.Id">Pick </a>*@
+                <form>
+                    <input type="hidden" asp-for="@item.Id" />
+                    <input type="submit" name="response" value="Accept" formaction=@Url.Action("SingIn") formmethod="post" class="btn btn-primary" />
+                </form>
             </td>
         </tr>
 }

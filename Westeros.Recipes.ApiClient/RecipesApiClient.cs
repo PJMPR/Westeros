@@ -48,9 +48,12 @@ namespace Westeros.Demo.ApiClient
         }
 
 
-     
+        public async void DeleteRecipe(int id)
+        {
+            await _httpClient.DeleteAsync($"api/Recipes/{id}");
+        }
 
-         public async void AddIngredient(IngredientsDto ingredient)
+        public async void AddIngredient(IngredientsDto ingredient)
         {
             await _httpClient.PostAsJsonAsync("api/Ingredients", ingredient);
         }
@@ -59,7 +62,7 @@ namespace Westeros.Demo.ApiClient
             await _httpClient.PutAsJsonAsync("api/Ingredients", ingredient);
         }
 
-        public IEnumerable<IngredientsDto> AllIngrednients()
+        public IEnumerable<IngredientsDto> AllIngredients()
         {
             return _httpClient
 

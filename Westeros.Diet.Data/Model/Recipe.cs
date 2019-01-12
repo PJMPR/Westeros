@@ -2,15 +2,23 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
-using Microsoft.EntityFrameworkCore;
-using Westeros.Diet.Data.Repositories;
+using Westeros.Diet.Data.Model;
 
-namespace Westeros.Diet.Data.Model
+namespace Westeros.Diet.Data
 {
+    public enum DifficultyType
+    {
+        Amateur,
+        Easy,
+        Medium,
+        Hard,
+        Masterchef
+    };
+
     public enum CuisineType
     {
         Polish,
-        Italian,
+        talian,
         Spanish,
         French,
         Scandinavian,
@@ -25,51 +33,105 @@ namespace Westeros.Diet.Data.Model
         Other
     };
 
-    public enum DifficultyType
-    {
-        Amateur,
-        Easy,
-        Medium,
-        Hard,
-        Masterchef
-    };
-
     public class Recipe
     {
         public int Id { get; set; }
         public string Name { get; set; }
-        public int Calories { get; set; }
-        public double Proteins { get; set; }
-        public double Carbohydrates { get; set; }
-        public double Fats { get; set; }
+        [NotMapped]
+        public double Calories => CaloriesCalc();
+        [NotMapped]
+        public double Proteins => ProteinsCalc();
+        [NotMapped]
+        public double Carbohydrates => CarbsCalc();
+        [NotMapped]
+        public double Fats => FatsCalc();
+        public Boolean IsNew { get; set; } = true;
         public CuisineType Cuisine { get; set; }
-        public string Description { get; set; } 
+        public string Description { get; set; }
         public int PrepTime { get; set; }
         public DifficultyType Difficulty { get; set; }
-        public string PriceBar { get; set; }
-        public string Image { get; set; }
-        public ICollection<RecipeIngredient> RecipeIngredients { get; set; }
-        public ICollection<RecipeEntry> EntryRecipes { get; set; }
-        public ICollection<RecipeDevice> RecipeDevices { get; set; } 
+        [NotMapped]
+        public string PriceBar => CalculatePriceBar();
+        public string PhotoPath { get; set; }
+        [NotMapped]
+        public List<string> Tag => GenerateTags();
+        public ICollection<RecipeDevice> RecipeDevices { get; set; } = new HashSet<RecipeDevice>();
+        public ICollection<RecipeIngredient> RecipeIngredients { get; set; } = new HashSet<RecipeIngredient>();
 
-        [NotMapped]
-        List<string> _tags;
-        [NotMapped]
-        public List<string> Tag
+
+        public Recipe NewInstance()
         {
-            get { return _tags ?? (_tags = GenerateTags()); }
+            return new Recipe();
+        }
+
+        private double CaloriesCalc()
+        {
+            double sumCalories = 0;
+
+            foreach (var ing in RecipeIngredients)
+            {
+                sumCalories += ing.Ingredient.Calories;
+            }
+
+            return sumCalories;
+        }
+
+        private double ProteinsCalc()
+        {
+            double sumProteins = 0;
+
+            foreach (var ing in RecipeIngredients)
+            {
+                sumProteins += ing.Ingredient.Proteins;
+            }
+
+            return sumProteins;
+        }
+
+        private double CarbsCalc()
+        {
+            double sumCarbs = 0;
+
+            foreach (var ing in RecipeIngredients)
+            {
+                sumCarbs += ing.Ingredient.Carbohydrates;
+            }
+
+            return sumCarbs;
+        }
+
+        private double FatsCalc()
+        {
+            double sumFats = 0;
+
+            foreach (var ing in RecipeIngredients)
+            {
+                sumFats += ing.Ingredient.Fats;
+            }
+
+            return sumFats;
         }
 
 
-        public List<string> GetAllTags()
+        public string CalculatePriceBar()
         {
-            return _tags.ToList();    
+            double Price = 0;
+
+            foreach (var ing in RecipeIngredients)
+            {
+                Price += ing.Ingredient.AveragePrice;
+            }
+
+            if (Price < 10) return "Bardzo tanie";
+            else if (Price >= 10 && Price < 15) return "Tanie";
+            else if (Price >= 15 && Price < 25) return "Œrenio drogie";
+            else if (Price >= 25 && Price < 40) return "Drogie";
+            else return "Bardzo drogie";
         }
 
-        List<string> GenerateTags()
+        public List<string> GenerateTags()
         {
             var tags = new List<string>();
-
 
             foreach (var ing in RecipeIngredients)
             {
@@ -81,33 +143,11 @@ namespace Westeros.Diet.Data.Model
                 tags.Add(dev.Device.Name);
             }
 
-
-            var ingredients = RecipeIngredients.Select(i => i.Ingredient);
-            tags.Add(CalculatePriceBar(ingredients));
+            tags.Add(PriceBar);
             tags.Add(Difficulty.ToString());
 
             return tags;
         }
-
-        string CalculatePriceBar(IEnumerable<Ingredient> ingredients)
-        {
-            double Price = 0;
-
-            foreach (Ingredient ing in ingredients)
-            {
-                Price += ing.AveragePrice;
-            }
-
-            if (Price < 10) return "Bardzo tanie";
-            else if (Price >= 10 && Price < 15) return "Tanie";
-            else if (Price >= 15 && Price < 25) return "Œrenio drogie";
-            else if (Price >= 25 && Price < 40) return "Drogie";
-            else return "Bardzo drogie";
-        }
-
-        public override string ToString()
-        {
-            return $"{Id} {Name} {Calories} {Fats} {Carbohydrates} {Proteins} {Image} ";
-        }
     }
 }
+

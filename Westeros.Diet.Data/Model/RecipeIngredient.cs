@@ -13,6 +13,7 @@ namespace Westeros.Diet.Data.Model
         [Key]
         public int RecipeId { get; set; }
         public Recipe Recipe { get; set; }
+        [Required]
         public double IngredientQuantity { get; set; }
     }
 }

@@ -20,51 +20,19 @@ namespace Westeros.Demo.ApiClient
 
 
 
-        public async void AddRecipe(RecipesDto Recipe)
+
         {
             await _httpClient.PostAsJsonAsync("api/Recipes", Recipe);
         }
         public async void UpdateRecipe(RecipesDto Recipe)
         {
             await _httpClient.PutAsJsonAsync("api/Recipes", Recipe);
+
         }
         public IEnumerable<RecipesDto> AllRecipes()
         {
             return _httpClient
-                .GetAsync("api/Recipes")
-                .Result
-                .Content
-                .ReadAsAsync<IEnumerable<RecipesDto>>()
-                .Result;
-        }
-        public RecipesDto GetRecipe(int id)
-        {
-            return _httpClient
-                       .GetAsync($"api/Recipes/{id}")
-                       .Result
-                       .Content
-                       .ReadAsAsync<RecipesDto>()
-                       .Result;
-        }
 
-        public async void DeleteRecipe(int id)
-        {
-            await _httpClient.DeleteAsync($"api/Recipes/{id}");
-        }
-
-
-
-         public async void AddIngridient(IngridientsDto Ingridient)
-        {
-            await _httpClient.PostAsJsonAsync("api/Ingridients", Ingridient);
-        }
-        public async void UpdateIngridient(IngridientsDto Ingridient)
-        {
-            await _httpClient.PutAsJsonAsync("api/Ingridients", Ingridient);
-        }
-        public IEnumerable<IngridientsDto> AllIngridients()
-        {
-            return _httpClient
                 .GetAsync("api/Ingridients")
                 .Result
                 .Content

@@ -1,14 +1,14 @@
 using System.Collections.Generic;
-using Westeros.Events.Data.Model;
+using Westeros.Events.ApiClient.Contracts;
 
 namespace Westeros.Events.ApiClient
 {
     public interface IEventsApiClient
     {
-        void SendMessage(Message message);
-        IEnumerable<Message> All();
+        void SendMessage(MessageDto message);
+        IEnumerable<MessageDto> All();
         void DeleteMessage(int id);
-        Message GetById(int id);
+        MessageDto GetById(int id);
 
     }
 }

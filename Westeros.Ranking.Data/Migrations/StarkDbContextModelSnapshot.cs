@@ -41,11 +41,13 @@ namespace Westeros.Ranking.Data.Migrations
 
                     b.Property<DateTime>("Data");
 
-                    b.Property<string>("Nick");
+                    b.Property<string>("Nick")
+                        .IsRequired();
 
                     b.Property<int>("Ocena");
 
-                    b.Property<string>("Tekst");
+                    b.Property<string>("Tekst")
+                        .IsRequired();
 
                     b.Property<int>("resourceId");
 

@@ -5,10 +5,18 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Registry\**" />
+    <Content Remove="Registry\**" />
+    <EmbeddedResource Remove="Registry\**" />
+    <None Remove="Registry\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="AutoMapper" Version="8.0.0" />
     <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="6.0.0" />
     <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.3" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.0.4" />
+    <PackageReference Include="ncrontab" Version="3.3.0" />
   </ItemGroup>
 
   <ItemGroup>
@@ -31,10 +39,6 @@
     <Content Update="Views\Recipe\Index.cshtml">
       <Pack>$(IncludeRazorContentInPack)</Pack>
     </Content>
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Registry\" />
   </ItemGroup>
 
 </Project>

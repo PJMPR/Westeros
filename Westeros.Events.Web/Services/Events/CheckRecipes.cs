@@ -3,10 +3,11 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Westeros.Events.Data;
 using Westeros.Events.Data.Model;
 using Westeros.Events.Data.Repositories;
 
-namespace Westeros.Events.Data.Events
+namespace Westeros.Events.Web.Services.Events
 {
     public class CheckRecipes
     {

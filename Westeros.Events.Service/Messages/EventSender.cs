@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Westeros.Events.Data.Model;
 using Westeros.Events.Data.Repositories;
+using Westeros.Events.Service;
 
 namespace Westeros.Events.Data
 {
@@ -12,10 +13,11 @@ namespace Westeros.Events.Data
         private static readonly object padlock = new object();
 
 
-
+        
 
         EventSender()
         {
+            
         }
 
         public static EventSender Instance
@@ -42,7 +44,7 @@ namespace Westeros.Events.Data
                 msg.From = "Admin@recipes.com";
                 msg.Topic = "New Recipes from"+recipe.Tag;
                 
-                msg.Content = "<a href=\"http://localhost:51764/Recipe/Details/"+recipe.Id+"\">Recipe link</a>";
+               msg.Content = "<a href=\"http://localhost:51764/Recipe/Details/" + recipe.Id + "\">Recipe link</a>";
 
                 context.MailDB.Add(msg);
                 context.LogDb.Add(new LogRecord

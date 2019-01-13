@@ -29,7 +29,8 @@ namespace Westeros.Events.Data.Repositories
         }
        
 
-        public DbSet<Profile> Profiles { get; set; }
+            public DbSet<Profile> Profiles { get; set; }
+            public DbSet<MailServer> MailServerDb { get; set; }
             public DbSet<IMessage> MailDB { get; set; }
             public DbSet<LogRecord> LogDb { get; set; }
             public DbSet<Recipe> RecipeDb { get; set; }

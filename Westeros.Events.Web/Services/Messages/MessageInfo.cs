@@ -1,10 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿
 using System.Linq;
 using Westeros.Events.Data.Repositories;
 
-namespace Westeros.Web.Services.Messages
+namespace Westeros.Events.Web.Services.Messages
 {
     public class MessagesInfo
     {

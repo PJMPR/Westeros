@@ -8,19 +8,23 @@ using Microsoft.AspNetCore.Mvc;
 using Westeros.Events.ApiClient.Contracts;
 using Westeros.Events.Data.Model;
 using Westeros.Events.Data.Repositories;
+using Westeros.Events.Web.Services.Messages;
+
 namespace Westeros.Events.Web.Controllers.Api
 {
     [Produces("application/json")]
     [Route("api/Messages")]
     public class PeopleApiController : Controller
     {
-       IGenericRepository<IMessage> _message;
-       IMapper _mapper;
+       private IGenericRepository<IMessage> _message;
+       private IMapper _mapper;
+       private IMessageSender _messageSender;
 
-        public PeopleApiController(IGenericRepository<IMessage> message, IMapper mapper)
+        public PeopleApiController(IGenericRepository<IMessage> message, IMapper mapper,IMessageSender messageSender)
         {
             _message = message;
             _mapper = mapper;
+            _messageSender = messageSender;
         }
 
         [HttpGet]
@@ -41,7 +45,7 @@ namespace Westeros.Events.Web.Controllers.Api
         [HttpPost]
         public ActionResult Post([FromBody]MessageDto value)
         {
-             MailSender.SendMail(_mapper.Map<Message>(value));
+            _messageSender.SendMessage(_mapper.Map<Message>(value));
      
             return StatusCode(201);
         }       

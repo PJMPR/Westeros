@@ -18,7 +18,12 @@ namespace ASPNETCoreScheduler.Scheduler
 
         public override Task ProcessInScope(IServiceProvider serviceProvider)
         {
-            new CheckRecipes(serviceProvider.GetService<IGenericRepository<Recipe>>(), serviceProvider.GetService<IGenericRepository<Profile>>())
+            new CheckRecipes(
+                serviceProvider.GetService<IGenericRepository<Recipe>>(),
+                serviceProvider.GetService<IGenericRepository<Profile>>(),
+                serviceProvider.GetService<EventSender>()
+
+                )
                 .CheckNew();
 
             return Task.CompletedTask;

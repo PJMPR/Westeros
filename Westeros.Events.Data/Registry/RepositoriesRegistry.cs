@@ -15,8 +15,9 @@ namespace Westeros.Events.Data.Registry
         public static IServiceCollection AddRepositories(this IServiceCollection services)
         {
             return services.AddTransient<IGenericRepository<IMessage>, GenericRepository<IMessage>>()
-                .AddTransient<IGenericRepository<Profile>, GenericRepository<Profile>>()
+                .AddTransient<IGenericRepository<MailServer>, GenericRepository<MailServer>>()
                 .AddTransient<IGenericRepository<Recipe>, GenericRepository<Recipe>>()
+                .AddTransient<IGenericRepository<Profile>, GenericRepository<Profile>>()
                 .AddTransient<IGenericRepository<LogRecord>, GenericRepository<LogRecord>>();
         }
     }

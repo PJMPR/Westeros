@@ -7,16 +7,19 @@ using Microsoft.AspNetCore.Mvc;
 using Westeros.Events.Data.Model;
 using Westeros.Events.Data;
 using Westeros.Events.Data.Repositories;
+using Westeros.Events.Web.Services.Messages;
 
 namespace Westeros.Events.Web.Controllers
 {
     public class MessageController : Controller
     {
         EventContext _ctx;
+        IMessageSender _MailSender;  
 
-        public MessageController(EventContext ctx)
+        public MessageController(EventContext ctx, IMessageSender MessageSender)
         {
             _ctx = ctx;
+            _MailSender = MessageSender;
         }
         // GET: Message
         public ActionResult Index()
@@ -59,7 +62,7 @@ namespace Westeros.Events.Web.Controllers
             {
                 if (ModelState.IsValid)
                 {
-                    MailSender.SendMail(message);
+                    _MailSender.SendMessage(message);
                 }
                 else
                     return View(message);

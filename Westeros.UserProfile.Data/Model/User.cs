@@ -19,17 +19,23 @@ namespace Westeros.UserProfile.Data
         public string   surname { get; set; }
         public string   login   { get; set; }
         public string   email   { get; set; }
-        public int      age     { get; set; }
-        public decimal  weight  { get; set; }
-        public decimal  height  { get; set; }
-        public Gender   gender  { get; set; }
+        public Nullable<int>      age     { get; set; }
+        public Nullable<decimal>  weight  { get; set; }
+        public Nullable<decimal>  height  { get; set; }
+        public Nullable<Gender>   gender  { get; set; }
 
         public User() { }
 
-        public User(string login, string email)
+        public User(string login, string email = null, string name = null, string surname = null, Nullable<int> age = null, Nullable<decimal> weight = null, Nullable<decimal> height = null, Nullable<Gender> gender = null)
         {
             this.login = login;
             this.email = email;
+            this.name = name;
+            this.surname = surname;
+            this.age = age;
+            this.weight = weight;
+            this.height = height;
+            this.gender = gender;
         }
     }
 }

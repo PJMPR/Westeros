@@ -33,18 +33,38 @@ namespace Westeros.Diet.Web.Controllers
             }
             ViewBag.Name = HttpContext.Session.GetString("Name");
 
-            int t = HttpContext.Session.GetInt32("Key").GetValueOrDefault();
+            int t = HttpContext.Session.GetInt32("Id").GetValueOrDefault();
 
             var entry = await _context.UserProfiles.SingleOrDefaultAsync(u => u.Id == t);
             if (entry == null)
             {
                 return NotFound();
             }
-            return View(entry);
+            return View(contextToModel(entry));
 
         }
 
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Index(int id, [Bind("Id, Name, LastName, Login, Email, ConfirmEmail, Sex, Age, Weight, Height")] UserProfileModel userProfile)
+        {
+            if (id != userProfile.Id)
+            {
+                return NotFound();
+            }
 
+            if (ModelState.IsValid)
+            {
+                var up = modelToContext(userProfile);
+
+                _context.Update(up);
+                await _context.SaveChangesAsync();
+
+
+                return RedirectToAction("Index");
+            }
+            return View(userProfile);
+        }
 
         // GET: UserProfiles
         public ActionResult SingIn(int? id)
@@ -66,23 +86,45 @@ namespace Westeros.Diet.Web.Controllers
 
             foreach (var row in data)
             {
-                userProfiles.Add(new UserProfileModel
-                {
-                    Id = row.Id,
-                    Name = row.Name,
-                    LastName = row.Surname,
-                    Login = row.Login,
-                    Email = row.Email,
-                    Sex = row.Sex,
-                    Age = row.Age,
-                    Weight = row.Age,
-                    Height = row.Height
-                });
+                userProfiles.Add(contextToModel(row));
             }
 
             return View(userProfiles);
         }
 
+        private static UserProfileModel contextToModel(UserProfile row)
+        {
+            return new UserProfileModel
+            {
+                Id = row.Id,
+                Name = row.Name,
+                LastName = row.Surname,
+                Login = row.Login,
+                Email = row.Email,
+                ConfirmEmail = row.Email,
+                Sex = row.Sex,
+                Age = row.Age,
+                Weight = row.Age,
+                Height = row.Height
+            };
+        }
+
+
+        private static UserProfile modelToContext(UserProfileModel row)
+        {
+            return new UserProfile
+            {
+                Id = row.Id,
+                Name = row.Name,
+                Surname = row.LastName,
+                Login = row.Login,
+                Email = row.Email,
+                Sex = row.Sex,
+                Age = row.Age,
+                Weight = row.Age,
+                Height = row.Height
+            };
+        }
 
         public ActionResult SingOut()
         {

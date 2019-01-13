@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Westeros.Events.Data.Repositories;
 
 namespace Westeros.Events.Data.Migrations
 {
     [DbContext(typeof(EventContext))]
-    partial class EventContextModelSnapshot : ModelSnapshot
+    [Migration("20190112174936_newServicefix1")]
+    partial class newServicefix1
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -29,8 +31,13 @@ namespace Westeros.Events.Data.Migrations
 
                     b.Property<DateTime>("Date");
 
+                    b.Property<string>("Discriminator")
+                        .IsRequired();
+
                     b.Property<string>("From")
                         .IsRequired();
+
+                    b.Property<bool>("IsNew");
 
                     b.Property<bool>("ReadFlag");
 
@@ -42,6 +49,8 @@ namespace Westeros.Events.Data.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("MailDB");
+
+                    b.HasDiscriminator<string>("Discriminator").HasValue("IMessage");
                 });
 
             modelBuilder.Entity("Westeros.Events.Data.Model.LogRecord", b =>
@@ -59,31 +68,6 @@ namespace Westeros.Events.Data.Migrations
                     b.HasIndex("MessageId");
 
                     b.ToTable("LogDb");
-                });
-
-            modelBuilder.Entity("Westeros.Events.Data.Model.MailServer", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("Content");
-
-                    b.Property<DateTime>("Date");
-
-                    b.Property<string>("From")
-                        .IsRequired();
-
-                    b.Property<bool>("IsNew");
-
-                    b.Property<string>("To")
-                        .IsRequired();
-
-                    b.Property<string>("Topic");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("MailServerDb");
                 });
 
             modelBuilder.Entity("Westeros.Events.Data.Model.Profile", b =>
@@ -121,9 +105,19 @@ namespace Westeros.Events.Data.Migrations
                     b.ToTable("RecipeDb");
                 });
 
+            modelBuilder.Entity("Westeros.Events.Data.Model.Message", b =>
+                {
+                    b.HasBaseType("Westeros.Events.Data.Model.IMessage");
+
+
+                    b.ToTable("Message");
+
+                    b.HasDiscriminator().HasValue("Message");
+                });
+
             modelBuilder.Entity("Westeros.Events.Data.Model.LogRecord", b =>
                 {
-                    b.HasOne("Westeros.Events.Data.Model.MailServer", "Message")
+                    b.HasOne("Westeros.Events.Data.Model.IMessage", "Message")
                         .WithMany()
                         .HasForeignKey("MessageId");
                 });

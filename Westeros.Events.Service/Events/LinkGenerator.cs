@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Westeros.Events.Service
+namespace Westeros.Events.Web.Services.Events
 {
     public class LinkGenerator : ILinkGenerator
     {
-        String _RecipebaseAddress;
+        private String _RecipebaseAddress;
         public LinkGenerator(string RecipebaseAddress)
         {
             _RecipebaseAddress = RecipebaseAddress;

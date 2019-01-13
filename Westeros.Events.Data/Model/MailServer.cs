@@ -1,11 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
+
 using System.ComponentModel.DataAnnotations;
-using System.Text;
 
 namespace Westeros.Events.Data.Model
 {
-    public class IMessage
+    public class MailServer
     {
         public int Id { get; private set; }
 
@@ -16,7 +15,6 @@ namespace Westeros.Events.Data.Model
         public string Content { get; set; }
         public string Topic { get; set; }
         public DateTime Date { get; set; } = DateTime.Now;
-        public Boolean ReadFlag { get; set; }
-        //public Boolean IsNew { get; set; } = true;
+        public Boolean IsNew { get; set; } = true;
     }
 }

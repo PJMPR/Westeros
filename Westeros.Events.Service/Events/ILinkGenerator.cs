@@ -1,4 +1,4 @@
-﻿namespace Westeros.Events.Service
+﻿namespace Westeros.Events.Web.Services.Events
 {
     public interface ILinkGenerator
     {

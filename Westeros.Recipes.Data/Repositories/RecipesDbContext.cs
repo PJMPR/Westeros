@@ -10,7 +10,7 @@ namespace Westeros.Recipes.Data.Repositories
     {
         public RecipesDbContext():base()
         {
-
+            
         }
 
         public RecipesDbContext(DbContextOptions<RecipesDbContext> options) : base(options)
@@ -50,9 +50,24 @@ namespace Westeros.Recipes.Data.Repositories
 
             modelBuilder.Entity<Ingredient>().HasData(ing1, ing2, ing3, ing4, ing5);
 
-            var rec1 = new Recipe { Id = 1, Name = "Masa" };
-            var rec2 = new Recipe { Id = 2, Name = "Redukcja" };
-            var rec3 = new Recipe { Id = 3, Name = "Utrzymanie" };
+            var rec1 = new Recipe { Id = 1, Name = "Ramen",
+                PhotoPath = "http://images.kglobalservices.com/www.morningstarfarms.com/en_us/recipe/recipe_6540350/recip_img-6542859_banh_mi_ramen.jpg",
+                PrepTime = 7 ,
+                Difficulty = DifficultyType.Amateur,
+                Description = "Use chicken, noodles, spinach, sweetcorn and eggs to make this moreish Japanese noodle soup, for when you crave something comforting yet light and wholesome"
+            };
+            var rec2 = new Recipe { Id = 2, Name = "Ratatoille",
+                PhotoPath = "https://www.tasteofhome.com/wp-content/uploads/2017/10/exps9117_LM963641C27-2.jpg",
+                PrepTime = 18 ,
+                Difficulty = DifficultyType.Medium,
+                Description = "This moreish Mediterranean-style vegetable stew is perfect for a super-healthy midweek supper."
+            };
+            var rec3 = new Recipe { Id = 3, Name = "Paella",
+                PhotoPath = "https://www.tasteofhome.com/wp-content/uploads/2017/10/exps40641_HCA1383857D43.jpg",
+                PrepTime = 45 ,
+                Difficulty = DifficultyType.Hard,
+                Description = "Whip up this easy version of the traditional Spanish seafood dish straight from the storecupboard. Add extras such as chorizo and peas if you like"
+            };
 
             modelBuilder.Entity<Recipe>().HasData(rec1, rec2, rec3);
 

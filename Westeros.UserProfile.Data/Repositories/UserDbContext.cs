@@ -16,7 +16,7 @@ namespace Westeros.UserProfile.Data.Repositories
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer(@"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=TargeryanUser;Integrated Security=True;");
+            optionsBuilder.UseSqlServer(@"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=TargeryanUser;Integrated Security=False;");
         }
         public DbSet<User> User { get; set; }
         

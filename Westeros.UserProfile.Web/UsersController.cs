@@ -24,6 +24,12 @@ namespace Westeros.UserProfile.Web
         {
             return View(await _context.User.ToListAsync());
         }
+        // GET: Users/Register/5
+        public ActionResult Register()
+        {
+            return View();
+        }
+
 
         // GET: Users/Details/5
         public async Task<IActionResult> Details(int? id)
@@ -86,6 +92,29 @@ namespace Westeros.UserProfile.Web
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        public ActionResult Register(User U)
+
+        {
+
+            if (ModelState.IsValid)
+                using (UserDbContext dc = new UserDbContext())
+                {
+
+                dc.User.Add(U);
+
+                dc.SaveChanges();
+
+                ModelState.Clear();
+
+                U = null;
+
+                ViewBag.Message = "Successfully Registration Done";
+
+            }
+
+            return View(U);
+
+        }
         public async Task<IActionResult> Edit(int id, [Bind("id")] User user)
         {
             if (id != user.id)

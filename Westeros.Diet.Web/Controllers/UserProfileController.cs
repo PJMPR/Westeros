@@ -29,7 +29,8 @@ namespace Westeros.Diet.Web.Controllers
             {
                 return RedirectToAction(nameof(SingIn));
             }
-            ViewBag.Message = "Nie";
+            ViewBag.Name = HttpContext.Session.GetString("Name");
+
 
             return View();
         }
@@ -42,8 +43,9 @@ namespace Westeros.Diet.Web.Controllers
             if (id != null)
             {
                 int t = id ?? default(int);
+                var name = _repository.GetByID(t).Name;
                 HttpContext.Session.SetInt32("Id", t);
-                //HttpContext.Session.SetString("Name", Name);
+                HttpContext.Session.SetString("Name", name);
 
                 return RedirectToAction(nameof(Index));
             }
@@ -70,23 +72,23 @@ namespace Westeros.Diet.Web.Controllers
             return View(userProfiles);
         }
 
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult SingIn([Bind("Id")] UserProfileModel profileModel)
-        {
-            if (_repository.GetByID(profileModel.Id) == null)
-            {
-                //return View();
-                return RedirectToAction(nameof(Index), controllerName: "Home");
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //public ActionResult SingIn([Bind("Id")] UserProfileModel profileModel)
+        //{
+        //    if (_repository.GetByID(profileModel.Id) == null)
+        //    {
+        //        //return View();
+        //        return RedirectToAction(nameof(Index), controllerName: "Home");
 
-            }
+        //    }
 
-            HttpContext.Session.SetInt32("Id", profileModel.Id);
-            HttpContext.Session.SetString("Name", profileModel.Name);
+        //    HttpContext.Session.SetInt32("Id", profileModel.Id);
+        //    HttpContext.Session.SetString("Name", profileModel.Name);
 
-            return RedirectToAction(nameof(Index), controllerName: "Home");
+        //    return RedirectToAction(nameof(Index), controllerName: "Home");
 
-        }
+        //}
 
         public ActionResult SingOut()
         {

@@ -108,7 +108,7 @@ namespace Westeros.UserProfile.Web
 
                 U = null;
 
-                ViewBag.Message = "Successfully Registration Done";
+                ViewData["Message"] = "Successfull Registration";
 
             }
 

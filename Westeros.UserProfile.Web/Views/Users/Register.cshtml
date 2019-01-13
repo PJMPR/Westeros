@@ -3,7 +3,7 @@
 @{
     ViewData["Title"] = "Register";
 }
-
+<h1>@ViewData["Messege"]</h1>
 <h2>Register</h2>
 
 <h4>User</h4>
@@ -48,9 +48,9 @@
                 <span asp-validation-for="height" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="gender" class="control-label"></label>
-                <select asp-for="gender" class="form-control"></select>
-                <span asp-validation-for="gender" class="text-danger"></span>
+                <input type="radio" asp-for="gender" value="Male" checked> Male<br>
+                <input type="radio" asp-for="gender" value="Female"> Female<br>
+                <input type="radio" asp-for="gender" value="Other"> Other
             </div>
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-default" />

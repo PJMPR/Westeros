@@ -1,11 +1,10 @@
 ﻿@model Westeros.Diet.Web.Models.UserProfileModel
 
 @{
-    ViewData["Title"] = "Index";
-
+    ViewData["Title"] = "User profile";
 }
 
-<h2>Welcome, @ViewBag.Name</h2>
+<h2>View</h2>
 
 <h4>UserProfileModel</h4>
 <hr />
@@ -69,3 +68,8 @@
         </form>
     </div>
 </div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+

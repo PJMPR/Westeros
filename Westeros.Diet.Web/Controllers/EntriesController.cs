@@ -23,12 +23,14 @@ namespace Westeros.Diet.Web.Controllers
         // GET: Entries
         public async Task<IActionResult> Index()
         {
+            HttpContext.Session.SetInt32("Id", 1);
             if (HttpContext.Session.GetInt32("Id") == null)
             {
-                return RedirectToAction(nameof(UserProfileController.SignIn));
+                return RedirectToAction(nameof(UserProfileController.Index), "UserProfile");
             }
 
-            return View(await _context.Entries.ToListAsync());
+            int id = HttpContext.Session.GetInt32("Id").GetValueOrDefault();
+            return View(await _context.Entries.Where(x => x.UserProfileId == id).ToListAsync());
         }
 
         // GET: Entries/Details/5

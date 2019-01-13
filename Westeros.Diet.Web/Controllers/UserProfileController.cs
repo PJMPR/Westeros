@@ -16,14 +16,16 @@ namespace Westeros.Diet.Web.Controllers
 {
     public class UserProfileController : Controller
     {
-        IGenericRepository<UserProfile> _repository;
 
-        public UserProfileController(IGenericRepository<UserProfile> ctx)
+        private readonly DietDbContext _context;
+
+        public UserProfileController(DietDbContext context)
         {
-            _repository = ctx;
+            _context = context;
         }
 
-        public ActionResult Index(string returnUrl = null)
+
+        public async Task<IActionResult> Index(string returnUrl = null)
         {
             if (HttpContext.Session.GetInt32("Id") == null)
             {
@@ -31,9 +33,18 @@ namespace Westeros.Diet.Web.Controllers
             }
             ViewBag.Name = HttpContext.Session.GetString("Name");
 
+            int t = HttpContext.Session.GetInt32("Key").GetValueOrDefault();
 
-            return View();
+            var entry = await _context.UserProfiles.SingleOrDefaultAsync(u => u.Id == t);
+            if (entry == null)
+            {
+                return NotFound();
+            }
+            return View(entry);
+
         }
+
+
 
         // GET: UserProfiles
         public ActionResult SingIn(int? id)
@@ -43,14 +54,14 @@ namespace Westeros.Diet.Web.Controllers
             if (id != null)
             {
                 int t = id ?? default(int);
-                var name = _repository.GetByID(t).Name;
+                var name = _context.UserProfiles.Single(u => u.Id == t).Name;
                 HttpContext.Session.SetInt32("Id", t);
                 HttpContext.Session.SetString("Name", name);
 
                 return RedirectToAction(nameof(Index));
             }
 
-            var data = _repository.Get();
+            var data = _context.UserProfiles.ToList();
             List<UserProfileModel> userProfiles = new List<UserProfileModel>();
 
             foreach (var row in data)
@@ -72,23 +83,6 @@ namespace Westeros.Diet.Web.Controllers
             return View(userProfiles);
         }
 
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public ActionResult SingIn([Bind("Id")] UserProfileModel profileModel)
-        //{
-        //    if (_repository.GetByID(profileModel.Id) == null)
-        //    {
-        //        //return View();
-        //        return RedirectToAction(nameof(Index), controllerName: "Home");
-
-        //    }
-
-        //    HttpContext.Session.SetInt32("Id", profileModel.Id);
-        //    HttpContext.Session.SetString("Name", profileModel.Name);
-
-        //    return RedirectToAction(nameof(Index), controllerName: "Home");
-
-        //}
 
         public ActionResult SingOut()
         {

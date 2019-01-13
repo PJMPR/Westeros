@@ -16,7 +16,7 @@
                         <h3>@Html.DisplayFor(modelItem => item.Name)</h3>
                         <h4 style="display:inline">@Html.DisplayFor(modelItem => item.PrepTime) min</h4>
                         <h4 style="display:inline">@Html.DisplayFor(modelItem => item.Difficulty)</h4>
-                        <button type="button" class="btn btn-primary btn-md" data-toggle="modal" data-target="#@item.Name">
+                        <button type="button" class="btn btn-primary btn-md" data-toggle="modal" data-target="#@item.Id">
                             More Info
                         </button>
                     </div>
@@ -24,7 +24,7 @@
             </div>
 
             <!-- Modal -->
-            <div class="modal fade" id="@item.Name" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+            <div class="modal fade" id="@item.Id" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
                         <div class="modal-header">

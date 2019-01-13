@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Westeros.Recipes.Data.Model;
 using Westeros.Recipes.Data.Repositories;
+using Westeros.Recipes.Web.Models;
 
 namespace Westeros.Recipes.Web.Controllers
 {
@@ -31,5 +32,72 @@ namespace Westeros.Recipes.Web.Controllers
             var recipeList = _context.Recipes.Include(r => r.RecipeIngredients).ThenInclude( r => r.Ingredient);
             return View(recipeList);
         }
+
+        [HttpGet]
+        public ActionResult Create()
+        {
+            var model = new Recipe();
+            var Ingredients = _context.Ingredients.ToList();
+
+            foreach (var ing in Ingredients)
+            {
+                model.RecipeIngredients.Add(new RecipeIngredient
+                {
+                    Ingredient = ing, IngredientId = ing.Id,
+                    IngredientQuantity = 0
+                });
+            }
+            return View(model);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Create(Recipe recipe)
+        {
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    _context.Add(recipe);
+                    _context.SaveChanges();
+                }
+                else return View(recipe);
+
+                return Redirect(nameof(Index));
+            }
+            catch
+            {
+                return View();
+            }
+        }
+
+    
+        public ActionResult Delete(int id)
+        {
+            return View();
+        }
+
+   
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Delete(int id, Recipe recipe)
+        {
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    _context.Remove(recipe);
+                    _context.SaveChanges();
+                }
+                else return View(recipe);
+
+                return Redirect(nameof(Index));
+            }
+            catch
+            {
+                return View();
+            }
+        }
+
     }
 }

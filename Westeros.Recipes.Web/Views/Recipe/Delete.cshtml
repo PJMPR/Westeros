@@ -1,0 +1,26 @@
+﻿@model Westeros.Recipes.Data.Model.Recipe
+
+@{
+    ViewData["Title"] = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>Recipe</h4>
+    <hr />
+    <dl class="dl-horizontal">
+       
+    </dl>
+    
+    <form asp-action="Delete">
+        <div class="form-group">
+            <label asp-for="Name" class="control-label"></label>
+            <input asp-for="Name" class="form-control" />
+            <span asp-validation-for="Name" class="text-danger"></span>
+        </div>
+        <input type="submit" value="Delete" class="btn btn-default"/> |
+        <a asp-action="Index">Back to List</a>
+    </form>
+</div>

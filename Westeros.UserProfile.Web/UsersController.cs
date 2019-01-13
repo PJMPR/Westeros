@@ -149,5 +149,19 @@ namespace Westeros.UserProfile.Web
         {
             return _context.User.Any(e => e.id == id);
         }
+
+        // GET: Users/Login/5
+        [HttpGet]
+        public IActionResult Login()
+        {
+            return View();
+        }
+
+        // POST: Users/Login/5
+        [HttpPost]
+        public IActionResult Login(string login)
+        {
+            
+        }
     }
 }

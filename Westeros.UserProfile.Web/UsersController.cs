@@ -157,11 +157,5 @@ namespace Westeros.UserProfile.Web
             return View();
         }
 
-        // POST: Users/Login/5
-        [HttpPost]
-        public IActionResult Login(string login)
-        {
-            
-        }
     }
 }

@@ -70,7 +70,7 @@ namespace Westeros.Diet.Data
 
             foreach (var ing in RecipeIngredients)
             {
-                sumCalories += ing.Ingredient.Calories;
+                sumCalories += ing.Ingredient.Calories * ing.IngredientQuantity;
             }
 
             return sumCalories;
@@ -82,7 +82,7 @@ namespace Westeros.Diet.Data
 
             foreach (var ing in RecipeIngredients)
             {
-                sumProteins += ing.Ingredient.Proteins;
+                sumProteins += ing.Ingredient.Proteins * ing.IngredientQuantity;
             }
 
             return sumProteins;
@@ -94,7 +94,7 @@ namespace Westeros.Diet.Data
 
             foreach (var ing in RecipeIngredients)
             {
-                sumCarbs += ing.Ingredient.Carbohydrates;
+                sumCarbs += ing.Ingredient.Carbohydrates * ing.IngredientQuantity;
             }
 
             return sumCarbs;
@@ -106,7 +106,7 @@ namespace Westeros.Diet.Data
 
             foreach (var ing in RecipeIngredients)
             {
-                sumFats += ing.Ingredient.Fats;
+                sumFats += ing.Ingredient.Fats * ing.IngredientQuantity;
             }
 
             return sumFats;

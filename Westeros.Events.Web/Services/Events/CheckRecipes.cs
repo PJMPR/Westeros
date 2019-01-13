@@ -14,11 +14,18 @@ namespace Westeros.Events.Web.Services.Events
         private IGenericRepository<Recipe> _Rctx;
         private IGenericRepository<Profile> _Pctx;
         IEventSender _EventSender;
-        public CheckRecipes(IGenericRepository<Recipe> Rrepo, IGenericRepository<Profile> Prepo, IEventSender EventSender)
+        public CheckRecipes(
+            IGenericRepository<Recipe> Rrepo,
+            IGenericRepository<Profile> Prepo,
+            IEventSender EventSender,
+            IGenericRepository<IMessage> IMrepo,
+            IGenericRepository<LogRecord> Lgrepo,
+            ILinkGenerator linkGenerator)
         {
             _Rctx = Rrepo;
             _Pctx = Prepo;
-            _EventSender = EventSender;
+            _EventSender = new EventSender(IMrepo, Lgrepo, linkGenerator);
+            
         }
 
         public void CheckNew()
@@ -32,7 +39,6 @@ namespace Westeros.Events.Web.Services.Events
                         var profiles = GetTypedProfiles(r.Tag);
                         if (profiles != null)
                         {
-                        var one =profiles.ElementAt(0);
                             SendEvent(r, profiles);
                         }
                         r.IsNew = false;
@@ -55,9 +61,11 @@ namespace Westeros.Events.Web.Services.Events
         }
         private void SendEvent(Recipe recipe, IEnumerable<Profile> profiles)
         {
-            foreach(Profile p in profiles)
+ 
+            foreach (Profile p in profiles)
             {
                 _EventSender.SendEventMessage(p, recipe);
+
             }
 
             

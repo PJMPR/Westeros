@@ -100,7 +100,7 @@ namespace Westeros.Events.Web.Services.Messages
             var ReceiverProfile = _Prepo.Get
                (b => b.NickName.Equals(s));
 
-            if (ReceiverProfile != null)
+            if (ReceiverProfile.ElementAtOrDefault(0)!=null)
                 return ReceiverProfile.ElementAt(0);
             else
                 return null;

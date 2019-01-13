@@ -39,9 +39,6 @@ namespace Westeros.Events.Web.Services.Events
                 });
                 _IMrepo.SaveChanges();
                 _Lgrepo.SaveChanges();
-
-
-
         }
 
     }

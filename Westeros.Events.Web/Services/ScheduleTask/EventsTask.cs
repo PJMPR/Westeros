@@ -21,8 +21,10 @@ namespace ASPNETCoreScheduler.Scheduler
             new CheckRecipes(
                 serviceProvider.GetService<IGenericRepository<Recipe>>(),
                 serviceProvider.GetService<IGenericRepository<Profile>>(),
-                serviceProvider.GetService<EventSender>()
-
+                serviceProvider.GetService<EventSender>(),
+                serviceProvider.GetService<IGenericRepository<IMessage>>(),
+                serviceProvider.GetService<IGenericRepository<LogRecord>>(),
+                serviceProvider.GetService<ILinkGenerator>()
                 )
                 .CheckNew();
 

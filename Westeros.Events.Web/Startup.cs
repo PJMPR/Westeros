@@ -33,13 +33,14 @@ namespace Westeros.Events.Web
         {
             
             services.AddSingleton<IHostedService, EventsTask>();
-            //services.AddSingleton<IHostedService, MailServerTask>();
+            services.AddSingleton<IHostedService, MailServerTask>();
             services.AddAutoMapper();
 
             services.AddEventApiClient(Configuration);
             services.AddEventService(Configuration);
             services.AddRepositories();  
             services.AddMvc();
+            services.AddTransient<IEventSender, EventSender>();
 
             //services.AddContext(Configuration);
             var connection=Configuration.GetConnectionString("demo");

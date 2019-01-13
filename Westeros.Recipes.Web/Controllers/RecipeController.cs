@@ -36,7 +36,7 @@ namespace Westeros.Recipes.Web.Controllers
         [HttpGet]
         public ActionResult Create()
         {
-            var model = new RecipesModel();
+            var model = new Recipe();
             var Ingredients = _context.Ingredients.ToList();
 
             foreach (var ing in Ingredients)
@@ -52,7 +52,7 @@ namespace Westeros.Recipes.Web.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(RecipesModel recipe)
+        public ActionResult Create(Recipe recipe)
         {
             try
             {
@@ -70,5 +70,34 @@ namespace Westeros.Recipes.Web.Controllers
                 return View();
             }
         }
+
+    
+        public ActionResult Delete(int id)
+        {
+            return View();
+        }
+
+   
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Delete(int id, Recipe recipe)
+        {
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    _context.Remove(recipe);
+                    _context.SaveChanges();
+                }
+                else return View(recipe);
+
+                return Redirect(nameof(Index));
+            }
+            catch
+            {
+                return View();
+            }
+        }
+
     }
 }

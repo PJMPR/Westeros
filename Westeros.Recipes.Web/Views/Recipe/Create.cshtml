@@ -1,4 +1,4 @@
-﻿@model Westeros.Recipes.Web.Models.RecipesModel
+﻿@model Westeros.Recipes.Data.Model.Recipe
 @using Microsoft.EntityFrameworkCore.Internal
 @using Westeros.Recipes.Data.Model
 @{
@@ -11,17 +11,17 @@
 <hr />
 <div class="row">
     <form asp-action="Create">
-    <div class="col-md-4">
+        <div class="col-md-4">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <label asp-for="Name" class="control-label"></label>
                 <input asp-for="Name" class="form-control" />
                 <span asp-validation-for="Name" class="text-danger"></span>
             </div>
-            
+
             <div class="form-group">
                 <label asp-for="Cuisine" class="control-label"></label>
-                <select asp-for="Cuisine" asp-items="Html.GetEnumSelectList<CuisineType>()"  class="form-control"></select>
+                <select asp-for="Cuisine" asp-items="Html.GetEnumSelectList<CuisineType>()" class="form-control"></select>
                 <span asp-validation-for="Cuisine" class="text-danger"></span>
             </div>
             <div class="form-group">
@@ -36,7 +36,7 @@
             </div>
             <div class="form-group">
                 <label asp-for="Difficulty" class="control-label"></label>
-                <input asp-for="Difficulty" class="form-control" />
+                <select asp-for="Difficulty" asp-items="Html.GetEnumSelectList<DifficultyType>()" class="form-control" > </select>
                 <span asp-validation-for="Difficulty" class="text-danger"></span>
             </div>
             <div class="form-group">
@@ -47,36 +47,35 @@
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-default" />
             </div>
-       
-    </div>
-    <div class="col-md-4">
-        <table class="table">
-            <thead>
-            <tr>
-                <th>
-                    @Html.DisplayNameFor(model => model.RecipeIngredients.First().Ingredient.Name)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.RecipeIngredients.First().IngredientQuantity)
-                </th>
-            </tr>
-            </thead>
-            <tbody>
+
+        </div>
+    </form>
+        @*
+        <div class="col-md-4">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>
+                            @Html.DisplayNameFor(model => model.RecipeIngredients.First().Ingredient.Name)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.RecipeIngredients.First().IngredientQuantity)
+                        </th>
+                    </tr>
+                </thead>
+               *<tbody>
             @for (int i =0; i < Model.RecipeIngredients.Count; i++)
             {
                 <tr>
                     <td>@Html.DisplayFor(ingModel => Model.RecipeIngredients[i].Ingredient.Name)</td>
-                 
 
-             
-                    <td>@Html.TextBox("recipe.RecipeIngredients[" + @i + "].IngredientQuantity", Model.RecipeIngredients[i].IngredientQuantity)</td>
+
+
+                    @*<td>@Html.TextBox("recipe.RecipeIngredients[" + @i + "].IngredientQuantity", Model.RecipeIngredients[i].IngredientQuantity)</td>
                 </tr>
             }
             </tbody>
-        </table>
-       
-    </div>
-    </form>
+        </table>*@
 </div>
 
 <div>

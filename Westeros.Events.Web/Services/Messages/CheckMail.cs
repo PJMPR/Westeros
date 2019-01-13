@@ -1,8 +1,8 @@
 ﻿
 using System;
-using System.Collections.Generic;
+
 using System.Linq;
-using System.Threading.Tasks;
+
 using Westeros.Events.Data.Model;
 using Westeros.Events.Data.Repositories;
 
@@ -14,13 +14,13 @@ namespace Westeros.Events.Web.Services.Messages
         private IGenericRepository<IMessage> _IMrepo;
         private IGenericRepository<LogRecord> _Lgrepo;
         private IGenericRepository<Profile> _Prepo;
-        AutoMapper.IMapper _mapper;
+        private IMyMapper _mapper;
 
         public CheckMail(IGenericRepository<MailServer> MSrepo,
             IGenericRepository<IMessage> IMrepo,
             IGenericRepository<LogRecord> Lgrepo,
              IGenericRepository<Profile> Prepo,
-             AutoMapper.IMapper mapper)
+             IMyMapper mapper)
         {
             _MSrepo = MSrepo;
             _IMrepo = IMrepo;
@@ -64,7 +64,7 @@ namespace Westeros.Events.Web.Services.Messages
            _IMrepo.Insert(message);
             _Lgrepo.Insert(new LogRecord
             {
-                Message = message,
+                Message = _mapper.MapMail(message),
                 Status = "Succeed"
             });
             _IMrepo.SaveChanges();
@@ -84,7 +84,7 @@ namespace Westeros.Events.Web.Services.Messages
             _IMrepo.Insert(message);      //FOR INBOX OUTBOX
             _Lgrepo.Insert(new LogRecord
             {
-                Message = message,
+                Message = _mapper.MapMail(message),
                 Status = "Failed"
             });
 

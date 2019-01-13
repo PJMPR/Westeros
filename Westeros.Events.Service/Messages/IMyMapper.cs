@@ -2,8 +2,8 @@
 
 namespace Westeros.Events.Web.Services.Messages
 {
-    public interface IMailSerwer
+    public interface IMyMapper
     {
-        void SendMessage(Message message);
+        MailServer MapMail(IMessage msg);
     }
 }

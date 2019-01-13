@@ -1,8 +1,5 @@
-﻿using AutoMapper;
+﻿
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Westeros.Events.Data.Model;
 using Westeros.Events.Data.Repositories;
 

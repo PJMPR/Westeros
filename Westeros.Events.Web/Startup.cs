@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿
 using ASPNETCoreScheduler.Scheduler;
 using AutoMapper;
 using Microsoft.AspNetCore.Builder;
@@ -9,12 +6,10 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.Extensions.Hosting;
 using Westeros.Events.Data.Registry;
 using Westeros.Events.Data.Repositories;
-using Westeros.Events.Web.Services.Events;
-using Westeros.Events.Web.Services.Messages;
+
 
 namespace Westeros.Events.Web
 {
@@ -35,12 +30,10 @@ namespace Westeros.Events.Web
             services.AddSingleton<IHostedService, EventsTask>();
             services.AddSingleton<IHostedService, MailServerTask>();
             services.AddAutoMapper();
-
             services.AddEventApiClient(Configuration);
             services.AddEventService(Configuration);
             services.AddRepositories();  
             services.AddMvc();
-            services.AddTransient<IEventSender, EventSender>();
 
             //services.AddContext(Configuration);
             var connection=Configuration.GetConnectionString("demo");

@@ -14,13 +14,13 @@ namespace Westeros.Events.Web.Controllers.Api
 {
     [Produces("application/json")]
     [Route("api/Messages")]
-    public class PeopleApiController : Controller
+    public class MessageApiController : Controller
     {
        private IGenericRepository<IMessage> _message;
        private IMapper _mapper;
        private IMessageSender _messageSender;
 
-        public PeopleApiController(IGenericRepository<IMessage> message, IMapper mapper,IMessageSender messageSender)
+        public MessageApiController(IGenericRepository<IMessage> message, IMapper mapper,IMessageSender messageSender)
         {
             _message = message;
             _mapper = mapper;
@@ -53,6 +53,10 @@ namespace Westeros.Events.Web.Controllers.Api
         [HttpDelete("{id}")]
         public ActionResult Delete(int id)
         {
+            IMessage message = _message.GetByID(id);
+            if (message == null)
+                return StatusCode(404);
+            
             _message.Delete(id);
             _message.SaveChanges();
             return StatusCode(200);

@@ -31,11 +31,11 @@ namespace Westeros.Events.Web.Controllers
      
 
         // GET: Message/Details/5
-        public ActionResult Details(int id, [FromRoute] int? messageId)
+        public ActionResult Details(int? id)
         {
-            if (messageId != null)
-                id = messageId.Value;
-            
+            if (id == null)
+                return NotFound();
+
             var message = _ctx.MailDB.FirstOrDefault(x => x.Id == id);
             if (message.ReadFlag != true)
             {
@@ -86,39 +86,37 @@ namespace Westeros.Events.Web.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit(int id, IFormCollection collection)
         {
-            try
-            {
-                // TODO: Add update logic here
-
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
-        }
-
-        // GET: Message/Delete/5
-        public ActionResult Delete(int id)
-        {
             return View();
         }
 
-        // POST: Message/Delete/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
+        // GET: Message/Delete/5
+        public ActionResult Delete(int? id)
         {
-            try
-            {
-                // TODO: Add delete logic here
+            if (id == null)
+                return NotFound();
 
-                return RedirectToAction(nameof(Index));
-            }
-            catch
+           
+            IMessage message = _ctx.MailDB.Find(id);
+            if (message == null)
             {
-                return View();
+               return NotFound();
             }
+            return View(message);
+        }
+
+        // POST: Message/Delete/5
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public ActionResult Delete(int id)
+        {
+
+            IMessage message = _ctx.MailDB.Find(id);
+            
+            _ctx.MailDB.Remove(message);
+            _ctx.SaveChanges(); 
+            
+            return RedirectToAction("Index");
+
         }
     }
 }

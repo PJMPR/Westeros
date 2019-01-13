@@ -12,7 +12,8 @@ namespace Microsoft.Extensions.DependencyInjection
         {
 
             return services.AddTransient<ILinkGenerator>(s => new LinkGenerator(config.GetSection("RecipeBaseAddress").Value))
-                .AddScoped<IMessageSender, MessageSender>(); 
+                .AddScoped<IMessageSender, MessageSender>()
+                .AddScoped<IMyMapper, MyMapper>();
                 
         }
 

@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using Westeros.Events.Data.Model;
 using Westeros.Events.Data.Repositories;
 using Westeros.Events.Web.Services.Events;
+using Westeros.Events.Web.Services.Messages;
 
 namespace ASPNETCoreScheduler.Scheduler
 {
@@ -24,7 +25,8 @@ namespace ASPNETCoreScheduler.Scheduler
                 serviceProvider.GetService<EventSender>(),
                 serviceProvider.GetService<IGenericRepository<IMessage>>(),
                 serviceProvider.GetService<IGenericRepository<LogRecord>>(),
-                serviceProvider.GetService<ILinkGenerator>()
+                serviceProvider.GetService<ILinkGenerator>(),
+                serviceProvider.GetService<IMyMapper>()
                 )
                 .CheckNew();
 

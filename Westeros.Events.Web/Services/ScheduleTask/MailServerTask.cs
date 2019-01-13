@@ -1,8 +1,6 @@
-﻿using ASPNETCoreScheduler.Scheduler;
+﻿
 using Microsoft.Extensions.DependencyInjection;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using Westeros.Events.Data.Model;
 using Westeros.Events.Data.Repositories;
@@ -23,7 +21,7 @@ namespace ASPNETCoreScheduler.Scheduler
                serviceProvider.GetService <IGenericRepository < IMessage >> (),
                serviceProvider.GetService<IGenericRepository<LogRecord>> (),
                serviceProvider.GetService <IGenericRepository < Profile >> (),
-               serviceProvider.GetService<AutoMapper.Mapper>()      
+               serviceProvider.GetService<IMyMapper>()      
                )
                .CheckNew();
             return Task.CompletedTask;

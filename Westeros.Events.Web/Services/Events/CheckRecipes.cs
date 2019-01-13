@@ -1,11 +1,10 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using Westeros.Events.Data;
 using Westeros.Events.Data.Model;
 using Westeros.Events.Data.Repositories;
+using Westeros.Events.Web.Services.Messages;
 
 namespace Westeros.Events.Web.Services.Events
 {
@@ -20,11 +19,12 @@ namespace Westeros.Events.Web.Services.Events
             IEventSender EventSender,
             IGenericRepository<IMessage> IMrepo,
             IGenericRepository<LogRecord> Lgrepo,
-            ILinkGenerator linkGenerator)
+            ILinkGenerator linkGenerator,
+            IMyMapper mapper)
         {
             _Rctx = Rrepo;
             _Pctx = Prepo;
-            _EventSender = new EventSender(IMrepo, Lgrepo, linkGenerator);
+            _EventSender = new EventSender(IMrepo, Lgrepo, linkGenerator,mapper);
             
         }
 
@@ -48,7 +48,6 @@ namespace Westeros.Events.Web.Services.Events
                     }
 
                 }
-            
 
         }
         private IEnumerable<Profile> GetTypedProfiles(String tag)
@@ -67,8 +66,6 @@ namespace Westeros.Events.Web.Services.Events
                 _EventSender.SendEventMessage(p, recipe);
 
             }
-
-            
         }
     }
 }

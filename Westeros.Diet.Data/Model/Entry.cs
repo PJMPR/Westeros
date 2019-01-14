@@ -19,8 +19,8 @@ namespace Westeros.Diet.Data.Model
         public double Fats => FatsCalc();
         public DateTime Date { get; set; }
         public double Weight { get; set; }
-        public ICollection<IngredientEntry> EntryIngredients { get; set; } = new List<IngredientEntry>();
-        public ICollection<RecipeEntry> EntryRecipes { get; set; } = new List<RecipeEntry>();
+        public ICollection<EntryIngredient> EntryIngredients { get; set; } = new List<EntryIngredient>();
+        public ICollection<EntryRecipe> EntryRecipes { get; set; } = new List<EntryRecipe>();
         public int UserProfileId { get; set; }
         public UserProfile UserProfile { get; set; }
 

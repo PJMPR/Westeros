@@ -9,6 +9,7 @@ using Microsoft.EntityFrameworkCore;
 using Westeros.Diet.Data.Model;
 using Westeros.Diet.Data.Repositories;
 using Westeros.Diet.Web.Models;
+using Westeros.Diet.Data;
 
 namespace Westeros.Diet.Web.Controllers
 {
@@ -31,7 +32,7 @@ namespace Westeros.Diet.Web.Controllers
             }
 
             int id = HttpContext.Session.GetInt32("Id").GetValueOrDefault();
-            var entry = _context.Entries.Where(x => x.UserProfileId == id)
+            var entry = _context.Entries.AsNoTracking().Where(x => x.UserProfileId == id)
                 .Include(i => i.EntryIngredients)
                 .ThenInclude(i => i.Ingredient)
                 .Include(r => r.EntryRecipes)
@@ -57,8 +58,8 @@ namespace Westeros.Diet.Web.Controllers
                 Weight = e.Weight,
                 UserProfileId = e.UserProfileId,
                 UserProfile = e.UserProfile,
-                EntryIngredients = e.EntryIngredients,
-                EntryRecipes = e.EntryRecipes
+                EntryIngredients = e.EntryIngredients.ToList(),
+                EntryRecipes = e.EntryRecipes.ToList()
             };
         }
 
@@ -70,7 +71,7 @@ namespace Westeros.Diet.Web.Controllers
                 return NotFound();
             }
 
-            var entry = await _context.Entries
+            var entry = await _context.Entries.AsNoTracking()
                 .Include(i => i.EntryIngredients)
                 .ThenInclude(i => i.Ingredient)
                 .Include(r => r.EntryRecipes)
@@ -89,9 +90,29 @@ namespace Westeros.Diet.Web.Controllers
         }
 
         // GET: Entries/Create
-        public IActionResult Create()
+        public async Task<IActionResult> Create()
         {
-            return View();
+            var ing = await _context.Ingredients.ToListAsync();
+            var rec = await _context.Recipes.Include(r => r.RecipeIngredients).ThenInclude(r => r.Ingredient).ToListAsync();
+            var model = new EntriesCreateModel
+            {
+                Ingredients = ing,
+                Recipes = rec,
+                UserProfileId = HttpContext.Session.GetInt32("Id").GetValueOrDefault()
+            };
+
+            foreach (var item in ing)
+            {
+                model.EntryIngredients.Add(new EntryIngredient { Ingredient = item, IngredientQuantity = 0 });
+            }
+
+            foreach (var item in rec)
+            {
+                item.IsNew = false;
+                model.EntryRecipes.Add(new EntryRecipe { Recipe = item });
+            }
+
+            return View(model);
         }
 
         // POST: Entries/Create
@@ -99,18 +120,59 @@ namespace Westeros.Diet.Web.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Date,Weight")] Entry entry)
+        public async Task<IActionResult> Create(EntriesCreateModel entry, int uid)
         {
             if (HttpContext.Session.GetInt32("Id") == null)
             {
                 return RedirectToAction(nameof(UserProfileController.SignIn));
             }
 
-            if (ModelState.IsValid)
+            if (true/*ModelState.IsValid*/)
             {
                 entry.UserProfileId = (int)HttpContext.Session.GetInt32("Id");
-                _context.Add(entry);
-                await _context.SaveChangesAsync();
+
+                ICollection<EntryIngredient> ing = new List<EntryIngredient>();
+                ICollection<EntryRecipe> rec = new List<EntryRecipe>();
+
+                var en = new Entry
+                {
+                    Date = entry.Date,
+                    UserProfileId = entry.UserProfileId,
+
+                };
+
+                _context.Add(en);
+                _context.SaveChanges();
+
+
+                foreach (var item in entry.EntryRecipes.Where(i => i.Recipe.IsNew == true))
+                {
+                    rec.Add(new EntryRecipe
+                    {
+                        RecipeId = item.Recipe.Id,
+                        Entry = en,
+                        EntryId = en.Id
+                    });
+                }
+
+                _context.EntryRecipes.AddRange(rec);
+                _context.SaveChanges();
+
+                foreach (var item in entry.EntryIngredients.Where(i=>i.IngredientQuantity > 0))
+                {
+                    ing.Add(new EntryIngredient
+                    {
+                        IngredientId = item.Ingredient.Id,
+                        IngredientQuantity = item.IngredientQuantity,
+                        Entry = en,
+                        EntryId = en.Id
+                    });
+                }
+
+                _context.EntryIngredients.AddRange(ing);
+                _context.SaveChanges();
+
+
                 return RedirectToAction(nameof(Index));
             }
 
@@ -176,7 +238,7 @@ namespace Westeros.Diet.Web.Controllers
                 return NotFound();
             }
 
-            var entry = await _context.Entries
+            var entry = await _context.Entries.AsNoTracking()
                 .Include(i => i.EntryIngredients)
                 .ThenInclude(i => i.Ingredient)
                 .Include(r => r.EntryRecipes)

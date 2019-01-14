@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
+using Westeros.Diet.Data;
 using Westeros.Diet.Data.Model;
 
 namespace Westeros.Diet.Web.Models
@@ -36,8 +37,13 @@ namespace Westeros.Diet.Web.Models
         [Range(0, int.MaxValue, ErrorMessage = "Please enter valid integer Number")]
         [RegularExpression("([0-9]+)")]
         public double Weight { get; set; }
-        public ICollection<IngredientEntry> EntryIngredients { get; set; } = new List<IngredientEntry>();
-        public ICollection<RecipeEntry> EntryRecipes { get; set; } = new List<RecipeEntry>();
+        public List<EntryIngredient> EntryIngredients { get; set; } = new List<EntryIngredient>();
+        public List<EntryRecipe> EntryRecipes { get; set; } = new List<EntryRecipe>();
+        public List<Ingredient> Ingredients { get; set; } = new List<Ingredient>();
+        public List<Recipe> Recipes { get; set; } = new List<Recipe>();
+
+
+
         public int UserProfileId { get; set; }
         public UserProfile UserProfile { get; set; }
 

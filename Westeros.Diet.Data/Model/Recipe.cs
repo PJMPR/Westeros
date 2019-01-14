@@ -55,8 +55,8 @@ namespace Westeros.Diet.Data
         public string PhotoPath { get; set; }
         [NotMapped]
         public List<string> Tag => GenerateTags();
-        public ICollection<RecipeDevice> RecipeDevices { get; set; } = new HashSet<RecipeDevice>();
-        public ICollection<RecipeIngredient> RecipeIngredients { get; set; } = new HashSet<RecipeIngredient>();
+        public ICollection<RecipeDevice> RecipeDevices { get; set; } = new List<RecipeDevice>();
+        public ICollection<RecipeIngredient> RecipeIngredients { get; set; } = new List<RecipeIngredient>();
 
 
         public Recipe NewInstance()

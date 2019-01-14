@@ -29,7 +29,7 @@ namespace Westeros.Diet.Data.Model
         public string Name { get; set; }
         public double AveragePrice { get; set; }
         public string PhotoPath { get; set; }
-        public ICollection<RecipeIngredient> RecipeIngredients { get; set; } = new HashSet<RecipeIngredient>();
-        public ICollection<IngredientEntry> IngredientEntries { get; set; } = new HashSet<IngredientEntry>();
+        public ICollection<RecipeIngredient> RecipeIngredients { get; set; } = new List<RecipeIngredient>();
+        public ICollection<EntryIngredient> EntryIngredients { get; set; } = new List<EntryIngredient>();
     }
 }

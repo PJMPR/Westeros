@@ -23,7 +23,7 @@ namespace Westeros.Diet.Web
         {
             services.AddRepositories();
             services.AddMvc();
-            services.AddSession(options => { options.IdleTimeout = TimeSpan.FromSeconds(10); });
+            services.AddSession(options => { options.IdleTimeout = TimeSpan.FromSeconds(20); });
             services.AddDistributedMemoryCache();
             var connection = Configuration.GetConnectionString("DietDB");
             services.AddDbContext<DietDbContext>(options => options.UseSqlServer(connection));

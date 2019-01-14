@@ -71,7 +71,15 @@ namespace Westeros.Diet.Web.Controllers
             }
 
             var entry = await _context.Entries
-                .SingleOrDefaultAsync(m => m.Id == id);
+                .Include(i => i.EntryIngredients)
+                .ThenInclude(i => i.Ingredient)
+                .Include(r => r.EntryRecipes)
+                .ThenInclude(r => r.Recipe)
+                .ThenInclude(r => r.RecipeIngredients)
+                .ThenInclude(r => r.Ingredient)
+                .SingleOrDefaultAsync(x => x.Id == id);
+
+
             if (entry == null)
             {
                 return NotFound();
@@ -169,13 +177,13 @@ namespace Westeros.Diet.Web.Controllers
             }
 
             var entry = await _context.Entries
-                    .Include(i => i.EntryIngredients)
-                    .ThenInclude(i => i.Ingredient)
-                    .Include(r => r.EntryRecipes)
-                    .ThenInclude(r => r.Recipe)
-                    .ThenInclude(r => r.RecipeIngredients)
-                    .ThenInclude(r => r.Ingredient)
-                    .SingleOrDefaultAsync(x => x.Id == id);
+                .Include(i => i.EntryIngredients)
+                .ThenInclude(i => i.Ingredient)
+                .Include(r => r.EntryRecipes)
+                .ThenInclude(r => r.Recipe)
+                .ThenInclude(r => r.RecipeIngredients)
+                .ThenInclude(r => r.Ingredient)
+                .SingleOrDefaultAsync(x => x.Id == id);
 
             if (entry == null)
             {

@@ -1,36 +1,125 @@
 ﻿@model Westeros.Diet.Data.Model.Entry
 
 @{
-    ViewData["Title"] = "Details";
+    ViewData["Title"] = "Entry details";
 }
 
-<h2>Details</h2>
+<h2>Entry details</h2>
 
 <div>
-    <h4>Entry</h4>
     <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Date)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Date)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Weight)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Weight)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.UserProfileId)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.UserProfileId)
-        </dd>
-    </dl>
+    <div class="row">
+        <div class="col-md-4">
+            <dl class="dl-horizontal">
+                <dt>
+                    @Html.DisplayNameFor(model => model.Calories)
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.Calories)
+                </dd>
+                <dt>
+                    @Html.DisplayNameFor(model => model.Proteins)
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.Proteins)
+                </dd>
+                <dt>
+                    @Html.DisplayNameFor(model => model.Carbohydrates)
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.Carbohydrates)
+                </dd>
+                <dt>
+                    @Html.DisplayNameFor(model => model.Fats)
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.Fats)
+                </dd>
+                <dt>
+                    @Html.DisplayNameFor(model => model.Date)
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.Date)
+                </dd>
+                <dt>
+                    @Html.DisplayNameFor(model => model.Weight)
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.Weight)
+                </dd>
+            </dl>
+        </div>
+        <div class="col-md-8">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>
+                            @Html.DisplayNameFor(model => model.EntryRecipes.First().Recipe.Name)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.EntryRecipes.First().Recipe.Proteins)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.EntryRecipes.First().Recipe.Carbohydrates)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.EntryRecipes.First().Recipe.Fats)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.EntryRecipes.First().Recipe.Cuisine)
+                        </th>
+                        <th>Quantity</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var recipe in Model.EntryRecipes)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(itemModel => recipe.Recipe.Name)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(itemModel => recipe.Recipe.Proteins)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(itemModel => recipe.Recipe.Carbohydrates)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(itemModel => recipe.Recipe.Fats)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(itemModel => recipe.Recipe.Cuisine)
+                            </td>
+                            <td>-</td>
+                        </tr>
+                    }
+                    @foreach (var ir in Model.EntryIngredients)
+                    {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(itemModel => ir.Ingredient.Name)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(itemModel => ir.Ingredient.Proteins)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(itemModel => ir.Ingredient.Carbohydrates)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(itemModel => ir.Ingredient.Fats)
+                        </td>
+                        <td>-</td>
+                        <td>
+                            @Html.DisplayFor(itemModel => ir.IngredientQuantity)
+                        </td>
+                    </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
 </div>
 <div>
-    <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
-    <a asp-action="Index">Back to List</a>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    <a asp-action="Index">Back to Diary</a>
 </div>

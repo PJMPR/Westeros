@@ -23,7 +23,7 @@ namespace Westeros.Diet.Web
         {
             services.AddRepositories();
             services.AddMvc();
-            services.AddSession(options => { options.IdleTimeout = TimeSpan.FromSeconds(10); });
+            services.AddSession(options => { options.IdleTimeout = TimeSpan.FromSeconds(20); });
             services.AddDistributedMemoryCache();
             var connection = Configuration.GetConnectionString("DietDB");
             services.AddDbContext<DietDbContext>(options => options.UseSqlServer(connection));
@@ -50,7 +50,7 @@ namespace Westeros.Diet.Web
             {
                 routes.MapRoute(
                     name: "default",
-                    template: "{controller=Home}/{action=Index}/{id?}");
+                    template: "{controller=UserProfile}/{action=Index}/{id?}");
             });
         }
     }

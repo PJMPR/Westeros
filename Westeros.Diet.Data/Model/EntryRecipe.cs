@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Westeros.Diet.Data.Model
 {
-    public class RecipeEntry
+    public class EntryRecipe
     {
         public int Id { get; set; }
         public int EntryId { get; set; }

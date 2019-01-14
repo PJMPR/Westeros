@@ -1,38 +1,164 @@
-﻿@model Westeros.Diet.Data.Model.Entry
+﻿@model Westeros.Diet.Web.Models.EntriesCreateModel
 
 @{
     ViewData["Title"] = "Create";
 }
 
-<h2>Create</h2>
+<h2>Add new entry</h2>
 
-<h4>Entry</h4>
 <hr />
 <div class="row">
-    <div class="col-md-4">
-        <form asp-action="Create">
+    <form asp-action="Create">
+        <div class="col-md-4">
+            <h4>Properties</h4>
+
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group hidden">
+                <label asp-for="Id" class="control-label"></label>
+                <input asp-for="Id" class="form-control" />
+                <span asp-validation-for="Id" class="text-danger"></span>
+            </div>
             <div class="form-group">
                 <label asp-for="Date" class="control-label"></label>
-                <input asp-for="Date" class="form-control" />
+                <input asp-for="Date" type="date" asp-format="{0:yyyy-MM-dd-hh-mm-ss}" class="form-control" />
                 <span asp-validation-for="Date" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Weight" class="control-label"></label>
-                <input asp-for="Weight" class="form-control" />
+                <input asp-for="Weight" type="number" class="form-control" />
                 <span asp-validation-for="Weight" class="text-danger"></span>
+            </div>
+            <div class="form-group hidden">
+                <label asp-for="UserProfileId" class="control-label"></label>
+                <input asp-for="UserProfileId" class="form-control" />
+                <span asp-validation-for="UserProfileId" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-default" />
             </div>
-        </form>
-    </div>
-</div>
+        </div>
+        <div class="col-md-8">
+            <h4>Ingredients</h4>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Recipes.First().Name)
+                        </th>
+                        <th class="text-center">
+                            @Html.DisplayNameFor(model => model.Recipes.First().Proteins)
+                        </th>
+                        <th class="text-center">
+                            @Html.DisplayNameFor(model => model.Recipes.First().Carbohydrates)
+                        </th>
+                        <th class="text-center">
+                            @Html.DisplayNameFor(model => model.Recipes.First().Fats)
+                        </th>
+                        <th class="text-center">
+                            @Html.DisplayNameFor(model => model.Recipes.First().Calories)
+                        </th>
+                        <th class="col-xs-1">Quantity</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @for(int i=0; i < Model.EntryIngredients.Count; i++) {
+                    <tr>
+                        <td>
+                            @Model.EntryIngredients[i].Ingredient.Name
 
+                            <div class="form-group">
+                                <input asp-for="EntryIngredients[i].Ingredient.Id" class="form-control hidden" />
+                                <input asp-for="UserProfileId" class="form-control hidden" />
+                            </div>
+                        </td>
+                        <td class="text-center">
+                            @Html.DisplayFor(model => model.EntryIngredients[i].Ingredient.Proteins)
+                        </td>
+                        <td class="text-center">
+                            @Html.DisplayFor(model => model.EntryIngredients[i].Ingredient.Carbohydrates)
+                        </td>
+                        <td class="text-center">
+                            @Html.DisplayFor(model => model.EntryIngredients[i].Ingredient.Fats)
+                        </td>
+                        <td class="text-center">
+                            @Html.DisplayFor(model => model.EntryIngredients[i].Ingredient.Calories)
+                        </td>
+                        <td>
+                            <input asp-for="EntryIngredients[i].IngredientQuantity" class="form-control" />
+                            <span asp-validation-for="EntryIngredients[i].IngredientQuantity" class="text-danger"></span>
+                        </td>
+
+                    </tr>
+                    }
+                </tbody>
+            </table>
+
+            <h4>Recipes</h4>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Recipes.First().Name)
+                        </th>
+                        <th class="text-center">
+                            @Html.DisplayNameFor(model => model.Recipes.First().Proteins)
+                        </th>
+                        <th class="text-center">
+                            @Html.DisplayNameFor(model => model.Recipes.First().Carbohydrates)
+                        </th>
+                        <th class="text-center">
+                            @Html.DisplayNameFor(model => model.Recipes.First().Fats)
+                        </th>
+                        <th class="text-center">
+                            @Html.DisplayNameFor(model => model.Recipes.First().Calories)
+                        </th>
+                        <th class="text-center">
+                            @Html.DisplayNameFor(model => model.Recipes.First().Cuisine)
+                        </th>
+                        <th class="col-xs-1">Add</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @for(int i=0; i < Model.EntryRecipes.Count; i++) {
+                    <tr>
+                        <td>
+                            @Model.EntryRecipes[i].Recipe.Name
+
+                            <div class="form-group">
+                                <input asp-for="EntryRecipes[i].Recipe.Id" class="form-control hidden" />
+                                <input asp-for="UserProfileId" class="form-control hidden" />
+                            </div>
+                        </td>
+                        <td class="text-center">
+                            @Html.DisplayFor(model => model.EntryRecipes[i].Recipe.Proteins)
+                        </td>
+                        <td class="text-center">
+                            @Html.DisplayFor(model => model.EntryRecipes[i].Recipe.Carbohydrates)
+                        </td>
+                        <td class="text-center">
+                            @Html.DisplayFor(model => model.EntryRecipes[i].Recipe.Fats)
+                        </td>
+                        <td class="text-center">
+                            @Html.DisplayFor(model => model.EntryRecipes[i].Recipe.Calories)
+                        </td>
+                        <td class="text-center">
+                            @Html.DisplayFor(model => model.EntryRecipes[i].Recipe.Cuisine)
+                        </td>
+                        <td>
+                            <input asp-for="EntryRecipes[i].Recipe.IsNew" type="checkbox" class="form-control" />
+                        </td>
+
+                    </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </form>
+</div>
+@*section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}*@
 <div>
     <a asp-action="Index">Back to List</a>
 </div>
 
-@section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-}

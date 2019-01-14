@@ -31,13 +31,13 @@ namespace Westeros.Diet.Data.Repositories
         public DbSet<Recipe> Recipes { get; set; }
         public DbSet<Entry> Entries { get; set; }
         public DbSet<RecipeIngredient> RecipeIngredients { get; set; }
-        public DbSet<IngredientEntry> EntryIngredients { get; set; }
-        public DbSet<RecipeEntry> EntryRecipes { get; set; }
+        public DbSet<EntryIngredient> EntryIngredients { get; set; }
+        public DbSet<EntryRecipe> EntryRecipes { get; set; }
         public DbSet<UserProfile> UserProfiles { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<IngredientEntry>().HasKey(p => new { p.IngredientId, p.EntryId });
+            modelBuilder.Entity<EntryIngredient>().HasKey(p => new { p.IngredientId, p.EntryId });
             modelBuilder.Entity<RecipeIngredient>().HasKey(p => new { p.IngredientId, p.RecipeId });
 
             #region Device
@@ -122,29 +122,29 @@ namespace Westeros.Diet.Data.Repositories
             #endregion
 
             #region IngredientEntry
-            var ie1 = new IngredientEntry { EntryId = 1, IngredientId = 1, IngredientQuantity = 5 };
-            var ie2 = new IngredientEntry { EntryId = 2, IngredientId = 5, IngredientQuantity = 0.5 };
+            var ie1 = new EntryIngredient { EntryId = 1, IngredientId = 1, IngredientQuantity = 5 };
+            var ie2 = new EntryIngredient { EntryId = 2, IngredientId = 5, IngredientQuantity = 0.5 };
 
-            var ie3 = new IngredientEntry { EntryId = 4, IngredientId = 5, IngredientQuantity = 0.15 };
-            var ie4 = new IngredientEntry { EntryId = 4, IngredientId = 2, IngredientQuantity = 1.5 };
-            var ie5 = new IngredientEntry { EntryId = 6, IngredientId = 4, IngredientQuantity = 8.5 };
+            var ie3 = new EntryIngredient { EntryId = 4, IngredientId = 5, IngredientQuantity = 0.15 };
+            var ie4 = new EntryIngredient { EntryId = 4, IngredientId = 2, IngredientQuantity = 1.5 };
+            var ie5 = new EntryIngredient { EntryId = 6, IngredientId = 4, IngredientQuantity = 8.5 };
 
-            modelBuilder.Entity<IngredientEntry>().HasData(ie1, ie2, ie3, ie4, ie5);
+            modelBuilder.Entity<EntryIngredient>().HasData(ie1, ie2, ie3, ie4, ie5);
             #endregion
 
             #region RecipeEntry
-            var re1 = new RecipeEntry { Id = 1, EntryId = 1, RecipeId = 2 };
-            var re2 = new RecipeEntry { Id = 2, EntryId = 1, RecipeId = 2 };
-            var re3 = new RecipeEntry { Id = 3, EntryId = 2, RecipeId = 2 };
-            var re4 = new RecipeEntry { Id = 4, EntryId = 2, RecipeId = 3 };
-            var re5 = new RecipeEntry { Id = 5, EntryId = 3, RecipeId = 3 };
+            var re1 = new EntryRecipe { Id = 1, EntryId = 1, RecipeId = 2 };
+            var re2 = new EntryRecipe { Id = 2, EntryId = 1, RecipeId = 2 };
+            var re3 = new EntryRecipe { Id = 3, EntryId = 2, RecipeId = 2 };
+            var re4 = new EntryRecipe { Id = 4, EntryId = 2, RecipeId = 3 };
+            var re5 = new EntryRecipe { Id = 5, EntryId = 3, RecipeId = 3 };
 
-            var re6 = new RecipeEntry { Id = 6, EntryId = 4, RecipeId = 1 };
-            var re7 = new RecipeEntry { Id = 7, EntryId = 4, RecipeId = 1 };
-            var re8 = new RecipeEntry { Id = 8, EntryId = 5, RecipeId = 2 };
-            var re9 = new RecipeEntry { Id = 9, EntryId = 6, RecipeId = 2 };
+            var re6 = new EntryRecipe { Id = 6, EntryId = 4, RecipeId = 1 };
+            var re7 = new EntryRecipe { Id = 7, EntryId = 4, RecipeId = 1 };
+            var re8 = new EntryRecipe { Id = 8, EntryId = 5, RecipeId = 2 };
+            var re9 = new EntryRecipe { Id = 9, EntryId = 6, RecipeId = 2 };
 
-            modelBuilder.Entity<RecipeEntry>().HasData(re1, re2, re3, re4, re5, re6, re7, re8, re9);
+            modelBuilder.Entity<EntryRecipe>().HasData(re1, re2, re3, re4, re5, re6, re7, re8, re9);
             #endregion
 
             #region DietPlan

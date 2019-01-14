@@ -337,7 +337,7 @@ namespace Westeros.Diet.Data.Migrations
                         .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("Westeros.Diet.Data.Model.Ingredient", "Ingredient")
-                        .WithMany("IngredientEntries")
+                        .WithMany("EntryIngredients")
                         .HasForeignKey("IngredientId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });

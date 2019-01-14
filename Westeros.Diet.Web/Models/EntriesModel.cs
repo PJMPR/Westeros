@@ -1,26 +1,49 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
+using System.Linq;
+using System.Threading.Tasks;
+using Westeros.Diet.Data;
+using Westeros.Diet.Data.Model;
 
-namespace Westeros.Diet.Data.Model
+namespace Westeros.Diet.Web.Models
 {
-    public class Entry
+    public class EntriesModel
     {
-        [Key]
         public int Id { get; set; }
-        [NotMapped]
+
+        [DataType(DataType.DateTime)]
+        [Required(ErrorMessage = "Date is required.")]
+        public DateTime Date
+        {
+            get
+            {
+                return this.dateCreated.HasValue
+                   ? this.dateCreated.Value
+                   : DateTime.Now;
+            }
+
+            set { this.dateCreated = value; }
+        }
+
+        private DateTime? dateCreated = null;
+
         public double Calories => CaloriesCalc();
-        [NotMapped]
         public double Proteins => ProteinsCalc();
-        [NotMapped]
         public double Carbohydrates => CarbsCalc();
-        [NotMapped]
         public double Fats => FatsCalc();
-        public DateTime Date { get; set; }
+
+
+        [Range(0, int.MaxValue, ErrorMessage = "Please enter valid integer Number")]
+        [RegularExpression("([0-9]+)")]
         public double Weight { get; set; }
-        public ICollection<EntryIngredient> EntryIngredients { get; set; } = new List<EntryIngredient>();
-        public ICollection<EntryRecipe> EntryRecipes { get; set; } = new List<EntryRecipe>();
+        public List<EntryIngredient> EntryIngredients { get; set; } = new List<EntryIngredient>();
+        public List<EntryRecipe> EntryRecipes { get; set; } = new List<EntryRecipe>();
+        public List<Ingredient> Ingredients { get; set; } = new List<Ingredient>();
+        public List<Recipe> Recipes { get; set; } = new List<Recipe>();
+
+
+
         public int UserProfileId { get; set; }
         public UserProfile UserProfile { get; set; }
 
@@ -30,7 +53,7 @@ namespace Westeros.Diet.Data.Model
 
             foreach (var ing in EntryIngredients)
             {
-                sumCalories += ing.Ingredient.Calories;
+                sumCalories += ing.Ingredient.Calories * ing.IngredientQuantity;
             }
 
             foreach (var ing in EntryRecipes)
@@ -48,7 +71,7 @@ namespace Westeros.Diet.Data.Model
 
             foreach (var ing in EntryIngredients)
             {
-                sumProteins += ing.Ingredient.Proteins;
+                sumProteins += ing.Ingredient.Proteins * ing.IngredientQuantity;
             }
 
             foreach (var ing in EntryRecipes)
@@ -65,7 +88,7 @@ namespace Westeros.Diet.Data.Model
 
             foreach (var ing in EntryIngredients)
             {
-                sumCarbs += ing.Ingredient.Carbohydrates;
+                sumCarbs += ing.Ingredient.Carbohydrates * ing.IngredientQuantity;
             }
 
             foreach (var ing in EntryRecipes)
@@ -82,7 +105,7 @@ namespace Westeros.Diet.Data.Model
 
             foreach (var ing in EntryIngredients)
             {
-                sumFats += ing.Ingredient.Fats;
+                sumFats += ing.Ingredient.Fats * ing.IngredientQuantity;
             }
 
             foreach (var ing in EntryRecipes)
@@ -92,5 +115,6 @@ namespace Westeros.Diet.Data.Model
 
             return sumFats;
         }
+
     }
 }

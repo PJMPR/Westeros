@@ -16,14 +16,16 @@ namespace Westeros.Diet.Web.Controllers
 {
     public class UserProfileController : Controller
     {
-        IGenericRepository<UserProfile> _repository;
 
-        public UserProfileController(IGenericRepository<UserProfile> ctx)
+        private readonly DietDbContext _context;
+
+        public UserProfileController(DietDbContext context)
         {
-            _repository = ctx;
+            _context = context;
         }
 
-        public ActionResult Index(string returnUrl = null)
+
+        public async Task<IActionResult> Index(string returnUrl = null)
         {
             if (HttpContext.Session.GetInt32("Id") == null)
             {
@@ -31,8 +33,36 @@ namespace Westeros.Diet.Web.Controllers
             }
             ViewBag.Name = HttpContext.Session.GetString("Name");
 
+            int t = HttpContext.Session.GetInt32("Id").GetValueOrDefault();
 
-            return View();
+            var entry = await _context.UserProfiles.SingleOrDefaultAsync(u => u.Id == t);
+            if (entry == null)
+            {
+                return NotFound();
+            }
+            return View(contextToModel(entry));
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Index(int id, [Bind("Id, Name, LastName, Login, Email, ConfirmEmail, Sex, Age, Weight, Height")] UserProfileModel userProfile)
+        {
+            if (id != userProfile.Id)
+            {
+                return NotFound();
+            }
+
+            if (ModelState.IsValid)
+            {
+                var up = modelToContext(userProfile);
+
+                _context.Update(up);
+                await _context.SaveChangesAsync();
+
+
+                return RedirectToAction("Index");
+            }
+            return View(userProfile);
         }
 
         // GET: UserProfiles
@@ -43,60 +73,64 @@ namespace Westeros.Diet.Web.Controllers
             if (id != null)
             {
                 int t = id ?? default(int);
-                var name = _repository.GetByID(t).Name;
+                var name = _context.UserProfiles.Single(u => u.Id == t).Name;
                 HttpContext.Session.SetInt32("Id", t);
                 HttpContext.Session.SetString("Name", name);
 
                 return RedirectToAction(nameof(Index));
             }
 
-            var data = _repository.Get();
+            var data = _context.UserProfiles.ToList();
             List<UserProfileModel> userProfiles = new List<UserProfileModel>();
 
             foreach (var row in data)
             {
-                userProfiles.Add(new UserProfileModel
-                {
-                    Id = row.Id,
-                    Name = row.Name,
-                    LastName = row.Surname,
-                    Login = row.Login,
-                    Email = row.Email,
-                    Sex = row.Sex,
-                    Age = row.Age,
-                    Weight = row.Age,
-                    Height = row.Height
-                });
+                userProfiles.Add(contextToModel(row));
             }
 
             return View(userProfiles);
         }
 
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public ActionResult SingIn([Bind("Id")] UserProfileModel profileModel)
-        //{
-        //    if (_repository.GetByID(profileModel.Id) == null)
-        //    {
-        //        //return View();
-        //        return RedirectToAction(nameof(Index), controllerName: "Home");
+        private static UserProfileModel contextToModel(UserProfile row)
+        {
+            return new UserProfileModel
+            {
+                Id = row.Id,
+                Name = row.Name,
+                LastName = row.Surname,
+                Login = row.Login,
+                Email = row.Email,
+                ConfirmEmail = row.Email,
+                Sex = row.Sex,
+                Age = row.Age,
+                Weight = row.Age,
+                Height = row.Height
+            };
+        }
 
-        //    }
 
-        //    HttpContext.Session.SetInt32("Id", profileModel.Id);
-        //    HttpContext.Session.SetString("Name", profileModel.Name);
-
-        //    return RedirectToAction(nameof(Index), controllerName: "Home");
-
-        //}
+        private static UserProfile modelToContext(UserProfileModel row)
+        {
+            return new UserProfile
+            {
+                Id = row.Id,
+                Name = row.Name,
+                Surname = row.LastName,
+                Login = row.Login,
+                Email = row.Email,
+                Sex = row.Sex,
+                Age = row.Age,
+                Weight = row.Age,
+                Height = row.Height
+            };
+        }
 
         public ActionResult SingOut()
         {
-
             HttpContext.Session.Clear();
             //HttpContext.Session.SetString("Name", profileModel.Name);
 
-            return RedirectToAction(nameof(Index));
+            return RedirectToAction(nameof(UserProfileController.Index), "UserProfile");
 
         }
     }

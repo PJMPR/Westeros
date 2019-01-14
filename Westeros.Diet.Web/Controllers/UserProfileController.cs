@@ -41,7 +41,6 @@ namespace Westeros.Diet.Web.Controllers
                 return NotFound();
             }
             return View(contextToModel(entry));
-
         }
 
         [HttpPost]
@@ -128,11 +127,10 @@ namespace Westeros.Diet.Web.Controllers
 
         public ActionResult SingOut()
         {
-
             HttpContext.Session.Clear();
             //HttpContext.Session.SetString("Name", profileModel.Name);
 
-            return RedirectToAction(nameof(Index));
+            return RedirectToAction(nameof(UserProfileController.Index), "UserProfile");
 
         }
     }

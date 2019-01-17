@@ -1,4 +1,4 @@
-INSERT INTO dbo.Komentarz
+/*INSERT INTO dbo.Komentarz
 (
     Data,
     Tekst,
@@ -61,12 +61,12 @@ VALUES
 INSERT INTO dbo.Komentarz
 (Data, Tekst, Nick, resourceId, resourceName)
 VALUES
-('2018-11-21 22:11:20','<scripts>alert("script")<scripts>', 'Hacker', 8, 'przepis')
+('2018-11-21 22:11:20','<script>alert("script")<script>', 'Hacker', 8, 'przepis')
 INSERT INTO dbo.Komentarz
 (Data, Tekst, Nick, resourceId, resourceName)
 VALUES
 ('2018-11-11 22:11:20','super dieta schudlem juz 3 kilogramy', 'AwesomeUser', 1, 'dieta')
+*/
 
-
-SELECT * from Komentarz;
+SELECT * from PrzepisyOdwiedziny;
 

@@ -121,13 +121,11 @@ namespace Westeros.UserProfile.Web
 
                 ModelState.Clear();
 
-                U = null;
-
                 ViewData["Message"] = "Successfull Registration";
 
             }
 
-            return View(U);
+            return RedirectToAction("Details", U);
 
         }
         public async Task<IActionResult> Edit(int id, [Bind("id")] User user)

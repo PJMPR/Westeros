@@ -12,9 +12,10 @@ using Westeros.UserProfile.Data.Repositories;
 namespace Westeros.UserProfile.Data.Migrations
 {
     [DbContext(typeof(UserDbContext))]
-    partial class UserDbContextModelSnapshot : ModelSnapshot
+    [Migration("20190119194708_CreateUserDB8")]
+    partial class CreateUserDB8
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

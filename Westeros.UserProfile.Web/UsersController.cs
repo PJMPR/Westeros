@@ -58,7 +58,7 @@ namespace Westeros.UserProfile.Web
         // POST: Users/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost, ActionName("Edit")]
+        [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("id")] User user)
         {
@@ -73,19 +73,33 @@ namespace Westeros.UserProfile.Web
 
         // GET: Users/Edit/5
         [HttpGet("Users/Edit/5")]
-        public async Task<IActionResult> Edit(int? id)
+        public IActionResult Edit(User U)
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
+            User user = _context.User.Find(U.id);
+            U.login = user.login;
+            U.email = user.email;
+            if (ModelState.IsValid)
+                using (UserDbContext dc = new UserDbContext())
+                {
 
-            var user = await _context.User.SingleOrDefaultAsync(m => m.id == id);
-            if (user == null)
-            {
-                return NotFound();
-            }
-            return View(user);
+                    dc.User.Update(U);
+
+                    dc.SaveChanges();
+
+                    ModelState.Clear();
+
+                    U = null;
+
+                }
+
+            return View(U);
+        }
+
+        [HttpPost("Users/Edit/5")]
+        public IActionResult Edit()
+        {
+            ViewData["Message"] = "Successful edit!";
+            return View();
         }
 
         // POST: Users/Edit/5

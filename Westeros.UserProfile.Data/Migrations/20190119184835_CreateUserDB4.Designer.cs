@@ -12,26 +12,15 @@ using Westeros.UserProfile.Data.Repositories;
 namespace Westeros.UserProfile.Data.Migrations
 {
     [DbContext(typeof(UserDbContext))]
-    partial class UserDbContextModelSnapshot : ModelSnapshot
+    [Migration("20190119184835_CreateUserDB4")]
+    partial class CreateUserDB4
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("ProductVersion", "2.0.3-rtm-10026")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-            modelBuilder.Entity("Westeros.UserProfile.Data.Recipe", b =>
-                {
-                    b.Property<int>("id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<string>("name");
-
-                    b.HasKey("id");
-
-                    b.ToTable("Recipe");
-                });
 
             modelBuilder.Entity("Westeros.UserProfile.Data.User", b =>
                 {
@@ -68,8 +57,6 @@ namespace Westeros.UserProfile.Data.Migrations
 
                     b.HasKey("id");
 
-                    b.HasIndex("RecipeID");
-
                     b.HasIndex("UserID");
 
                     b.ToTable("UserRecipe");
@@ -77,11 +64,6 @@ namespace Westeros.UserProfile.Data.Migrations
 
             modelBuilder.Entity("Westeros.UserProfile.Data.UserRecipe", b =>
                 {
-                    b.HasOne("Westeros.UserProfile.Data.Recipe")
-                        .WithMany("favouriteRecipes")
-                        .HasForeignKey("RecipeID")
-                        .OnDelete(DeleteBehavior.Cascade);
-
                     b.HasOne("Westeros.UserProfile.Data.User")
                         .WithMany("favouriteRecipes")
                         .HasForeignKey("UserID")

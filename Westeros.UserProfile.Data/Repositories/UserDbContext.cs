@@ -1,9 +1,11 @@
 ﻿using Microsoft.EntityFrameworkCore;
-
 namespace Westeros.UserProfile.Data.Repositories
 {
     public class UserDbContext : DbContext
     {
+        public DbSet<User> User { get; set; }
+        public DbSet<Recipe> Recipe { get; set; }
+        public DbSet<UserRecipe> UserRecipe { get; set; }
         public UserDbContext(DbContextOptions<UserDbContext> o) : base()
         {
 
@@ -18,7 +20,7 @@ namespace Westeros.UserProfile.Data.Repositories
         {
             optionsBuilder.UseSqlServer(@"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=TargeryanUser;Integrated Security=False;");
         }
-        public DbSet<User> User { get; set; }
+
         
     }
 }

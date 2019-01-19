@@ -1,0 +1,552 @@
+{
+	"info": {
+		"_postman_id": "178a58a4-cbd3-45cf-9c59-af5e5ba5a649",
+		"name": "MPR_Stark",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Przepisy",
+			"item": [
+				{
+					"name": "Iterate Przepis",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"id\": 1,\n    \"resourcename\": \"przepis\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:3142/api/PrzepisyApi",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3142",
+							"path": [
+								"api",
+								"PrzepisyApi"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get wszytkie przepisy",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://localhost:3142/api/PrzepisyApi",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3142",
+							"path": [
+								"api",
+								"PrzepisyApi"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Jeden Przepis",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://localhost:3142/api/PrzepisyApi",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3142",
+							"path": [
+								"api",
+								"PrzepisyApi"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Przpis",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"id\":3,\n\t\"przepisId\": 3,\n\t\"iloscOdwiedzin\":11\n}"
+						},
+						"url": {
+							"raw": "http://localhost:3142/api/PrzepisyApi/3",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3142",
+							"path": [
+								"api",
+								"PrzepisyApi",
+								"3"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add Przepis",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"przepisId\": 3,\n\t\"iloscOdwiedzin\":11\n}"
+						},
+						"url": {
+							"raw": "http://localhost:3142/api/PrzepisyApi",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3142",
+							"path": [
+								"api",
+								"PrzepisyApi"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Remove Przepis",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://localhost:3142/api/PrzepisyApi/1003",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3142",
+							"path": [
+								"api",
+								"PrzepisyApi",
+								"1003"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Dieta",
+			"item": [
+				{
+					"name": "Iterate Dieta",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"id\": 1,\n    \"resourcename\": \"dieta\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:3142/api/Iterator",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3142",
+							"path": [
+								"api",
+								"Iterator"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get wszystkie Diety",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://localhost:3142/api/DietaApi",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3142",
+							"path": [
+								"api",
+								"DietaApi"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Jedna Dieta",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://localhost:3142/api/DietaApi/2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3142",
+							"path": [
+								"api",
+								"DietaApi",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Dieta",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"id\":3,\n\t\"dietaId\": 3,\n\t\"iloscOdwiedzin\":11\n}"
+						},
+						"url": {
+							"raw": "http://localhost:3142/api/DietaApi/3",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3142",
+							"path": [
+								"api",
+								"DietaApi",
+								"3"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add Dieta",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"dietaId\": 3,\n\t\"iloscOdwiedzin\":11\n}"
+						},
+						"url": {
+							"raw": "http://localhost:3142/api/DietaApi",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3142",
+							"path": [
+								"api",
+								"DietaApi"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Remove Dieta",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://localhost:3142/api/DietaApi/99",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3142",
+							"path": [
+								"api",
+								"DietaApi",
+								"99"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Oceny",
+			"item": [
+				{
+					"name": "Get All Ocena",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://localhost:3142/api/OcenyApi",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3142",
+							"path": [
+								"api",
+								"OcenyApi"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get jedna Ocena",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://localhost:3142/api/OcenyApi/3004",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3142",
+							"path": [
+								"api",
+								"OcenyApi",
+								"3004"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Ocena",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"id\": 3004,\n    \"data\": \"2019-01-19T15:08:15.3369528\",\n    \"nick\": \"Konon\",\n    \"tekst\": \"Bardzo dobre, smaczne.\",\n    \"ocena\": 3,\n    \"resourceId\": 2,\n    \"resourceName\": \"dieta\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:3142/api/OcenyApi/3004",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3142",
+							"path": [
+								"api",
+								"OcenyApi",
+								"3004"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add Ocena",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"data\": \"2019-01-19T15:08:15.3369528\",\n    \"nick\": \"Konon\",\n    \"tekst\": \"Bardzo dobre, smaczne.\",\n    \"ocena\": 3,\n    \"resourceId\": 2,\n    \"resourceName\": \"dieta\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:3142/api/OcenyApi",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3142",
+							"path": [
+								"api",
+								"OcenyApi"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Remove Ocena",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://localhost:3142/api/OcenyApi/4004",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3142",
+							"path": [
+								"api",
+								"OcenyApi",
+								"4004"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

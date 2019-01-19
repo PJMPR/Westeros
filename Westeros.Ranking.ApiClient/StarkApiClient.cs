@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Net.Http;
 using Westeros.Ranking.ApiClient.Contracts;
+using Westeros.Ranking.Data.Model;
 
 namespace Westeros.Ranking.ApiClient
 {
@@ -77,13 +78,13 @@ namespace Westeros.Ranking.ApiClient
 
         public async void AddNewDieta(DietaDto Diety)
         {
-            await _httpClient.PostAsJsonAsync("api/DietyeApi", Diety);
+            await _httpClient.PostAsJsonAsync("api/DietyApi", Diety);
         }
 
         public IEnumerable<DietaDto> AllDiety()
         {
             return _httpClient
-                .GetAsync("api/DietyeApi")
+                .GetAsync("api/DietyApi")
                 .Result
                 .Content
                 .ReadAsAsync<IEnumerable<DietaDto>>()
@@ -92,17 +93,33 @@ namespace Westeros.Ranking.ApiClient
 
         public async void DeleteDieta(int id)
         {
-            await _httpClient.DeleteAsync($"api/DietyeApi/{id}");
+            await _httpClient.DeleteAsync($"api/DietyApi/{id}");
         }
 
         public DietaDto GetDieta(int id)
         {
-            return _httpClient.GetAsync($"api/DietyeApi/{id}").Result.Content.ReadAsAsync<DietaDto>().Result;
+            return _httpClient.GetAsync($"api/DietyApi/{id}").Result.Content.ReadAsAsync<DietaDto>().Result;
         }
 
         public async void UpdateDieta(DietaDto Diety)
         {
-            await _httpClient.PutAsJsonAsync("api/DietyeApi", Diety);
+            await _httpClient.PutAsJsonAsync("api/DietyApi", Diety);
+        }
+
+        public async void IterateDieta(int id)
+        {
+            Iterator i=new Iterator();
+            i.id = id;
+            i.resourcename = Iterator.DIETA_RESOURCE_NAME;
+            await _httpClient.PutAsJsonAsync("/api/Iterator", i);
+        }
+
+        public async void IteratePrzepis(int id)
+        {
+            Iterator i = new Iterator();
+            i.id = id;
+            i.resourcename = Iterator.PRZEPIS_RESOURCE_NAME;
+            await _httpClient.PutAsJsonAsync("/api/Iterator", i);
         }
     }
 }

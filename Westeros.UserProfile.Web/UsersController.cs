@@ -178,5 +178,29 @@ namespace Westeros.UserProfile.Web
         {
             return _context.User.Any(e => e.id == id);
         }
+
+        // GET: Users/Login/5
+        [HttpGet]
+        public IActionResult Login()
+        {
+            return View();
+        }
+
+        // POST: Users/Login/5
+        [HttpPost, ActionName("Login")]
+        [ValidateAntiForgeryToken]
+        public IActionResult Login(string login)
+        {
+            var users = _context.User.ToList();
+            foreach(var user in users)
+            {
+                if(user.login == login)
+                {
+                    return RedirectToAction(nameof(Details), user);
+                }
+            }
+            ViewData["Message"] = "Incorrect login";
+            return View();
+        }
     }
 }

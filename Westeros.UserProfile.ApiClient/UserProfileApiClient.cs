@@ -22,16 +22,16 @@ namespace Westeros.UserProfile.ApiClient
 
         public async void AddUser(UserDto userToAdd)
         {
-            await _httpClient.PostAsJsonAsync("api/Users", userToAdd);
+            await _httpClient.PostAsJsonAsync("api/UsersAPI", userToAdd);
         }
-        public async void UpdatePerson(UserDto userToUpdate)
+        public async void UpdateUser(UserDto userToUpdate)
         {
-            await _httpClient.PutAsJsonAsync("api/Users", userToUpdate);
+            await _httpClient.PutAsJsonAsync("api/UsersAPI", userToUpdate);
         }
         public IEnumerable<UserDto> All()
         {
             return _httpClient
-                .GetAsync("api/People")
+                .GetAsync("api/UsersAPI")
                 .Result
                 .Content
                 .ReadAsAsync<IEnumerable<UserDto>>()
@@ -40,7 +40,7 @@ namespace Westeros.UserProfile.ApiClient
         public UserDto GetById(int id)
         {
             return _httpClient
-                       .GetAsync($"api/People/{id}")
+                       .GetAsync($"api/UsersAPI/{id}")
                        .Result
                        .Content
                        .ReadAsAsync<UserDto>()
@@ -49,7 +49,7 @@ namespace Westeros.UserProfile.ApiClient
 
         public async void DeleteUser(int id)
         {
-            await _httpClient.DeleteAsync($"api/People/{id}");
+            await _httpClient.DeleteAsync($"api/UsersAPI/{id}");
         }
 
     }

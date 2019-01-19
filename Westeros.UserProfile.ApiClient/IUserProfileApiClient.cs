@@ -9,6 +9,6 @@ namespace Westeros.UserProfile.ApiClient
         IEnumerable<UserDto> All();
         void DeleteUser(int id);
         UserDto GetById(int id);
-        void UpdatePerson(UserDto userToUpdate);
+        void UpdateUser(UserDto userToUpdate);
     }
 }

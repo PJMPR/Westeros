@@ -58,7 +58,7 @@ namespace Westeros.UserProfile.Web
         // POST: Users/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
+        [HttpPost, ActionName("Edit")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("id")] User user)
         {
@@ -72,6 +72,7 @@ namespace Westeros.UserProfile.Web
         }
 
         // GET: Users/Edit/5
+        [HttpGet("Users/Edit/5")]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)

@@ -4,7 +4,13 @@ using System.Text;
 
 namespace Westeros.UserProfile.ApiClient.Contracts
 {
-    class UserRecipe
+    public class UserRecipeDto
     {
+        public int id { get; set; }
+        public int UserID { get; set; }
+        public UserDto user;
+
+        public int RecipeID { get; set; }
+        public RecipeDto recipe;
     }
 }

@@ -4,13 +4,26 @@ using System.Text;
 
 namespace Westeros.UserProfile.ApiClient.Contracts
 {
+    public enum Gender
+    {
+        Male,
+        Female,
+        Other
+    }
+
     public class UserDto
     {
-        public DateTime Data { get; set; }
-        public string Nick { get; set; }
-        public string Tekst { get; set; }
-        public int Ocena { get; set; }
-        public int resourceId { get; set; }
-        public string resourceName { get; set; }
+        public int id { get; set; }
+        public string name { get; set; }
+        public string surname { get; set; }
+        public string login { get; set; }
+        public string email { get; set; }
+        public Nullable<int> age { get; set; }
+        public Nullable<decimal> weight { get; set; }
+        public Nullable<decimal> height { get; set; }
+        public Nullable<Gender> gender { get; set; }
+
+        public ICollection<UserRecipeDto> favouriteRecipes { get; set; }
+
     }
 }

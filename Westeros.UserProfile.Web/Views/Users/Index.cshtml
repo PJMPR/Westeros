@@ -19,6 +19,33 @@
 @foreach (var item in Model) {
         <tr>
             <td>
+                @item.id
+            </td>
+            <td>
+                @item.login
+            </td>
+            <td>
+                @item.email
+            </td>
+            <td>
+                @item.name
+            </td>
+            <td>
+                @item.surname
+            </td>
+            <td>
+                @item.age
+            </td>
+            <td>
+                @item.height
+            </td>
+            <td>
+                @item.weight
+            </td>
+            <td>
+                @item.gender
+            </td>
+            <td>
                 <a asp-action="Edit" asp-route-id="@item.id">Edit</a> |
                 <a asp-action="Details" asp-route-id="@item.id">Details</a> |
                 <a asp-action="Delete" asp-route-id="@item.id">Delete</a>

@@ -23,5 +23,8 @@ namespace Westeros.Ranking.ApiClient
         void DeleteDieta(int id);
         DietaDto GetDieta(int id);
         void UpdateDieta(DietaDto dieta);
+
+        void IterateDieta(int id);
+        void IteratePrzepis(int id);
     }
 }

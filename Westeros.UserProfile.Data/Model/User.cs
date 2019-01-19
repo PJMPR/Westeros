@@ -26,6 +26,11 @@ namespace Westeros.UserProfile.Data
 
         public ICollection<UserRecipe> favouriteRecipes { get; set; }
 
+        public User()
+        {
+
+        }
+
         public User(string login, string email, string name = null, string surname = null, Nullable<int> age = null, Nullable<decimal> weight = null, Nullable<decimal> height = null, string gender = null)
         {
             this.login = login;

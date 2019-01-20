@@ -61,7 +61,7 @@ namespace Westeros.Ranking.Web.Calculator
             ret.Add(0);//5
             foreach (var oceny in o)
             {
-                ret[oceny.Ocena]++;
+                ret[oceny.Ocena-1]++;
             }
 
             return ret;

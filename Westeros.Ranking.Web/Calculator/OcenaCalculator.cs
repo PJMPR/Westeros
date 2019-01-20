@@ -9,7 +9,7 @@ namespace Westeros.Ranking.Web.Calculator
     public class OcenaCalculator
     {
 
-        public IList<Oceny> OcenyDoPrzepisu(Oceny[] o, int id)
+        public static IList<Oceny> OcenyDoPrzepisu(Oceny[] o, int id)
         {
             IList<Oceny> ret=new List<Oceny>();
             foreach (Oceny ocena in o)
@@ -23,21 +23,21 @@ namespace Westeros.Ranking.Web.Calculator
             return ret;
         }
 
-        public IList<Oceny> ocenyRosnaco(Oceny[] o)
+        public static IList<Oceny> ocenyRosnaco(Oceny[] o)
         {
             IList<Oceny>ret=new List<Oceny>(o);
-            ret.OrderBy(x => x.Ocena).ToList();
+            ret = ret.OrderBy(x => x.Ocena).ToList();
             return ret;
         }
 
-        public IList<Oceny> ocenymalejaco(Oceny[] o)
+        public static IList<Oceny> ocenyMalejaco(Oceny[] o)
         {
             IList<Oceny>ret=new List<Oceny>(o);
-            ret.OrderByDescending(x => x.Ocena);
+            ret = ret.OrderByDescending(x => x.Ocena).ToList();
             return ret;
         }
 
-        public IList<int> policzIloscOcen(Oceny[] o)
+        public static IList<int> policzIloscOcen(Oceny[] o)
         {
             IList<int>ret = new List<int>();
             ret.Add(0);//1

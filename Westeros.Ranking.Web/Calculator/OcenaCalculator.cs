@@ -14,7 +14,21 @@ namespace Westeros.Ranking.Web.Calculator
             IList<Oceny> ret=new List<Oceny>();
             foreach (Oceny ocena in o)
             {
-                if (ocena.id==id)
+                if (ocena.resourceId==id && ocena.resourceName=="przepis")
+                {
+                    ret.Add(ocena);
+                }
+            }
+
+            return ret;
+        }
+
+        public static IList<Oceny> OcenyDoDiety(Oceny[] o, int id)
+        {
+            IList<Oceny> ret = new List<Oceny>();
+            foreach (Oceny ocena in o)
+            {
+                if (ocena.resourceId == id && ocena.resourceName=="dieta")
                 {
                     ret.Add(ocena);
                 }

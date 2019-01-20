@@ -37,5 +37,21 @@ namespace Westeros.Ranking.Web.Calculator
             return ret;
         }
 
+        public IList<int> policzIloscOcen(Oceny[] o)
+        {
+            IList<int>ret = new List<int>();
+            ret.Add(0);//1
+            ret.Add(0);//2
+            ret.Add(0);//3
+            ret.Add(0);//4
+            ret.Add(0);//5
+            foreach (var oceny in o)
+            {
+                ret[oceny.Ocena]++;
+            }
+
+            return ret;
+        }
+
     }
 }

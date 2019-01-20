@@ -7,3 +7,4 @@ script:
   - dotnet restore
   - dotnet build
   - dotnet test Westeros.Demo.Tests
+  - dotnet test Westeros.Ranking.Tests

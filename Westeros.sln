@@ -28,6 +28,9 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Bolton", "Bolton", "{5113E526-FA97-4B59-963E-81D57ADF0BD8}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Westeros.Recipes.Tests", "Westeros.Recipes.Tests\Westeros.Recipes.Tests.csproj", "{3601FB4D-EBC5-43B2-B899-50DE964F1BE3}"
+	ProjectSection(ProjectDependencies) = postProject
+		{FFEE551E-AE30-45BC-BA9C-76FF4E26EA7A} = {FFEE551E-AE30-45BC-BA9C-76FF4E26EA7A}
+	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Westeros.Recipes.Data", "Westeros.Recipes.Data\Westeros.Recipes.Data.csproj", "{FFEE551E-AE30-45BC-BA9C-76FF4E26EA7A}"
 EndProject

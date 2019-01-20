@@ -1,4 +1,5 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Westeros.UserProfile.Data.Services;
 
 namespace Westeros.UserProfile.Tests
 {
@@ -8,6 +9,8 @@ namespace Westeros.UserProfile.Tests
         [TestMethod]
         public void TestMethod1()
         {
+            Calculator c = new Calculator();
+            Assert.AreEqual(4, c.execute(2));
         }
     }
 }

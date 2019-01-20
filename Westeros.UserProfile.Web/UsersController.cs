@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Westeros.UserProfile.Data;
 using Westeros.UserProfile.Data.Repositories;
+using Westeros.UserProfile.Data.Services;
 
 namespace Westeros.UserProfile.Web
 {
@@ -46,6 +47,13 @@ namespace Westeros.UserProfile.Web
                 return NotFound();
             }
 
+            if (user.height != null && user.weight != null)
+            {
+                Calculator c = new Calculator();
+                ViewBag.BMR_H = c.BMR_Harrisa_Benedicta(user);
+                ViewBag.BMR_M = c.BMR_Mifflin_StJeor(user);
+                ViewBag.BMI = c.BMI(user);
+            }
             return View(user);
         }
 

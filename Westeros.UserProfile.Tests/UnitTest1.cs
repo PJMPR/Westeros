@@ -42,7 +42,7 @@ namespace Westeros.UserProfile.Tests
             user.weight = 80;
             user.height = (decimal)1.58;
 
-            decimal expected = (decimal)1000.9;
+            decimal expected = (decimal)967.1;
 
             Assert.AreEqual(expected, bmr.BMR_Harrisa_Benedicta(user));
         }
@@ -92,7 +92,7 @@ namespace Westeros.UserProfile.Tests
             int d = 1;
             int bd = 1;
 
-            decimal expected = (decimal)(1000.9 + 28.3);
+            decimal expected = (decimal)(967.1 + 28.3);
 
             Assert.AreEqual(expected, t.TER(user, bm, m, u, d, bd));
         }

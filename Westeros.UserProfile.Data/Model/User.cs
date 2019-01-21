@@ -31,7 +31,7 @@ namespace Westeros.UserProfile.Data
 
         }
 
-        public User(string login, string email, string name = null, string surname = null, Nullable<int> age = null, Nullable<decimal> weight = null, Nullable<decimal> height = null, string gender = null)
+        public User(string login, string email, string name = "Nie podano", string surname = "Nie podano", Nullable<int> age = null, Nullable<decimal> weight = null, Nullable<decimal> height = null, string gender = null)
         {
             this.login = login;
             this.email = email;

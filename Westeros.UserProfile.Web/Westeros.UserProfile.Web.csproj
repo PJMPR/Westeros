@@ -17,4 +17,8 @@
     <ProjectReference Include="..\Westeros.UserProfile.Data\Westeros.UserProfile.Data.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Views\Calculators\" />
+  </ItemGroup>
+
 </Project>

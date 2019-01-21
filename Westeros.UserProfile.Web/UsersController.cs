@@ -93,7 +93,7 @@ namespace Westeros.UserProfile.Web
         }
 
         // GET: Users/Temporary/5
-        [HttpGet("Users/Edit/5")]
+        [HttpGet("Users/Temporary/5")]
         public IActionResult Temporary()
         {
             return View();
@@ -157,7 +157,7 @@ namespace Westeros.UserProfile.Web
 
             }
 
-            return RedirectToAction("Details", U);
+            return View();
 
         }
         public async Task<IActionResult> Edit(int id, [Bind("id")] User user)
@@ -247,6 +247,43 @@ namespace Westeros.UserProfile.Web
             }
             ViewData["Message"] = "Incorrect login";
             return View();
+        }
+
+        // GET: Calculators/WHR/5
+        [HttpGet("Users/WHR/5")]
+        public IActionResult WHR(int? id)
+        {
+            if(_session.GetString("login") == _context.User.Find(id).login)
+            {
+                return View();
+            }
+            else
+            {
+                return RedirectToAction(nameof(Temporary));
+            }
+        }
+
+        // POST: Calculators/WHR/5
+        [HttpPost, ActionName("WHR")]
+        [ValidateAntiForgeryToken]
+        public IActionResult WHR(int? id, decimal waist, decimal hip)
+        {
+            if(_session.GetString("login") == _context.User.Find(id).login)
+            {
+                ViewBag.waist = 0;
+                ViewBag.hip = 0;
+
+                Calculator c = new Calculator();
+                decimal x = Convert.ToDecimal(TempData["waist"]);
+                decimal y = Convert.ToDecimal(TempData["hip"]);
+                decimal result = c.WHR(hip, waist);
+                ViewData["Result"] = "Your result is: " + result + ".";
+                return View();
+            }
+            else
+            {
+                return RedirectToAction(nameof(Temporary));
+            }
         }
     }
 }

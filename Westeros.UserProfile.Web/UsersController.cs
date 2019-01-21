@@ -8,17 +8,23 @@ using Microsoft.EntityFrameworkCore;
 using Westeros.UserProfile.Data;
 using Westeros.UserProfile.Data.Repositories;
 using Westeros.UserProfile.Data.Services;
+using Microsoft.AspNetCore.Http;
 
 namespace Westeros.UserProfile.Web
 {
     public class UsersController : Controller
     {
         private readonly UserDbContext _context;
+        private readonly IHttpContextAccessor _httpContextAccessor;
+        
 
-        public UsersController(UserDbContext context)
+        public UsersController(UserDbContext context, IHttpContextAccessor httpContextAccessor)
         {
             _context = context;
+            _httpContextAccessor = httpContextAccessor;
         }
+
+        private ISession _session => _httpContextAccessor.HttpContext.Session;
 
         // GET: Users
         public async Task<IActionResult> Index()
@@ -35,26 +41,33 @@ namespace Westeros.UserProfile.Web
         // GET: Users/Details/5
         public async Task<IActionResult> Details(int? id)
         {
-            if (id == null)
+            if (_context.User.Find(id).login == _session.GetString("login"))
             {
-                return NotFound();
-            }
+                if (id == null)
+                {
+                    return NotFound();
+                }
 
-            var user = await _context.User
-                .SingleOrDefaultAsync(m => m.id == id);
-            if (user == null)
-            {
-                return NotFound();
-            }
+                var user = await _context.User
+                    .SingleOrDefaultAsync(m => m.id == id);
+                if (user == null)
+                {
+                    return NotFound();
+                }
 
-            if (user.height != null && user.weight != null)
-            {
-                Calculator c = new Calculator();
-                ViewBag.BMR_H = c.BMR_Harrisa_Benedicta(user);
-                ViewBag.BMR_M = c.BMR_Mifflin_StJeor(user);
-                ViewBag.BMI = c.BMI(user);
+                if (user.height != null && user.weight != null)
+                {
+                    Calculator c = new Calculator();
+                    ViewBag.BMR_H = c.BMR_Harrisa_Benedicta(user);
+                    ViewBag.BMR_M = c.BMR_Mifflin_StJeor(user);
+                    ViewBag.BMI = c.BMI(user);
+                }
+                return View(user);
             }
-            return View(user);
+            else
+            {
+                return RedirectToAction(nameof(Temporary));
+            }
         }
 
         // GET: Users/Create
@@ -79,6 +92,13 @@ namespace Westeros.UserProfile.Web
             return View(user);
         }
 
+        // GET: Users/Temporary/5
+        [HttpGet("Users/Edit/5")]
+        public IActionResult Temporary()
+        {
+            return View();
+        }
+
         // GET: Users/Edit/5
         [HttpGet("Users/Edit/5")]
         public IActionResult Edit(User U)
@@ -86,7 +106,7 @@ namespace Westeros.UserProfile.Web
             User user = _context.User.Find(U.id);
             U.login = user.login;
             U.email = user.email;
-            if (ModelState.IsValid)
+            if (ModelState.IsValid && _session.GetString("login") == user.login)
                 using (UserDbContext dc = new UserDbContext())
                 {
 
@@ -99,6 +119,10 @@ namespace Westeros.UserProfile.Web
                     U = null;
 
                 }
+            else
+            {
+                return RedirectToAction("Temporary");
+            }
 
             return View(U);
         }
@@ -217,6 +241,7 @@ namespace Westeros.UserProfile.Web
             {
                 if(user.login == login)
                 {
+                    _session.SetString("login", user.login);
                     return RedirectToAction(nameof(Details), user);
                 }
             }

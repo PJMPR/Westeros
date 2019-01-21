@@ -1,0 +1,152 @@
+{
+	"info": {
+		"_postman_id": "321e99d5-ed71-4ce3-ac36-cd33149cd762",
+		"name": "MPR_Targaryen",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "getAllUsers",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": ""
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "addNewUser",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"Jan\",\n    \"surname\": \"Nowak\",\n    \"login\": \"Tuturu\",\n    \"email\": \"superJN@gmail.com\",\n    \"age\": 33,\n    \"weight\": 99,\n    \"height\": 189,\n    \"gender\": 0,\n    \"favouriteRecipes\": null\n}"
+				},
+				"url": {
+					"raw": "localhost:38314/api/UsersAPI",
+					"host": [
+						"localhost"
+					],
+					"port": "38314",
+					"path": [
+						"api",
+						"UsersAPI"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "deleteUser",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "localhost:38314/api/UsersAPI/24",
+					"host": [
+						"localhost"
+					],
+					"port": "38314",
+					"path": [
+						"api",
+						"UsersAPI",
+						"24"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "updateUser",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"id\": \"2\",\n    \"name\": \"Joanna\",\n    \"surname\": \"Bakalia\",\n    \"login\": \"Baku156\",\n    \"email\": \"jB@onet.pl\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:38314/api/UsersAPI/2",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "38314",
+					"path": [
+						"api",
+						"UsersAPI",
+						"2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getOneUser",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"id\": \"2\",\n    \"name\": \"Joanna\",\n    \"surname\": \"Bakalia\",\n    \"login\": \"Baku156\",\n    \"email\": \"jB@onet.pl\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:38314/api/UsersAPI/2",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "38314",
+					"path": [
+						"api",
+						"UsersAPI",
+						"2"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
